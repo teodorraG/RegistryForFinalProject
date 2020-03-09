@@ -1,0 +1,30 @@
+﻿@model RegistryForFinalProject.Models.ViewModels.AccountViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<form asp-controller="Account">
+    <label action="/Account/Register" asp-for="UserName">User Name: </label>
+    <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
+    <input asp-for="UserName" class="form-control inputSizeTwenty" />
+    <label action="/Account/Register" asp-for="Email">Email: </label>
+    <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+    <input asp-for="Email" class="form-control inputSizeTwenty" />
+    <label action="/Account/Register" asp-for="Password">Password: </label>
+    <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+    <input asp-for="Password" class="form-control inputSizeTwenty" type="password" />
+    <label asp-for="ConfirmPassword" action="/Account/Register">Confirm Password: </label>
+    <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+    <input asp-for="ConfirmPassword" class="form-control inputSizeTwenty" type="password" />
+    <br />
+    <br />
+    <input type="checkbox" id="AgeCheckBox" />
+    <label action="/Account/Register">I am above 18 years old</label>
+    <br />
+    <input type="checkbox" id="TermsCheckBox" />
+    <label action="/Account/Register">I agree with the terms of use and conditions</label>
+    <br />
+    <button type="submit" class="btn-primary" id="RegisterButton">Register</button>
+</form>
+<script src="~/js/site.js"></script>
