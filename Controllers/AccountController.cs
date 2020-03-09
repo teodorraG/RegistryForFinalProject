@@ -13,6 +13,11 @@ namespace RegistryForFinalProject.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult LogIn(AccountViewModel accViewModel)
+        {
+            return View(accViewModel);
+        }
         public IActionResult Register()
         {
             return View();
