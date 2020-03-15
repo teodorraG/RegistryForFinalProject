@@ -14,9 +14,13 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult LogIn(AccountViewModel accViewModel)
+        public IActionResult LogIn(LogInViewModel logViewModel)
         {
-            return View(accViewModel);
+            if (ModelState.IsValid)
+            {
+                return View("LogIn");
+            }
+            return View(logViewModel);
         }
         public IActionResult Register()
         {
@@ -32,6 +36,19 @@ namespace RegistryForFinalProject.Controllers
             }
             return View(accViewModel);
 
+        }
+        public IActionResult ForgottenPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgottenPassword(ForgottenPasswordViewModel forgottenPassViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                return View("ForgottenPassword");
+            }
+            return View(forgottenPassViewModel);
         }
     }
 }

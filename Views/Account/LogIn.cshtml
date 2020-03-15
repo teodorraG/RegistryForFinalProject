@@ -1,7 +1,20 @@
-﻿
+﻿@model RegistryForFinalProject.Models.ViewModels.LogInViewModel
 @{
     ViewData["Title"] = "LogIn";
 }
 
-<h1>LogIn</h1>
+<h1>Log In</h1>
+<form asp-controller="Account">
+    <label action="/Account/LogIn" asp-for="UserName">User Name: </label>
+    <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
+    <input asp-for="UserName" class="form-control inputSizeTwenty" />
+    <label action="/Account/LogIn" asp-for="Password">Password: </label>
+    <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+    <input asp-for="Password" class="form-control inputSizeTwenty" type="password" />
+    <br />
+    <br />
+    <button type="submit" class="btn-primary" id="RegisterButton">Log In</button>
 
+    <a id="myFormSubmit" href="ForgottenPassword">Forgot your password?</a>
+</form>
+<script src="~/js/site.js"></script>
