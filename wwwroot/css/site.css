@@ -78,3 +78,37 @@ h1{
     width: 20em !important;
 }
 
+#registry {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+    #registry label {
+        display: flex;
+        justify-content: space-around;
+        text-align:center;
+    }
+
+.RegistryTypes {
+    
+    padding-bottom: 10em;
+    padding-top: 10em;
+    padding-left: 10em;
+    padding-right: 10em;
+    border-radius: 1em;
+    
+    background-color: aliceblue;
+    color: black;
+    width:402px;
+    height: 380px;
+       
+}
+
+.bigButton {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    
+}
+
