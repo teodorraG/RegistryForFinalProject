@@ -8,8 +8,7 @@ using RegistryForFinalProject.Models;
 using RegistryForFinalProject.Models.ViewModels;
 using RegistryForFinalProject.Enums;
 using RegistryForFinalProject.Contexts;
-using System.Text;
-using System.Security.Cryptography;
+using RegistryForFinalProject.Services;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -28,7 +27,17 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View("LogIn");
+                var password = PasswordEncodingService.GetHashSha256(logViewModel.Password);
+                var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
+                if (user != null)
+                {
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View("LogIn");
+                }
             }
             return View(logViewModel);
         }
@@ -50,7 +59,7 @@ namespace RegistryForFinalProject.Controllers
                     Account account = new Account
                     {
                         UserName = accViewModel.UserName,
-                        Password = GetHashSha256(accViewModel.Password),
+                        Password = PasswordEncodingService.GetHashSha256(accViewModel.Password),
                         Email = accViewModel.Email,
                         Role = Role.User
                     };
@@ -79,19 +88,6 @@ namespace RegistryForFinalProject.Controllers
                 return View("ForgottenPassword");
             }
             return View(forgottenPassViewModel);
-        }
-
-        public static string GetHashSha256(string text)
-        {
-            byte[] bytes = Encoding.Unicode.GetBytes(text);
-            SHA256Managed hashstring = new SHA256Managed();
-            byte[] hash = hashstring.ComputeHash(bytes);
-            string hashString = string.Empty;
-            foreach (byte x in hash)
-            {
-                hashString += String.Format("{0:x2}", x);
-            }
-            return hashString;
         }
     }
 }
