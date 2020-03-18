@@ -5,7 +5,7 @@
 
 <h1>Log In</h1>
 <form asp-controller="Account">
-    <label action="/Account/LogIn" asp-for="UserName">User Name: </label>
+    <label action="/Account/LogIn" asp-for="UserName">Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
     <input asp-for="UserName" class="form-control inputSizeTwenty" />
     <label action="/Account/LogIn" asp-for="Password">Password: </label>

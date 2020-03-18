@@ -5,7 +5,7 @@
 
 <h1>Register</h1>
 <form asp-controller="Account">
-    <label action="/Account/Register" asp-for="UserName">User Name: </label>
+    <label action="/Account/Register" asp-for="UserName">Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
     <input asp-for="UserName" class="form-control inputSizeTwenty" />
     <label action="/Account/Register" asp-for="Email">Email: </label>
@@ -19,10 +19,10 @@
     <input asp-for="ConfirmPassword" class="form-control inputSizeTwenty" type="password" />
     <br />
     <br />
-    <input type="checkbox" id="AgeCheckBox" />
+    <input type="checkbox" id="AgeCheckBox" name="AgeCheckBox"/>
     <label action="/Account/Register">I am above 18 years old</label>
     <br />
-    <input type="checkbox" id="TermsCheckBox" />
+    <input type="checkbox" id="TermsCheckBox" name="TermsCheckBox" />
     <label action="/Account/Register">I agree with the terms of use and conditions</label>
     <br />
     <button type="submit" class="btn-primary" id="RegisterButton">Register</button>

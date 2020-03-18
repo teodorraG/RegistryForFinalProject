@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistryForFinalProject.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models
 {
-    public class AccountView
+    public class Account
     {
         [Key]
         public int Id { get; set; }
@@ -24,8 +25,7 @@ namespace RegistryForFinalProject.Models
         [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage ="Password must contain at least one: lower case letter, upper case letter and number")]
         public string Password { get; set; }
 
-        [NotMapped]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+        public Role Role { get; set; }
+
     }
 }
