@@ -5,6 +5,10 @@
 
 <h1>Register</h1>
 <form asp-controller="Account">
+    @if (ViewData["LoginError"] != null)
+    {
+    <p class="text-danger">@ViewData["LoginError"]</p>
+    }
     <label action="/Account/Register" asp-for="UserName">Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
     <input asp-for="UserName" class="form-control inputSizeTwenty" />

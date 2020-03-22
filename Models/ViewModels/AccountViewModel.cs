@@ -11,7 +11,7 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         [MinLength(5, ErrorMessage = "The username must be between 5 and 15 characters")]
         [MaxLength(15, ErrorMessage = "The username must be between 5 and 15 characters")]
-        [Required(ErrorMessage = "UserName is required")]
+        [Required(ErrorMessage = "Username is required")]
         public string UserName { get; set; }
 
         [EmailAddress(ErrorMessage = "Please enter a valid email address")]

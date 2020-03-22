@@ -65,11 +65,12 @@ namespace RegistryForFinalProject.Controllers
                     };
                     db.Accounts.Add(account);
                     db.SaveChanges();
-                    return View("LogIn");
+                    return View("SuccessfullyRegistered");
                 }
                 else
                 {
-                    return View("Index");
+                    ViewData["LoginError"] = "You must agree to the terms and be above 18 years old.";
+                    return View();
                 }
 
             }
@@ -88,6 +89,10 @@ namespace RegistryForFinalProject.Controllers
                 return View("ForgottenPassword");
             }
             return View(forgottenPassViewModel);
+        }
+        public IActionResult SuccessfullyRegistered()
+        {
+            return View("SuccessfullyRegistered");
         }
     }
 }

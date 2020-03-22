@@ -3,7 +3,7 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<form asp-controller="Home">
+<form asp-controller="Registry">
     <br />
     <br />
     <br />
@@ -13,12 +13,13 @@
         <button type="submit" class="btn-primary RegistryTypes" id="RegistryButton">Wedding registry</button>*@
         <div class="bigButton">
             @*<input type="button" style="width:200px;" class="btn-primary RegistryTypes" value="Baby christening registry" />*@
-            <button class="btn-primary RegistryTypes">Baby christening registry</button>
+            <button href="Registry/BabyRegistry" class="btn-primary RegistryTypes" type="submit" asp-action="BabyRegistry" formmethod="get">Baby christening registry</button>
         </div>
         <div class="bigButton">
             @*<input type="button" style="width:200px;" class="btn-primary RegistryTypes" value="Wedding registry" />*@
-            <button class="btn-primary RegistryTypes">Wedding registry</button>
+            <button href="Registry/WeddingRegistry" class="btn-primary RegistryTypes" asp-action="WeddingRegistry" formmethod="get">Wedding registry</button>
         </div>
+        
 
 
     </div>
