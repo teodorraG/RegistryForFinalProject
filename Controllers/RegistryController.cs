@@ -49,5 +49,21 @@ namespace RegistryForFinalProject.Controllers
             }
             return View(weddingRegistryViewModel);
         }
+
+        public IActionResult BirthdayRegistry()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult BirthdayRegistry(BirthdayRegistryViewModel birthdayRegistryViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return View("BirthdayRegistry");
+            }
+            return View(birthdayRegistryViewModel);
+        }
     }
 }

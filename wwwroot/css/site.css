@@ -80,7 +80,7 @@ h1{
 
 #registry {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content: center;
 }
 
@@ -92,6 +92,7 @@ h1{
     padding-left: 5em;
     padding-right: 5em;
     border-radius: 1em;
+    margin-right: 0.5em;
     
     background-color: aliceblue;
     color: black;
@@ -103,7 +104,7 @@ h1{
 .bigButton {
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+   
     
 }
 
