@@ -104,7 +104,10 @@ h1{
 .bigButton {
     text-align: center;
     text-decoration: none;
-   
-    
+}
+
+.profileContainer {
+
+    border-radius: 1em;
 }
 

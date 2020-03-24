@@ -22,6 +22,7 @@ namespace RegistryForFinalProject.Models.ViewModels
         [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Password must contain at least one: lower case letter, upper case letter and number")]
         public string Password { get; set; }
 
+        [NotMapped]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
     }
