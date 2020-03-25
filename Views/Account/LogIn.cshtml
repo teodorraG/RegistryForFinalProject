@@ -18,3 +18,35 @@
     <a id="myFormSubmit" href="ForgottenPassword">Forgot your password?</a>
 </form>
 <script src="~/js/site.js"></script>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Log in</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}

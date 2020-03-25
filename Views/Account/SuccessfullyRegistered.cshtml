@@ -2,8 +2,40 @@
     ViewData["Title"] = "SuccessfullyRegistered";
 }
 
-    <form asp-controller="Account">
-        <h1>You have registered successfully</h1>
-        <br />
-        <h2>Please <a href="/Account/LogIn" class="successfullyRegistered"><span>login</span></a> to proceed</h2>
-    </form>
+<form asp-controller="Account">
+    <h1>You have registered successfully</h1>
+    <br />
+    <h2>Please <a href="/Account/LogIn" class="successfullyRegistered"><span>login</span></a> to proceed</h2>
+</form>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Log in</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}

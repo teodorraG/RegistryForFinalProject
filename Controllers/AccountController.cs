@@ -15,8 +15,9 @@ namespace RegistryForFinalProject.Controllers
     public class AccountController : Controller
     {
         private readonly RegistryContext db = new RegistryContext();
-        public AccountController()
+        public AccountController(RegistryContext registryContext)
         {
+            db = registryContext;
         }
         public IActionResult LogIn()
         {
@@ -31,7 +32,7 @@ namespace RegistryForFinalProject.Controllers
                 var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
                 if (user != null)
                 {
-
+                    HttpContext.Session.SetString("CurrentUser", user.UserName);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -40,6 +41,12 @@ namespace RegistryForFinalProject.Controllers
                 }
             }
             return View(logViewModel);
+        }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("CurrentUser");
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult Register()
         {

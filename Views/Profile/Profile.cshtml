@@ -10,43 +10,75 @@
     {
         <p class="text-danger">@ViewData["LoginError"]</p>
     }
-<div class="profileContainer">
-    <div class="information">
-        <h6>Information:</h6>
-        <label action="/Profile/Profile" asp-for="Name">Name: </label>
-        <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
-        <input asp-for="Name" class="form-control inputSizeTwenty" />
+    <div class="profileContainer">
+        <div class="information">
+            <h6>Information:</h6>
+            <label action="/Profile/Profile" asp-for="Name">Name: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
+            <input asp-for="Name" class="form-control inputSizeTwenty" />
 
-        <label action="/Profile/Profile" asp-for="Address">Address: </label>
-        <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>
-        <input asp-for="Address" class="form-control inputSizeTwenty" />
-        <br />
-        <h6>Gender:</h6>
-        @Html.DropDownListFor(m => m.Gender,
-                    new SelectList(Enum.GetValues(typeof(Gender))),
-                    "Select Gender")
-        <br />
+            <label action="/Profile/Profile" asp-for="Address">Address: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>
+            <input asp-for="Address" class="form-control inputSizeTwenty" />
+            <br />
+            <h6>Gender:</h6>
+            @Html.DropDownListFor(m => m.Gender,
+                        new SelectList(Enum.GetValues(typeof(Gender))),
+                        "Select Gender")
+            <br />
 
-        <br />
-    </div>
-    <div class="newPassword">
-        <h6>Change your password:</h6>
-        <label action="/Profile/Profile" asp-for="NewPassword">Current password: </label>
-        <span class="text-danger">@Html.ValidationMessageFor(m => m.NewPassword)</span>
-        <input asp-for="NewPassword" class="form-control inputSizeTwenty" type="password" />
+            <br />
+        </div>
+        <div class="newPassword">
+            <h6>Change your password:</h6>
+            <label action="/Profile/Profile" asp-for="NewPassword">Current password: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.NewPassword)</span>
+            <input asp-for="NewPassword" class="form-control inputSizeTwenty" type="password" />
 
-        <label asp-for="ConfirmNewPassword" action="/Profile/Profile">New password: </label>
-        <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</span>
-        <input asp-for="ConfirmNewPassword" class="form-control inputSizeTwenty" type="password" />
-    </div>
-    <div class="products">
+            <label asp-for="ConfirmNewPassword" action="/Profile/Profile">New password: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</span>
+            <input asp-for="ConfirmNewPassword" class="form-control inputSizeTwenty" type="password" />
+        </div>
+        <div class="products">
+            <br />
+            <a href="/Profile/Orders" class="orders">View your orders</a>
+            <br />
+            <a href="/Profile/Offers" class="offers">View your offers</a>
+        </div>
         <br />
-        <a href="/Profile/Orders" class="orders">View your orders</a>
-        <br />
-        <a href="/Profile/Offers" class="offers">View your offers</a>
+        <button type="submit" class="btn-primary" id="ExitButton">Save</button>
     </div>
-    <br />
-    <button type="submit" class="btn-primary" id="ExitButton">Save</button>
-</div>
 </form>
 <script src="~/js/site.js"></script>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Log in</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
