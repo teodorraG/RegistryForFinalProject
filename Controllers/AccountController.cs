@@ -9,6 +9,7 @@ using RegistryForFinalProject.Models.ViewModels;
 using RegistryForFinalProject.Enums;
 using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Services;
+using RegistryForFinalProject.ErrorMessages;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -29,18 +30,20 @@ namespace RegistryForFinalProject.Controllers
             if (ModelState.IsValid)
             {
                 var password = PasswordEncodingService.GetHashSha256(logViewModel.Password);
-                var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
-                if (user != null)
+                if (db.Accounts.FirstOrDefault(x=>x.UserName == logViewModel.UserName && x.Password == password) != null)
                 {
+                    var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
                     HttpContext.Session.SetString("CurrentUser", user.UserName);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return View("LogIn");
+                    ViewData["InvalidUser"] = Errors.LogInInvalidUserCredentialsError;
+                    return View();
                 }
+                
             }
-            return View(logViewModel);
+            return View();
         }
 
         public IActionResult LogOut()
@@ -58,7 +61,18 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                if (db.Accounts.FirstOrDefault(x=>x.UserName == accViewModel.UserName) != null)
+                {
+                    ViewData["UsernameError"] = Errors.UsernameAlreadyExists;
+                }
+                if (db.Accounts.FirstOrDefault(x=>x.Email == accViewModel.Email) != null)
+                {
+                    ViewData["EmailError"] = Errors.EmailAlreadyExists;
+                }
+                if (ViewData["UsernameError"] != null || ViewData["EmailError"] != null)
+                {
+                    return View();
+                }
                 int termsCheckBox = Request.Form["TermsCheckBox"].Count;
                 int ageCheckBox = Request.Form["AgeCheckBox"].Count;
                 if (termsCheckBox == 1 && ageCheckBox == 1)
@@ -76,7 +90,7 @@ namespace RegistryForFinalProject.Controllers
                 }
                 else
                 {
-                    ViewData["LoginError"] = "You must agree to the terms and be above 18 years old.";
+                    ViewData["LoginError"] = Errors.LogInError;
                     return View();
                 }
 

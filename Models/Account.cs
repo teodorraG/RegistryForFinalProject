@@ -1,4 +1,5 @@
 ﻿using RegistryForFinalProject.Enums;
+using RegistryForFinalProject.ErrorMessages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,11 +14,11 @@ namespace RegistryForFinalProject.Models
         [Key]
         public int Id { get; set; }
 
-        [Range(5,15,ErrorMessage ="The username must be between 5 and 15 characters")]
-        [Required(ErrorMessage = "UserName is required")]
+        [Range(5,15,ErrorMessage =Errors.RegisterUsernameLengthError)]
+        [Required(ErrorMessage = Errors.RegisterUsernameRequiredError)]
         public string UserName { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please enter a valid email address")]
+        [EmailAddress(ErrorMessage = Errors.RegisterInvalidEmailError)]
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 

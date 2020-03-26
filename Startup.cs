@@ -29,13 +29,11 @@ namespace RegistryForFinalProject
             services.AddControllersWithViews();
             services.AddDbContext<RegistryContext>(); 
             services.AddDistributedMemoryCache();
-            services.AddDistributedMemoryCache();
-            services.AddSession();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(1000);
+                options.IdleTimeout = TimeSpan.FromHours(1);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

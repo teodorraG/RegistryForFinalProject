@@ -5,6 +5,15 @@
 
 <h1>Register</h1>
 <form asp-controller="Account">
+    @if (ViewData["UsernameError"] != null)
+    {
+        <p class="text-danger">@ViewData["UsernameError"]</p>
+    }
+    @if (ViewData["EmailError"] != null)
+    {
+        <p class="text-danger">@ViewData["EmailError"]</p>
+    }
+
     @if (ViewData["LoginError"] != null)
     {
         <p class="text-danger">@ViewData["LoginError"]</p>

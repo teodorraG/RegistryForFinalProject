@@ -5,6 +5,10 @@
 
 <h1>Log In</h1>
 <form asp-controller="Account">
+    @if (ViewData["InvalidUser"] != null)
+    {
+        <p class="text-danger">@ViewData["InvalidUser"]</p>
+    }
     <label action="/Account/LogIn" asp-for="UserName">Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
     <input asp-for="UserName" class="form-control inputSizeTwenty" />
