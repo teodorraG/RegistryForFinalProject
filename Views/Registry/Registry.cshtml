@@ -8,26 +8,44 @@
     <br />
     <br />
 
-    <div id="registry">
-        @*<button type="submit" class="btn-primary RegistryTypes" id="RegistryButton">Baby christening registry</button>
-            <button type="submit" class="btn-primary RegistryTypes" id="RegistryButton">Wedding registry</button>*@
+    @*<div id="registry">
+
         <div class="bigButton">
-            @*<input type="button" style="width:200px;" class="btn-primary RegistryTypes" value="Baby christening registry" />*@
             <button href="Registry/BabyRegistry" class="btn-primary RegistryTypes" type="submit" asp-action="BabyRegistry" formmethod="get">Baby christening registry</button>
         </div>
+
         <div class="bigButton">
-            @*<input type="button" style="width:200px;" class="btn-primary RegistryTypes" value="Wedding registry" />*@
             <button href="Registry/WeddingRegistry" class="btn-primary RegistryTypes" asp-action="WeddingRegistry" formmethod="get">Wedding registry</button>
         </div>
         <div class="bigButton">
-            @*<input type="button" style="width:200px;" class="btn-primary RegistryTypes" value="Birthday registry" />*@
             <button href="Registry/BirthdayRegistry" class="btn-primary RegistryTypes" asp-action="BirthdayRegistry" formmethod="get">Birthday registry</button>
         </div>
-
-
-
+    </div>*@
+<div id="registry">
+    <div class="card" style="width: 30rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text font-italic font-weight-bold">Baby christening registry</p>
+            <div class="text-center"><a href="#" class="btn btn-warning"><span class="text-center">Create</span></a></div>
+        </div>
     </div>
 
+    <div class="card" style="width: 30rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text font-italic font-weight-bold">Wedding registry</p>
+            <div class="text-center"><a href="#" class="btn btn-warning"><span class="text-center">Create</span></a></div>
+        </div>
+    </div>
+
+    <div class="card" style="width: 30rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text font-italic font-weight-bold">Birthday registry</p>
+            <div class="text-center"><a href="#" class="btn btn-warning"><span class="text-center">Create</span></a></div>
+        </div>
+    </div>
+    </div>
 </form>
 <script src="~/js/site.js"></script>
 

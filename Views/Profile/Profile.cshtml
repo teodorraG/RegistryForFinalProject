@@ -20,34 +20,42 @@
 <div class="card">
     <div class="card-body">
         <div class="p-3 mb-2 bg-secondary text-white"><h6>Information:</h6></div>
-            <label action="/Profile/Profile" asp-for="FirstName">First name: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
-            <input asp-for="FirstName" class="form-control inputSizeTwenty" />
+        <label action="/Profile/Profile" asp-for="FirstName">First name: </label>
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
+        <input asp-for="FirstName" class="form-control inputSizeTwenty" />
 
-            <label action="/Profile/Profile" asp-for="LastName">Last name: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
-            <input asp-for="LastName" class="form-control inputSizeTwenty" />
+        <label action="/Profile/Profile" asp-for="LastName">Last name: </label>
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
+        <input asp-for="LastName" class="form-control inputSizeTwenty" />
 
-            <label action="/Profile/Profile" asp-for="Address">Address: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>
-            <input asp-for="Address" class="form-control inputSizeTwenty" />
-            <br />
-            <h6>Gender:</h6>
-            @Html.DropDownListFor(m => m.Gender,
-                        new SelectList(Enum.GetValues(typeof(Gender))),
-                        "Select Gender")
-            <br />
-        </div>
+        <label action="/Profile/Profile" asp-for="Address">Address: </label>
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>
+        <input asp-for="Address" class="form-control inputSizeTwenty" />
+        <br />
+        <p>Gender:</p>
+        @Html.DropDownListFor(m => m.Gender,
+                    new SelectList(Enum.GetValues(typeof(Gender))),
+                    "Select Gender")
+        <br />
+        <br />
+        <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
+
+        <br />
+    </div>
     <div class="card-body">
         <div class="p-3 mb-2 bg-secondary text-white"><h6>Change your password:</h6></div>
-            <label action="/Profile/Profile" asp-for="NewPassword">Current password: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.NewPassword)</span>
-            <input asp-for="NewPassword" class="form-control inputSizeTwenty" type="password" />
+        <label action="/Profile/Profile" asp-for="NewPassword">Current password: </label>
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.NewPassword)</span>
+        <input asp-for="NewPassword" class="form-control inputSizeTwenty" type="password" />
 
-            <label asp-for="ConfirmNewPassword" action="/Profile/Profile">New password: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</span>
-            <input asp-for="ConfirmNewPassword" class="form-control inputSizeTwenty" type="password" />
-        </div>
+        <label asp-for="ConfirmNewPassword" action="/Profile/Profile">New password: </label>
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</span>
+        <input asp-for="ConfirmNewPassword" class="form-control inputSizeTwenty" type="password" />
+
+        <br />
+        <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
+
+    </div>
     <div class="card-body">
         <div class="p-3 mb-2 bg-secondary text-white"><h6>Items: </h6></div>
             <br />
@@ -58,7 +66,6 @@
         </div>
         <br />
     </div>
-        <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
     
 </form>
 <script src="~/js/site.js"></script>
