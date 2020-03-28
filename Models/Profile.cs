@@ -13,7 +13,10 @@ namespace RegistryForFinalProject.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         public Gender Gender { get; set; }
 
         public string Address { get; set; }

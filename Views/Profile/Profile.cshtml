@@ -13,9 +13,13 @@
     <div class="profileContainer">
         <div class="information">
             <h6>Information:</h6>
-            <label action="/Profile/Profile" asp-for="Name">Name: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
-            <input asp-for="Name" class="form-control inputSizeTwenty" />
+            <label action="/Profile/Profile" asp-for="FirstName">First name: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
+            <input asp-for="FirstName" class="form-control inputSizeTwenty" />
+
+            <label action="/Profile/Profile" asp-for="LastName">Last name: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
+            <input asp-for="LastName" class="form-control inputSizeTwenty" />
 
             <label action="/Profile/Profile" asp-for="Address">Address: </label>
             <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>

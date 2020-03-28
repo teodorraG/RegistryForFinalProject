@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistryForFinalProject.ErrorMessages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,12 +13,12 @@ namespace RegistryForFinalProject.Models.ViewModels
         [Key]
         public int Id { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please enter a valid email address")]
-        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = Errors.RegisterInvalidEmailError)]
+        [Required(ErrorMessage = Errors.RequiredEmailError)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
-        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Password must contain at least one: lower case letter, upper case letter and number")]
+        [Required(ErrorMessage = Errors.RequiredPasswardError)]
+        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Errors.PasswordComplexityError)]
         public string NewPassword { get; set; }
 
         [NotMapped]

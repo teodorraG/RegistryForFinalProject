@@ -19,11 +19,11 @@ namespace RegistryForFinalProject.Models
         public string UserName { get; set; }
 
         [EmailAddress(ErrorMessage = Errors.RegisterInvalidEmailError)]
-        [Required(ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = Errors.RequiredEmailError)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
-        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage ="Password must contain at least one: lower case letter, upper case letter and number")]
+        [Required(ErrorMessage = Errors.RequiredPasswardError)]
+        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Errors.PasswordComplexityError)]
         public string Password { get; set; }
 
         public Role Role { get; set; }
