@@ -5,14 +5,21 @@
 }
 
 <h1>Personal Profile</h1>
+<br />
 <form asp-controller="Profile">
     @if (ViewData["LoginError"] != null)
     {
         <p class="text-danger">@ViewData["LoginError"]</p>
     }
-    <div class="profileContainer">
-        <div class="information">
-            <h6>Information:</h6>
+    @*<div class="card">
+        <div class="card-body">
+            This is some text within a panel body.
+        </div>
+    </div>*@
+
+<div class="card">
+    <div class="card-body">
+        <div class="p-3 mb-2 bg-secondary text-white"><h6>Information:</h6></div>
             <label action="/Profile/Profile" asp-for="FirstName">First name: </label>
             <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
             <input asp-for="FirstName" class="form-control inputSizeTwenty" />
@@ -30,11 +37,9 @@
                         new SelectList(Enum.GetValues(typeof(Gender))),
                         "Select Gender")
             <br />
-
-            <br />
         </div>
-        <div class="newPassword">
-            <h6>Change your password:</h6>
+    <div class="card-body">
+        <div class="p-3 mb-2 bg-secondary text-white"><h6>Change your password:</h6></div>
             <label action="/Profile/Profile" asp-for="NewPassword">Current password: </label>
             <span class="text-danger">@Html.ValidationMessageFor(m => m.NewPassword)</span>
             <input asp-for="NewPassword" class="form-control inputSizeTwenty" type="password" />
@@ -43,15 +48,18 @@
             <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</span>
             <input asp-for="ConfirmNewPassword" class="form-control inputSizeTwenty" type="password" />
         </div>
-        <div class="products">
+    <div class="card-body">
+        <div class="p-3 mb-2 bg-secondary text-white"><h6>Items: </h6></div>
             <br />
             <a href="/Profile/Orders" class="orders">View your orders</a>
+            <br />
             <br />
             <a href="/Profile/Offers" class="offers">View your offers</a>
         </div>
         <br />
-        <button type="submit" class="btn-primary" id="ExitButton">Save</button>
     </div>
+        <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
+    
 </form>
 <script src="~/js/site.js"></script>
 
