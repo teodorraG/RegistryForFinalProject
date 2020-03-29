@@ -88,35 +88,14 @@ h1{
 }
 
 
-/*.RegistryTypes {
-    
-    padding-bottom: 5em;
-    padding-top: 5em;
-    padding-left: 5em;
-    padding-right: 5em;
-    border-radius: 1em;
-    margin-right: 0.5em;
-    
-    background-color: aliceblue;
-    color: black;
-    width:402px;
-    height: 380px;
-       
-}
-
-.bigButton {
-    text-align: center;
-    text-decoration: none;
-}*/
-
-/*icons for- fb,figcaption,tw*/
+/*icons for- fb,figcaption,tw and Profile*/ 
 .warning {
-    color: #f7ca25;
+    color: #ebae34;
 }
 
-.logo{
-    width:219px;
-    height:62px;
+.logo {
+    width: 190px;
+    height: 46px;
 }
 
 
