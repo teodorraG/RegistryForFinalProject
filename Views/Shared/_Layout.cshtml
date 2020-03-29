@@ -21,11 +21,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @RenderSection("MainNavigation",false)
+                        @RenderSection("MainNavigation", false)
                     </ul>
                 </div>
                 <ul class="navbar-nav">
-                    @RenderSection("AccountNavigation",false)
+                    @RenderSection("AccountNavigation", false)
                 </ul>
             </div>
         </nav>
@@ -37,13 +37,28 @@
     </div>
 
     <footer class="border-top footer text-muted">
+        @*<div class="container">
+                &copy; 2020 - RegistryForFinalProject - <a asp-area="" asp-controller="Home" asp-action="Registry">Registry</a>
+            </div>*@
         <div class="container">
-            &copy; 2020 - RegistryForFinalProject - <a asp-area="" asp-controller="Home" asp-action="Registry">Registry</a>
+            &copy; 2020 &nbsp;
+            @*<div class="footer-icons">
+            <ul class="footer-icons-inline">
+                <li><a href="https://www.facebook.com/"><i class="fab fa-facebook icon-3x"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://twitter.com/explore"><i class="fab fa-twitter"></i></a></li>
+            </ul>
+        </div>*@
+
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook fa-1x pr-2 warning"></i></a>
+            <a href="https://www.instagram.com/"><i class="fab fa-instagram fa-1x pr-2 warning"></i></a>
+            <a href="https://twitter.com/explore"><i class="fab fa-twitter fa-1x pr-2 warning"></i></a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/0a5d2a231e.js" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

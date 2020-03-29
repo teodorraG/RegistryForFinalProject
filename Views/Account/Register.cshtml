@@ -18,15 +18,19 @@
     {
         <p class="text-danger">@ViewData["LoginError"]</p>
     }
+    <br />
     <label action="/Account/Register" asp-for="UserName"><span class="text-danger">*</span> Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
     <input asp-for="UserName" class="form-control inputSizeTwenty" />
+    <br />
     <label action="/Account/Register" asp-for="Email"><span class="text-danger">*</span> Email: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
     <input asp-for="Email" class="form-control inputSizeTwenty" />
+    <br />
     <label action="/Account/Register" asp-for="Password"><span class="text-danger">*</span> Password: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
     <input asp-for="Password" class="form-control inputSizeTwenty" type="password" />
+    <br />
     <label asp-for="ConfirmPassword" action="/Account/Register"><span class="text-danger">*</span> Confirm Password: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
     <input asp-for="ConfirmPassword" class="form-control inputSizeTwenty" type="password" />
@@ -38,7 +42,8 @@
     <input type="checkbox" id="TermsCheckBox" name="TermsCheckBox" />
     <label action="/Account/Register"><span class="text-danger">*</span> I agree with the terms of use and conditions</label>
     <br />
-    <button type="submit" class="btn-primary" id="RegisterButton">Register</button>
+    <button type="submit" class="btn btn-warning btn-lg" id="RegisterButton">Register</button>
+
 </form>
 <script src="~/js/site.js"></script>
 

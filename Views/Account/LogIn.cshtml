@@ -9,15 +9,17 @@
     {
         <p class="text-danger">@ViewData["InvalidUser"]</p>
     }
+    <br />
     <label action="/Account/LogIn" asp-for="UserName"><span class="text-danger">*</span> Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
     <input asp-for="UserName" class="form-control inputSizeTwenty" />
+    <br />
     <label action="/Account/LogIn" asp-for="Password"><span class="text-danger">*</span> Password: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
     <input asp-for="Password" class="form-control inputSizeTwenty" type="password" />
     <br />
     <br />
-    <button type="submit" class="btn-primary" id="LogInButton">Log In</button>
+    <button type="submit" class="btn btn-warning btn-lg" id="LogInButton">Log In</button>
 
     <a id="myFormSubmit" href="ForgottenPassword">Forgot your password?</a>
 </form>

@@ -5,27 +5,28 @@
 
 <h1>Baby Registry</h1>
 <hr />
-<h3>Please fill out the form ...</h3>
+<h3 class="font-italic font-weight-bold">Please fill out the form ...</h3>
 <form asp-controller="Registry">
+    <br />
     <label action="/Registry/BabyRegistry" asp-for="Name"><span class="text-danger">*</span> Baby's name: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
-    <input asp-for="Name" class="form-control" />
-
+    <input asp-for="Name" class="form-control inputSizeTwenty" />
+    <br />
     <label action="/Registry/BabyRegistry" asp-for="City"><span class="text-danger">*</span> Location of Event: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.City)</span>
-    <input asp-for="City" class="form-control" />
-
+    <input asp-for="City" class="form-control inputSizeTwenty" />
+    <br />
     <label action="/Registry/BabyRegistry" asp-for="DateOfEvent"><span class="text-danger">*</span> Date of Event: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.DateOfEvent)</span>
-    <input asp-for="DateOfEvent" class="form-control" />
+    <input asp-for="DateOfEvent" class="form-control inputSizeTwenty" />
     <br />
     <br />
-    <button type="submit" class="btn-primary" id="RegistryButton">Create Registry</button>
+    <button type="submit" class="btn btn-warning btn-lg" id="RegistryButton">Create Registry</button>
     <br />
     <br />
     <h4>or</h4>
     <br />
-    <button type="submit" class="btn-primary" id="RegistryButton">Find Registry</button>
+    <button type="submit" class="btn btn-warning btn-lg" id="RegistryButton">Find Registry</button>
 </form>
 
 @section MainNavigation {
