@@ -5,7 +5,7 @@
 <form asp-controller="Account">
     <h1>You have registered successfully</h1>
     <br />
-    <h2>Please <a href="/Account/LogIn" class="successfullyRegistered"><span>login</span></a> to proceed</h2>
+    <h2>Please <a href="/Account/LogIn" class="successfullyRegistered"><span>Sign in</span></a> to proceed</h2>
 </form>
 
 @section MainNavigation {
@@ -13,7 +13,7 @@
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
         </li>
     }
 }
@@ -22,20 +22,20 @@
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
         <li>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
         </li>
         <li>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
         </li>
 
     }
     else
     {
         <li>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Log in</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
         </li>
         <li>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
         </li>
     }
 }

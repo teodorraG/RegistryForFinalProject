@@ -109,9 +109,17 @@ h1{
     text-decoration: none;
 }*/
 
+/*icons for- fb,figcaption,tw*/
 .warning {
     color: #f7ca25;
 }
+
+.logo{
+    width:219px;
+    height:62px;
+}
+
+
 
 
 
