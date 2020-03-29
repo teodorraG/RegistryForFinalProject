@@ -63,7 +63,7 @@
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="ffas fa-user-circle warning"></i></a>
         </li>
         <li>
             <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
