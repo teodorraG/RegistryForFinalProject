@@ -20,7 +20,7 @@
     <br />
     <br />
     <button type="submit" class="btn btn-warning btn-lg" id="LogInButton">Log In</button>
-
+    &nbsp;
     <a id="myFormSubmit" href="ForgottenPassword">Forgot your password?</a>
 </form>
 <script src="~/js/site.js"></script>
@@ -39,7 +39,7 @@
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"> My Profile</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
         </li>
         <li>
             <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
