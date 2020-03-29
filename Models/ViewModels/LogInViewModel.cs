@@ -1,4 +1,4 @@
-﻿using RegistryForFinalProject.ErrorMessages;
+﻿using RegistryForFinalProject.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,10 +11,10 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         //[MinLength(5, ErrorMessage = "The username must be between 5 and 15 characters")]
         //[MaxLength(15, ErrorMessage = "The username must be between 5 and 15 characters")]
-        [Required(ErrorMessage = Errors.RegisterUsernameRequiredError)]
+        [Required(ErrorMessage = Constant.RegisterUsernameRequiredError)]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredPasswardError)]
+        [Required(ErrorMessage = Constant.RequiredPasswardError)]
         //[RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Password must contain at least one: lower case letter, upper case letter and number")]
         public string Password { get; set; }
     }

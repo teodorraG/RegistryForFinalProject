@@ -1,4 +1,4 @@
-﻿using RegistryForFinalProject.ErrorMessages;
+﻿using RegistryForFinalProject.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +9,13 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class BirthdayRegistryViewModel
     {
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string City { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public DateTime DateOfEvent { get; set; }
     }
 }

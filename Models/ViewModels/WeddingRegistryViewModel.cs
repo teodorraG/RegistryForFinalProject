@@ -1,4 +1,4 @@
-﻿using RegistryForFinalProject.ErrorMessages;
+﻿using RegistryForFinalProject.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,16 +10,16 @@ namespace RegistryForFinalProject.Models.ViewModels
     public class WeddingRegistryViewModel
     {
 
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string BrideName { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string GroomName { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string CityOfEvent { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredFieldError)]
+        [Required(ErrorMessage = Constant.RequiredFieldError)]
         public DateTime DateOfEvent { get; set; }
     }
 }

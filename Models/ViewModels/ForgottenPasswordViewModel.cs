@@ -1,4 +1,4 @@
-﻿using RegistryForFinalProject.ErrorMessages;
+﻿using RegistryForFinalProject.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,12 +13,12 @@ namespace RegistryForFinalProject.Models.ViewModels
         [Key]
         public int Id { get; set; }
 
-        [EmailAddress(ErrorMessage = Errors.RegisterInvalidEmailError)]
-        [Required(ErrorMessage = Errors.RequiredEmailError)]
+        [EmailAddress(ErrorMessage = Constant.RegisterInvalidEmailError)]
+        [Required(ErrorMessage = Constant.RequiredEmailError)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredPasswardError)]
-        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Errors.PasswordComplexityError)]
+        [Required(ErrorMessage = Constant.RequiredPasswardError)]
+        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Constant.PasswordComplexityError)]
         public string NewPassword { get; set; }
 
         [NotMapped]

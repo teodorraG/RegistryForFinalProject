@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RegistryForFinalProject.ErrorMessages
+namespace RegistryForFinalProject.Constants
 {
-    public class Errors
+    public class Constant
     {
         public const string UsernameAlreadyExists = "The username you have entered already exists";
         public const string EmailAlreadyExists = "The email you have entered already exists";
@@ -14,14 +14,16 @@ namespace RegistryForFinalProject.ErrorMessages
         public const string RegisterUsernameRequiredError = "Username is required";
         public const string RegisterInvalidEmailError = "Please enter a valid email address";
         public const string LogInInvalidUserCredentialsError = "The username and/or password are incorrect";
-
-        //
         public const string RequiredEmailError = "Email is required";
         public const string RequiredPasswardError = "Password is required";
         public const string PasswordComplexityError = "Password must contain at least one: lower case letter, upper case letter and number";
         public const string RequiredFieldError = "This field is required";
-        //public const string RegisterUsernameRequiredError = "UserName is required";
-        //public const string RegisterInvalidEmailError = "Please enter a valid email address";
-        //public const string LogInInvalidUserCredentialsError = "The username and/or password are incorrect";
+
+
+        //Cloudinary
+        public const string CLOUD_NAME = "teodorascloud";
+        public const string API_KEY = "384475583874649";
+        public const string API_SECRET = "fTNzwWElxwVCvz_LsRFoLpDyG7o";
+      
     }
 }

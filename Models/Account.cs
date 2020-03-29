@@ -1,5 +1,5 @@
 ﻿using RegistryForFinalProject.Enums;
-using RegistryForFinalProject.ErrorMessages;
+using RegistryForFinalProject.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,16 +14,16 @@ namespace RegistryForFinalProject.Models
         [Key]
         public int Id { get; set; }
 
-        [Range(5,15,ErrorMessage =Errors.RegisterUsernameLengthError)]
-        [Required(ErrorMessage = Errors.RegisterUsernameRequiredError)]
+        [Range(5,15,ErrorMessage =Constant.RegisterUsernameLengthError)]
+        [Required(ErrorMessage = Constant.RegisterUsernameRequiredError)]
         public string UserName { get; set; }
 
-        [EmailAddress(ErrorMessage = Errors.RegisterInvalidEmailError)]
-        [Required(ErrorMessage = Errors.RequiredEmailError)]
+        [EmailAddress(ErrorMessage = Constant.RegisterInvalidEmailError)]
+        [Required(ErrorMessage = Constant.RequiredEmailError)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = Errors.RequiredPasswardError)]
-        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Errors.PasswordComplexityError)]
+        [Required(ErrorMessage = Constant.RequiredPasswardError)]
+        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Constant.PasswordComplexityError)]
         public string Password { get; set; }
 
         public Role Role { get; set; }

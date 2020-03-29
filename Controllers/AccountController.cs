@@ -9,7 +9,7 @@ using RegistryForFinalProject.Models.ViewModels;
 using RegistryForFinalProject.Enums;
 using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Services;
-using RegistryForFinalProject.ErrorMessages;
+using RegistryForFinalProject.Constants;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -38,7 +38,7 @@ namespace RegistryForFinalProject.Controllers
                 }
                 else
                 {
-                    ViewData["InvalidUser"] = Errors.LogInInvalidUserCredentialsError;
+                    ViewData["InvalidUser"] = Constant.LogInInvalidUserCredentialsError;
                     return View();
                 }
                 
@@ -63,11 +63,11 @@ namespace RegistryForFinalProject.Controllers
             {
                 if (db.Accounts.FirstOrDefault(x=>x.UserName == accViewModel.UserName) != null)
                 {
-                    ViewData["UsernameError"] = Errors.UsernameAlreadyExists;
+                    ViewData["UsernameError"] = Constant.UsernameAlreadyExists;
                 }
                 if (db.Accounts.FirstOrDefault(x=>x.Email == accViewModel.Email) != null)
                 {
-                    ViewData["EmailError"] = Errors.EmailAlreadyExists;
+                    ViewData["EmailError"] = Constant.EmailAlreadyExists;
                 }
                 if (ViewData["UsernameError"] != null || ViewData["EmailError"] != null)
                 {
@@ -90,7 +90,7 @@ namespace RegistryForFinalProject.Controllers
                 }
                 else
                 {
-                    ViewData["LoginError"] = Errors.LogInError;
+                    ViewData["LoginError"] = Constant.LogInError;
                     return View();
                 }
 
