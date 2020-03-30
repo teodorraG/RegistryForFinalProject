@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "FooterTerms";
+}
+
+<form asp-controller="Footer">
+    <h1>Terms and Conditions</h1>
+</form>
+<hr />
+<br />
+<br />
+<h3>COPYRIGHT</h3>
+<br />
+<p>All content included in or made available through any Getme, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software is the property of Getme or its content suppliers and protected by the international copyright laws.</p>
+<br />
+<h3>TRADEMARKS</h3>
+<br />
+<p>In addition, graphics, logos, page headers, button icons, scripts, and service names included in or made available through any Getme Service are trademarks or trade dress of Getme in the U.S. and other countries.</p>
+<br />
+<h3>LICENSE AND ACCESS</h3>
+<p>Subject to your compliance with these Conditions of Use and any Service Terms, and your payment of any applicable fees, Getme or its content providers grant you a limited, non-exclusive, non-transferable, non-sublicensable license to access and make personal and non-commercial use of the Getme Services. This license does not include any resale or commercial use of any Getme Service, or its contents; any collection and use of any product listings, descriptions, or prices; any derivative use of any Getme Service or its contents; any downloading, copying, or other use of account information for the benefit of any third party; or any use of data mining, robots, or similar data gathering and extraction tools. All rights not expressly granted to you in these Conditions of Use or any Service Terms are reserved and retained by Getme or its licensors, suppliers, publishers, rightsholders, or other content providers.</p>
+<br />
+<h3>YOUR ACCOUNT</h3>
+<p>You may need your own Getme account to use certain Getme Services, and you may be required to be logged in to the account and have a valid payment method associated with it. If there is a problem charging your selected payment method, we may charge any other valid payment method associated with your account. If you are under 18, you may use the Amazon Services only with involvement of a parent or guardian.</p>
+<br />
+<h3>RISK OF LOSS</h3>
+<br />
+<p>All purchases of physical items from Getme are made pursuant to a shipment contract. This means that the risk of loss and title for such items pass to you upon our delivery to the carrier.</p>
+<br />
+<h3>PRICING</h3>
+<br />
+<p>"List Price" means the suggested retail price of a product as provided by a manufacturer, supplier, or seller. We generally do not charge your credit card until after your order has entered the shipping process or, for digital products, until we make the digital product available to you.</p>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
+

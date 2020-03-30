@@ -31,19 +31,24 @@
                 </div>
         </nav>
     </header>
-    <div class="container">
+    <div id="page-container" class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer id="footer" class="border-top footer text-muted">
 
         <div class="container">
-            &copy; 2020 &nbsp;
-            <a href="https://www.facebook.com/"><i class="fab fa-facebook fa-1x pr-2 warning"></i></a>
-            <a href="https://www.instagram.com/"><i class="fab fa-instagram fa-1x pr-2 warning"></i></a>
-            <a href="https://twitter.com/explore"><i class="fab fa-twitter fa-1x pr-2 warning"></i></a>
+            <ul class="footer-line">
+                <li>&copy; 2020 &nbsp;</li>
+                <li><a href="https://www.facebook.com/"><i class="fab fa-facebook fa-1x pr-2 warning"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="fab fa-instagram fa-1x pr-2 warning"></i></a></li>
+                <li><a href="https://twitter.com/explore"><i class="fab fa-twitter fa-1x pr-2 warning"></i></a></li>
+                <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Privacy">Privacy Policy</a></li>
+                <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Terms">Terms and Conditions</a></li>
+                <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Contact">Contact Us</a></li>
+            </ul>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
