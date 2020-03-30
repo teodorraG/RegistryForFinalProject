@@ -24,5 +24,10 @@ namespace RegistryForFinalProject.Controllers
         {
             return View("FooterContact");
         }
+
+        public IActionResult About()
+        {
+            return View("FooterAbout");
+        }
     }
 }

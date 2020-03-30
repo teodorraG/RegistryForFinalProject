@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "FooterAbout";
+}
+
+<form asp-controller="Footer">
+    <h1>About</h1>
+</form>
+<hr />
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
