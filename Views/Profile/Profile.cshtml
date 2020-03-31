@@ -22,15 +22,15 @@
         <div class="p-3 mb-2 bg-secondary text-white"><h6>Information:</h6></div>
         <label action="/Profile/Profile" asp-for="FirstName">First name: </label>
         <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
-        <input asp-for="FirstName" class="form-control inputSizeTwenty" />
+        <input asp-for="FirstName" class="form-control input-lg col-4" />
 
         <label action="/Profile/Profile" asp-for="LastName">Last name: </label>
         <span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
-        <input asp-for="LastName" class="form-control inputSizeTwenty" />
+        <input asp-for="LastName" class="form-control input-lg col-4" />
 
         <label action="/Profile/Profile" asp-for="Address">Address: </label>
         <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>
-        <input asp-for="Address" class="form-control inputSizeTwenty" />
+        <input asp-for="Address" class="form-control input-lg col-4" />
         <br />
         <p>Gender:</p>
         @Html.DropDownListFor(m => m.Gender,

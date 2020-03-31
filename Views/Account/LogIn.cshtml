@@ -12,11 +12,11 @@
     <br />
     <label action="/Account/LogIn" asp-for="UserName"><span class="text-danger">*</span> Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
-    <input asp-for="UserName" class="form-control inputSizeTwenty" />
+    <input asp-for="UserName" class="form-control input-lg col-4" />
     <br />
     <label action="/Account/LogIn" asp-for="Password"><span class="text-danger">*</span> Password: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
-    <input asp-for="Password" class="form-control inputSizeTwenty" type="password" />
+    <input asp-for="Password" class="form-control input-lg col-4" type="password" />
     <br />
     <br />
     <button type="submit" class="btn btn-warning btn-lg" id="LogInButton">Log In</button>

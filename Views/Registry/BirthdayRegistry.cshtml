@@ -10,15 +10,15 @@
     <br />
     <label action="/Registry/BirthdayRegistry" asp-for="Name"><span class="text-danger">*</span> Name: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
-    <input asp-for="Name" class="form-control inputSizeTwenty" />
+    <input asp-for="Name" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/BirthdayRegistry" asp-for="City"><span class="text-danger">*</span> Location of Event: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.City)</span>
-    <input asp-for="City" class="form-control inputSizeTwenty" />
+    <input asp-for="City" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/BirthdayRegistry" asp-for="DateOfEvent"><span class="text-danger">*</span> Date of Event: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.DateOfEvent)</span>
-    <input asp-for="DateOfEvent" class="form-control inputSizeTwenty" />
+    <input asp-for="DateOfEvent" class="form-control input-lg col-4" />
     <br />
     <br />
     @*<button type="submit" class="btn btn-warning btn-lg" id="RegistryButton">Create Registry</button>*@

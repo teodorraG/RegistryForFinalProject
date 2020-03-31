@@ -21,19 +21,19 @@
     <br />
     <label action="/Account/Register" asp-for="UserName"><span class="text-danger">*</span> Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
-    <input asp-for="UserName" class="form-control inputSizeTwenty" />
+    <input asp-for="UserName" class="form-control input-lg col-4" />
     <br />
     <label action="/Account/Register" asp-for="Email"><span class="text-danger">*</span> Email: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
-    <input asp-for="Email" class="form-control inputSizeTwenty" />
+    <input asp-for="Email" class="form-control input-lg col-4" />
     <br />
     <label action="/Account/Register" asp-for="Password"><span class="text-danger">*</span> Password: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
-    <input asp-for="Password" class="form-control inputSizeTwenty" type="password" />
+    <input asp-for="Password" class="form-control input-lg col-4" type="password" />
     <br />
     <label asp-for="ConfirmPassword" action="/Account/Register"><span class="text-danger">*</span> Confirm Password: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
-    <input asp-for="ConfirmPassword" class="form-control inputSizeTwenty" type="password" />
+    <input asp-for="ConfirmPassword" class="form-control input-lg col-4" type="password" />
     <br />
     <br />
     <input type="checkbox" id="AgeCheckBox" name="AgeCheckBox" />
