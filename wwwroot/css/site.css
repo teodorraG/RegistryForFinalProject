@@ -77,9 +77,6 @@ h1{
     text-align:center;
 }
 
-.inputSizeTwenty{
-    width: 20em !important;
-}
 
 #registry {
     display: flex;
