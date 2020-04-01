@@ -6,104 +6,57 @@
 
 <h1>Personal Profile</h1>
 <br />
-<form asp-controller="Profile">
-    @if (ViewData["LoginError"] != null)
+<form asp-controller="Profile" asp-action="UpdateAccountInfo" formmethod="post">
+    @if (this.TempData["MadeChanges"] != null)
     {
-        <p class="text-danger">@ViewData["LoginError"]</p>
+        <div class="alert alert-success">@this.TempData["MadeChanges"]</div>
     }
-    @*<div class="card">
-            <div class="card-body">
-                This is some text within a panel body.
-            </div>
-        </div>*@
+    @if (this.TempData["ErrorChanges"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["ErrorChanges"]</div>
+    }
 
     <div class="card">
         <div class="card-body">
             <div class="p-3 mb-2 bg-secondary text-white"><h6>Information:</h6></div>
             <label action="/Profile/Profile" asp-for="FirstName">First name: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
             <input asp-for="FirstName" class="form-control input-lg col-4" />
 
             <label action="/Profile/Profile" asp-for="LastName">Last name: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</span>
             <input asp-for="LastName" class="form-control input-lg col-4" />
 
             <label action="/Profile/Profile" asp-for="Address">Address: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.Address)</span>
             <input asp-for="Address" class="form-control input-lg col-4" />
             <br />
             <p>Gender:</p>
             @Html.DropDownListFor(m => m.Gender,
-                        new SelectList(Enum.GetValues(typeof(Gender))),
-                        "Select Gender")
+                        new SelectList(Enum.GetValues(typeof(Gender))))
             <br />
             <br />
             <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
 
-            @*<a class="btn btn-warning btn-lg" data-toggle="modal" data-target=".bootstrapmodal">Save</a>
-                <div class="modal fade bootstrapmodal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Changes</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>This action will make changes to your account</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning">Save changes</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-
             <br />
         </div>
-</form>
-<form asp-controller="Profile">
-    <div class="card-body">
-        <div class="p-3 mb-2 bg-secondary text-white"><h6>Change your password:</h6></div>
-        <label action="/Profile/Profile" asp-for="CurrentPassword">Current password: </label>
-        <span class="text-danger">@Html.ValidationMessageFor(m => m.CurrentPassword)</span>
-        <input asp-for="CurrentPassword" class="form-control input-lg col-4" type="password" />
-
-        <label asp-for="NewPassword" action="/Profile/Profile">New password: </label>
-        <span class="text-danger">@Html.ValidationMessageFor(m => m.NewPassword)</span>
-        <input asp-for="NewPassword" class="form-control input-lg col-4" type="password" />
-
-        <br />
-        <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
-
-        @*<a class="btn btn-warning btn-lg" data-toggle="modal" data-target=".bootstrapmodal">Save</a>
-
-            <div class="modal fade bootstrapmodal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Changes</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>This action will make changes to your account</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
-
-
     </div>
 </form>
+<form asp-controller="Profile" asp-action="UpdatePassword" formmethod="post">
+    <div class="card">
+        <div class="card-body">
+            <div class="p-3 mb-2 bg-secondary text-white"><h6>Change your password:</h6></div>
+            <label action="/Profile/Profile" asp-for="CurrentPassword">Current password: </label>
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.CurrentPassword)</span>
+            <input asp-for="CurrentPassword" asp-action="ChangePassword" class="form-control input-lg col-4" type="password" />
+
+            <label asp-for="NewPassword" action="/Profile/Profile">New password: </label>
+            <span class="text-danger" asp-validation-for="NewPassword"></span>
+            <input asp-for="NewPassword" class="form-control input-lg col-4" type="password" />
+
+            <br />
+            <button type="submit" class="btn btn-warning btn-lg" id="ExitButton">Save</button>
+        </div>
+    </div>
+</form>
+<div class="card">
     <div class="card-body">
         <div class="p-3 mb-2 bg-secondary text-white"><h6>Items: </h6></div>
         <br />
@@ -113,43 +66,38 @@
         <a href="/Profile/Offers" class="offers">View your offers</a>
     </div>
     <br />
+</div>
 
+    <script src="~/js/site.js"></script>
 
-<script src="~/js/site.js"></script>
+    @section MainNavigation {
 
-@if (this.TempData["MadeChanges"] != null)
-{
-    <div class="alert alert-success">@this.TempData["MadeChanges"]</div>
-}
-
-@section MainNavigation {
-
-    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
-        </li>
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+            </li>
+        }
     }
-}
 
-@section AccountNavigation {
-    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
-    {
-        <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
-        </li>
-        <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
-        </li>
+    @section AccountNavigation {
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+        {
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+            </li>
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+            </li>
 
+        }
+        else
+        {
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+            </li>
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+        }
     }
-    else
-    {
-        <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
-        </li>
-        <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-        </li>
-    }
-}

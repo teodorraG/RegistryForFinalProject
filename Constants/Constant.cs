@@ -16,7 +16,7 @@ namespace RegistryForFinalProject.Constants
         public const string LogInInvalidUserCredentialsError = "The username and/or password are incorrect";
         public const string RequiredEmailError = "Email is required";
         public const string RequiredPasswardError = "Password is required";
-        public const string PasswordComplexityError = "Password must contain at least one: lower case letter, upper case letter and number";
+        public const string PasswordComplexityError = "Password must be 8 or more characters, to contain at least one: lower case letter, upper case letter and number";
         public const string RequiredFieldError = "This field is required";
 
 
