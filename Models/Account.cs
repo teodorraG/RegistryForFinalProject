@@ -28,5 +28,7 @@ namespace RegistryForFinalProject.Models
 
         public Role Role { get; set; }
 
+
+
     }
 }

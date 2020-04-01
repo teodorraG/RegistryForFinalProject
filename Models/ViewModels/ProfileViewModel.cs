@@ -1,4 +1,5 @@
-﻿using RegistryForFinalProject.Enums;
+﻿using RegistryForFinalProject.Constants;
+using RegistryForFinalProject.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class ProfileViewModel
     {
-        [Required]
+        public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -18,15 +19,15 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         public Gender Gender { get; set; }
 
-        public string NewPassword { get; set; }
+        public string CurrentPassword { get; set; }
 
         [NotMapped]
-        [Compare("NewPassword")]
-        public string ConfirmNewPassword { get; set; }
+        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Constant.PasswordComplexityError)]
+        public string NewPassword { get; set; }
 
-        public string Orders { get; set; } // Order Orders
+        //public string Orders { get; set; } // Order Orders
 
-        public string Offers { get; set; } // Offer Offers
+        //public string Offers { get; set; } // Offer Offers
 
     }
 }

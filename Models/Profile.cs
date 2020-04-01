@@ -1,4 +1,5 @@
-﻿using RegistryForFinalProject.Enums;
+﻿using RegistryForFinalProject.Constants;
+using RegistryForFinalProject.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +22,7 @@ namespace RegistryForFinalProject.Models
 
         public string Address { get; set; }
 
-        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Password must contain at least one: lower case letter, upper case letter and number")]
+        [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Constant.PasswordComplexityError)]
         public string NewPassword { get; set; }
 
         public string Orders { get; set; } // Order Orders

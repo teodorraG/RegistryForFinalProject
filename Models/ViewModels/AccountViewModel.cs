@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using RegistryForFinalProject.Constants;
+using RegistryForFinalProject.Enums;
 
 namespace RegistryForFinalProject.Models.ViewModels
 {
@@ -26,5 +27,13 @@ namespace RegistryForFinalProject.Models.ViewModels
         [NotMapped]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public Gender Gender { get; set; }
+
+        public string Address { get; set; }
     }
 }

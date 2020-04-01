@@ -71,6 +71,8 @@ namespace RegistryForFinalProject.Controllers
                 }
                 if (ViewData["UsernameError"] != null || ViewData["EmailError"] != null)
                 {
+                    //??
+                    //&&
                     return View();
                 }
                 int termsCheckBox = Request.Form["TermsCheckBox"].Count;
@@ -86,6 +88,9 @@ namespace RegistryForFinalProject.Controllers
                     };
                     db.Accounts.Add(account);
                     db.SaveChanges();
+                    //??
+                    // termsCheckBox = 0;
+                    // ageCheckBox =0;
                     return View("SuccessfullyRegistered");
                 }
                 else
