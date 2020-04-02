@@ -33,21 +33,19 @@ namespace RegistryForFinalProject.Controllers
             {
                 var userName = HttpContext.Session.GetString("CurrentUser");
                 var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
-                if (profileViewModel.FirstName != null)
-                {
-                    account.FirstName = profileViewModel.FirstName;
-                }
-                if (profileViewModel.LastName != null)
-                {
-                    account.LastName = profileViewModel.LastName;
-                } 
-                if (profileViewModel.Address != null)
-                {
-                    account.Address = profileViewModel.Address;
-                }
+
+                account.FirstName = profileViewModel.FirstName;
+                account.LastName = profileViewModel.LastName;
+                account.Address = profileViewModel.Address;
+
                 if (profileViewModel.Gender != 0)
                 {
                     account.Gender = profileViewModel.Gender;
+                }
+                else if (profileViewModel.Gender == 0)
+                {
+                    this.TempData["InvalidGender"] = "Select your gender type";
+                    return RedirectToAction("Profile");
                 }
                 db.SaveChanges();
                 this.TempData["MadeChanges"] = "Your changes have been saved";
@@ -58,7 +56,7 @@ namespace RegistryForFinalProject.Controllers
         [HttpPost]
         public IActionResult UpdatePassword(ProfileViewModel profileViewModel)
         {
-            
+
             if (ModelState.IsValid)
             {
                 if (profileViewModel.CurrentPassword == null || profileViewModel.NewPassword == null)

@@ -27,7 +27,10 @@
     {
         <div class="alert alert-danger">@this.TempData["MatchingPassword"]</div>
     }
-
+    @if (this.TempData["InvalidGender"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["InvalidGender"]</div>
+    }
     <div class="card">
         <div class="card-body">
             <div class="p-3 mb-2 bg-secondary text-white"><h6>Information:</h6></div>

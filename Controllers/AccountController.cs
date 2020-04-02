@@ -114,9 +114,9 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View("ForgottenPassword");
+                return View();
             }
-            return View(forgottenPassViewModel);
+            return View();
         }
     }
 }
