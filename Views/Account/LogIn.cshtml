@@ -5,10 +5,15 @@
 
 <h1>Sign in</h1>
 <form asp-controller="Account">
+    @if (this.TempData["ErrorChanges"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["ErrorChanges"]</div>
+    }
     @if (ViewData["InvalidUser"] != null)
     {
         <p class="text-danger">@ViewData["InvalidUser"]</p>
     }
+
     <br />
     <label action="/Account/LogIn" asp-for="UserName"><span class="text-danger">*</span> Username: </label>
     <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>

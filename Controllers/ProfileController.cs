@@ -75,7 +75,8 @@ namespace RegistryForFinalProject.Controllers
                     this.TempData["ErrorChanges"] = "Make sure your password is valid";
                 }
             }
-            return View("Profile");
+            //return LocalRedirect("~/Account/LogIn");
+           return View("Profile");
         }
     }
 }

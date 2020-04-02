@@ -5,6 +5,10 @@
 
 <h1>Register</h1>
 <form asp-controller="Account">
+    @if (this.TempData["SuccessfullyRegistered"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["SuccessfullyRegistered"]</div>
+    }
     @if (ViewData["UsernameError"] != null)
     {
         <p class="text-danger">@ViewData["UsernameError"]</p>
@@ -41,6 +45,7 @@
     <br />
     <input type="checkbox" id="TermsCheckBox" name="TermsCheckBox" />
     <label action="/Account/Register"><span class="text-danger">*</span> I agree with the terms of use and conditions</label>
+    <br />
     <br />
     <button type="submit" class="btn btn-warning btn-lg" id="RegisterButton">Register</button>
 

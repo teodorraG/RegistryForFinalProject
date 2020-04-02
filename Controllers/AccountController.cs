@@ -91,7 +91,9 @@ namespace RegistryForFinalProject.Controllers
                     //??
                     // termsCheckBox = 0;
                     // ageCheckBox =0;
-                    return View("SuccessfullyRegistered");
+                    //return View("SuccessfullyRegistered");
+                    this.TempData["SuccessfullyRegistered"] = "Successfully registered. Please Sign In to continue!";
+                    return View();
                 }
                 else
                 {
@@ -115,10 +117,6 @@ namespace RegistryForFinalProject.Controllers
                 return View("ForgottenPassword");
             }
             return View(forgottenPassViewModel);
-        }
-        public IActionResult SuccessfullyRegistered()
-        {
-            return View("SuccessfullyRegistered");
         }
     }
 }

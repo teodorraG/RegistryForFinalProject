@@ -26,6 +26,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         [NotMapped]
         [Compare("Password")]
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
 
         public string FirstName { get; set; }
