@@ -54,29 +54,49 @@ namespace RegistryForFinalProject.Controllers
             }
             return RedirectToAction("Profile");
         }
-        [HttpPost]
 
+        [HttpPost]
         public IActionResult UpdatePassword(ProfileViewModel profileViewModel)
         {
+            
             if (ModelState.IsValid)
             {
-                var userName = HttpContext.Session.GetString("CurrentUser");
-                var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
-                var password = PasswordEncodingService.GetHashSha256(profileViewModel.CurrentPassword);
-
-                if (password == account.Password)
+                if (profileViewModel.CurrentPassword == null || profileViewModel.NewPassword == null)
                 {
-                    account.Password = PasswordEncodingService.GetHashSha256(profileViewModel.NewPassword);
-                    db.SaveChanges();
-                    this.TempData["MadeChanges"] = "Your changes have been saved";
+                    this.TempData["NoDataEntered"] = "Enter valid data";
+                    return RedirectToAction("Profile");
                 }
-                else
+                else if (profileViewModel.CurrentPassword != null && profileViewModel.NewPassword != null)
                 {
-                    this.TempData["ErrorChanges"] = "Make sure your password is valid";
+                    var userName = HttpContext.Session.GetString("CurrentUser");
+                    var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
+                    var password = PasswordEncodingService.GetHashSha256(profileViewModel.CurrentPassword);
+
+                    var newPassword = PasswordEncodingService.GetHashSha256(profileViewModel.NewPassword);
+
+
+                    if (password == newPassword)
+                    {
+                        this.TempData["MatchingPassword"] = "The new password matches current password";
+                        return RedirectToAction("Profile");
+                    }
+                    else if (password == account.Password)
+                    {
+                        account.Password = PasswordEncodingService.GetHashSha256(profileViewModel.NewPassword);
+                        db.SaveChanges();
+                        this.TempData["MadeChanges"] = "Your changes have been saved";
+                        return RedirectToAction("Profile");
+                    }
+                    else
+                    {
+                        this.TempData["ErrorChanges"] = "Make sure your password is valid";
+                        return RedirectToAction("Profile");
+                    }
                 }
             }
             //return LocalRedirect("~/Account/LogIn");
-           return View("Profile");
+            this.TempData["ErrorComplexity"] = "Password must be 8 or more characters, to contain at least one: lower case letter, upper case letter and number";
+            return RedirectToAction("Profile");
         }
     }
 }

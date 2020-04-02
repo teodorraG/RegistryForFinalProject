@@ -11,6 +11,22 @@
     {
         <div class="alert alert-success">@this.TempData["MadeChanges"]</div>
     }
+    @if (this.TempData["ErrorChanges"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["ErrorChanges"]</div>
+    }
+    @if (this.TempData["NoDataEntered"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NoDataEntered"]</div>
+    }
+    @if (this.TempData["ErrorComplexity"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["ErrorComplexity"]</div>
+    }
+    @if (this.TempData["MatchingPassword"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["MatchingPassword"]</div>
+    }
 
     <div class="card">
         <div class="card-body">
