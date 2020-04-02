@@ -9,15 +9,15 @@
 <form asp-controller="Registry">
     <br />
     <label action="/Registry/BirthdayRegistry" asp-for="Name"><span class="text-danger">*</span> Name: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
+    <span class="text-danger" asp-validation-for="Name"></span>
     <input asp-for="Name" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/BirthdayRegistry" asp-for="City"><span class="text-danger">*</span> Location of Event: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.City)</span>
+    <span class="text-danger"asp-validation-for="City"></span>
     <input asp-for="City" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/BirthdayRegistry" asp-for="DateOfEvent"><span class="text-danger">*</span> Date of Event: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.DateOfEvent)</span>
+    <span class="text-danger" asp-validation-for="DateOfEvent"></span>
     <input asp-for="DateOfEvent" class="form-control input-lg col-4" />
     <br />
     <br />

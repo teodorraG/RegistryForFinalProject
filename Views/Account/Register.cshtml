@@ -24,19 +24,19 @@
     }
     <br />
     <label action="/Account/Register" asp-for="UserName"><span class="text-danger">*</span> Username: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</span>
+    <span class="text-danger" asp-validation-for="UserName"></span>
     <input asp-for="UserName" class="form-control input-lg col-4" />
     <br />
     <label action="/Account/Register" asp-for="Email"><span class="text-danger">*</span> Email: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+    <span class="text-danger" asp-validation-for="Email"></span>
     <input asp-for="Email" class="form-control input-lg col-4" />
     <br />
     <label action="/Account/Register" asp-for="Password"><span class="text-danger">*</span> Password: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+    <span class="text-danger"asp-validation-for="Password"></span>
     <input asp-for="Password" class="form-control input-lg col-4" type="password" />
     <br />
     <label asp-for="ConfirmPassword" action="/Account/Register"><span class="text-danger">*</span> Confirm Password: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
     <input asp-for="ConfirmPassword" class="form-control input-lg col-4" type="password" />
     <br />
     <br />

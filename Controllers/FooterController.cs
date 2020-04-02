@@ -19,15 +19,5 @@ namespace RegistryForFinalProject.Controllers
         {
             return View("FooterTerms");
         }
-
-        public IActionResult Contact()
-        {
-            return View("FooterContact");
-        }
-
-        public IActionResult About()
-        {
-            return View("FooterAbout");
-        }
     }
 }

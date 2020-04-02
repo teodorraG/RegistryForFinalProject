@@ -40,7 +40,7 @@
         <div class="card-body">
             <div class="p-3 mb-2 bg-secondary text-white"><h6>Change your password:</h6></div>
             <label action="/Profile/Profile" asp-for="CurrentPassword">Current password: </label>
-            <span class="text-danger">@Html.ValidationMessageFor(m => m.CurrentPassword)</span>
+            <span class="text-danger" asp-validation-for="CurrentPassword"></span>
             <input asp-for="CurrentPassword" asp-action="ChangePassword" class="form-control input-lg col-4" type="password" />
 
             <label asp-for="NewPassword" action="/Profile/Profile">New password: </label>

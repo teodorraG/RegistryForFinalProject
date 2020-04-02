@@ -22,7 +22,13 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
+                                        <div class="col-md-3"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a></div>
+                                        <div class="col-md-3"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></div>
+                                    </div>
+                                    </div>
                             </li>
                             @RenderSection("MainNavigation", false)
                         </ul>
@@ -50,7 +56,6 @@
                     <li><a href="https://twitter.com/explore"><i class="fab fa-twitter fa-1x pr-2 warning"></i></a></li>
                     <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Privacy">Privacy Policy</a></li>
                     <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Terms">Terms and Conditions</a></li>
-                    <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Contact">Contact Us</a></li>
                 </ul>
             </div>
         </footer>

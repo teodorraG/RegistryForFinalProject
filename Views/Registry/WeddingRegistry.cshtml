@@ -9,19 +9,19 @@
 <form asp-controller="Registry">
     <br />
     <label action="/Registry/WeddingRegistry" asp-for="BrideName"><span class="text-danger">*</span> Name of Bride: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.BrideName)</span>
+    <span class="text-danger"asp-validation-for="BrideName"></span>
     <input asp-for="BrideName" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/WeddingRegistry" asp-for="GroomName"><span class="text-danger">*</span> Name of Groom: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.GroomName)</span>
+    <span class="text-danger"asp-validation-for="GroomName"></span>
     <input asp-for="BrideName" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/WeddingRegistry" asp-for="CityOfEvent"><span class="text-danger">*</span> Location of Event: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.CityOfEvent)</span>
+    <span class="text-danger" asp-validation-for="CityOfEvent"></span>
     <input asp-for="CityOfEvent" class="form-control input-lg col-4" />
     <br />
     <label action="/Registry/WeddingRegistry" asp-for="DateOfEvent"><span class="text-danger">*</span> Date of Event: </label>
-    <span class="text-danger">@Html.ValidationMessageFor(m => m.DateOfEvent)</span>
+    <span class="text-danger" asp-validation-for="DateOfEvent"></span>
     <input asp-for="DateOfEvent" class="form-control input-lg col-4" />
     <br />
     <br />
