@@ -114,7 +114,11 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View();
+                if (db.Accounts.FirstOrDefault(x => x.Email == forgottenPassViewModel.Email) != null)
+                {
+                    this.TempData["SentEmail"] = "An email has been sent to you.";
+                    return RedirectToAction("ForgottenPassword");
+                }
             }
             return View();
         }

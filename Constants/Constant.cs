@@ -19,11 +19,14 @@ namespace RegistryForFinalProject.Constants
         public const string PasswordComplexityError = "Password must be 8 or more characters, to contain at least one: lower case letter, upper case letter and number";
         public const string RequiredFieldError = "This field is required";
 
-
         //Cloudinary
         public const string CLOUD_NAME = "teodorascloud";
         public const string API_KEY = "384475583874649";
         public const string API_SECRET = "fTNzwWElxwVCvz_LsRFoLpDyG7o";
-      
+
+        //Contact form
+        public const string RequiredMessage = "it is necessary to add content";
+
+
     }
 }

@@ -21,15 +21,15 @@ namespace RegistryForFinalProject.Controllers
         {
             CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(Constant.CLOUD_NAME, Constant.API_KEY, Constant.API_SECRET);
             Cloudinary cloudinary = new Cloudinary(account);
-            //var asd = cloudinary.Api.UrlImgUp.BuildImageTag("ttss28mqurpmvinr45q8.jpg");
+            ////var asd = cloudinary.Api.UrlImgUp.BuildImageTag("ttss28mqurpmvinr45q8.jpg");
 
             //var uploadParams = new ImageUploadParams()
             //{
-            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\minilogo.jpg")
+            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\carousel06.jpg")
             //};
             //cloudinary.Upload(uploadParams);
 
-            //var path = uploadResult.JsonObj["public_id"];
+            ////var path = uploadResult.JsonObj["public_id"];
 
             return View();
         } 

@@ -2,19 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models.ViewModels
 {
-    public class ForgottenPasswordViewModel
+    public class ContactViewModel
     {
-        [Key]
-        public int Id { get; set; }
+        public string Name { get; set; }
 
-        [EmailAddress(ErrorMessage = Constant.RegisterInvalidEmailError)]
         [Required(ErrorMessage = Constant.RequiredEmailError)]
         public string Email { get; set; }
+
+        public string Subject { get; set; }
+
+        [Required(ErrorMessage = Constant.RequiredMessage)]
+        public string Message { get; set; }
     }
 }
