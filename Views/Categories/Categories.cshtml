@@ -1,27 +1,30 @@
-﻿@model RegistryForFinalProject.Models.ViewModels.ForgottenPasswordViewModel
+﻿@model RegistryForFinalProject.Models.ViewModels.CategoriesViewModel
 @{
-    ViewData["Title"] = "ForgottenPassword";
+    ViewData["Title"] = "Ctegories";
 }
 
-<h1 class="ml11">
-    <span class="text-wrapper">
-        <span class="line line1"></span>
-        <span class="letters">Password recovery</span>
-    </span>
-</h1>
 <form asp-controller="Account">
-    @if (this.TempData["SentEmail"] != null)
-    {
-        <div class="alert alert-success">@this.TempData["SentEmail"]</div>
-    }
-    <br />
-    <label action="/Account/ForgottenPassword" asp-for="Email"><span class="text-danger">*</span> Email: </label>
-    <span class="text-danger" asp-validation-for="Email"></span>
-    <input asp-for="Email" class="form-control input-lg col-4" />
-    <br />
-    <button type="submit" class="btn btn-warning btn-lg" id="SubmitButton">Submit</button>
-</form>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category list
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-8">
+            <label for="customRange2">Price range: </label>
+            <input type="range" name="rangeInput" min="0" max="1000" onchange="updateTextInput(this.value);">
+            <input type="text" id="textInput" value="">
+        </div>
+    </div>
+</form>
 
 @section MainNavigation {
 
@@ -59,4 +62,4 @@
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-<script src="~/js/pageTitle.js"></script>
+<script src="~/js/categoryPrice.js"></script>

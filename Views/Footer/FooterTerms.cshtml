@@ -2,14 +2,14 @@
     ViewData["Title"] = "FooterTerms";
 }
 
-    <form asp-controller="Footer">
-        <h1 class="ml11">
-            <span class="text-wrapper">
-                <span class="line line1"></span>
-                <span class="letters">Terms and Conditions</span>
-            </span>
-        </h1>
-    </form>
+<form asp-controller="Footer">
+    <h1 class="ml11">
+        <span class="text-wrapper">
+            <span class="line line1"></span>
+            <span class="letters">Terms and Conditions</span>
+        </span>
+    </h1>
+</form>
 <hr />
 <br />
 <br />
@@ -43,6 +43,9 @@
     {
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Categories</a>
         </li>
     }
 }

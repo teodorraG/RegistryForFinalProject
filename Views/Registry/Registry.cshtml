@@ -19,7 +19,7 @@
     <div id="registry" class="row">
         <div class="card col-md" style="width: 30rem;">
             <div class="img-hover-zoom">
-                <img src="http://res.cloudinary.com/teodorascloud/image/upload/mxsxgqdndnsvzyiknrnd.jpg" class="card-img-top img-thumbnail" alt="baby">
+                <a class="navbar-brand" asp-area="" asp-controller="Registry" asp-action="BabyRegistry"><img src="http://res.cloudinary.com/teodorascloud/image/upload/mxsxgqdndnsvzyiknrnd.jpg" class="card-img-top img-thumbnail" alt="baby"></a>
             </div>
             <div class="card-body">
                 <p class="card-text font-italic font-weight-bold text-center">Baby baptism registry</p>
@@ -29,7 +29,7 @@
 
         <div class="card col-md" style="width: 30rem;">
             <div class="img-hover-zoom">
-                <img src="http://res.cloudinary.com/teodorascloud/image/upload/jvfe1ixxfvoiq0465trp.jpg" class="card-img-top img-thumbnail" alt="wedding">
+                <a class="navbar-brand" asp-area="" asp-controller="Registry" asp-action="WeddingRegistry"><img src="http://res.cloudinary.com/teodorascloud/image/upload/jvfe1ixxfvoiq0465trp.jpg" class="card-img-top img-thumbnail" alt="wedding"></a>
             </div>
             <div class="card-body">
                 <p class="card-text font-italic font-weight-bold text-center">Wedding registry</p>
@@ -39,7 +39,7 @@
 
         <div class="card col-md" style="width: 30rem;">
             <div class="img-hover-zoom">
-                <img src="http://res.cloudinary.com/teodorascloud/image/upload/nuyjcb8nqdskfwtbdubl.jpg" class="card-img-top img-thumbnail" alt="bday">
+                <a class="navbar-brand" asp-area="" asp-controller="Registry" asp-action="BirthdayRegistry"><img src="http://res.cloudinary.com/teodorascloud/image/upload/nuyjcb8nqdskfwtbdubl.jpg" class="card-img-top img-thumbnail" alt="bday"></a>
             </div>
             <div class="card-body">
                 <p class="card-text font-italic font-weight-bold text-center">Birthday registry</p>
@@ -57,6 +57,9 @@
     {
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Categories</a>
         </li>
     }
 }
