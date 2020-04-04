@@ -25,7 +25,7 @@ namespace RegistryForFinalProject.Controllers
 
             //var uploadParams = new ImageUploadParams()
             //{
-            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\carousel06.jpg")
+            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\martha.jpg")
             //};
             //cloudinary.Upload(uploadParams);
 
