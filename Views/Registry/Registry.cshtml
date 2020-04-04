@@ -1,53 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Registry";
 }
-<h1>@ViewData["Title"]</h1>
+
+<div class="textJs">
+    <h1 class="ml3">Select your preference</h1>
+</div>
 
 <form asp-controller="Registry">
     <br />
     <br />
     <br />
 
-    @*<div id="registry">
-
-        <div class="bigButton">
-            <button href="Registry/BabyRegistry" class="btn-primary RegistryTypes" type="submit" asp-action="BabyRegistry" formmethod="get">Baby christening registry</button>
-        </div>
-
-        <div class="bigButton">
-            <button href="Registry/WeddingRegistry" class="btn-primary RegistryTypes" asp-action="WeddingRegistry" formmethod="get">Wedding registry</button>
-        </div>
-        <div class="bigButton">
-            <button href="Registry/BirthdayRegistry" class="btn-primary RegistryTypes" asp-action="BirthdayRegistry" formmethod="get">Birthday registry</button>
-        </div>
-    </div>*@
-<div id="registry" class="row">
-    <div class="card col-md" style="width: 30rem;">
-        <img src="http://res.cloudinary.com/teodorascloud/image/upload/mxsxgqdndnsvzyiknrnd.jpg" class="card-img-top img-thumbnail" alt="baby">
-        <div class="card-body">
-            <p class="card-text font-italic font-weight-bold text-center">Baby christening registry</p>
-            <div class="text-center"><a href="BabyRegistry" class="btn btn-warning"><span class="text-center">Go!</span></a></div>
-        </div>
-    </div>
-
-    <div class="card col-md" style="width: 30rem;">
-        <img src="http://res.cloudinary.com/teodorascloud/image/upload/jvfe1ixxfvoiq0465trp.jpg" class="card-img-top img-thumbnail" alt="wedding">
-        <div class="card-body">
-            <p class="card-text font-italic font-weight-bold text-center">Wedding registry</p>
-            <div class="text-center"><a href="WeddingRegistry" class="btn btn-warning"><span class="text-center">Go!</span></a></div>
-        </div>
-    </div>
-
-    <div class="card col-md" style="width: 30rem;">
-            <img src="http://res.cloudinary.com/teodorascloud/image/upload/nuyjcb8nqdskfwtbdubl.jpg" class="card-img-top img-thumbnail" alt="bday">
-                <div class="card-body">
-                    <p class="card-text font-italic font-weight-bold text-center">Birthday registry</p>
-                    <div class="text-center"><a href="BirthdayRegistry" class="btn btn-warning"><span class="text-center">Go!</span></a></div>
-                </div>
+    <div id="registry" class="row">
+        <div class="card col-md" style="width: 30rem;">
+            <img src="http://res.cloudinary.com/teodorascloud/image/upload/mxsxgqdndnsvzyiknrnd.jpg" class="card-img-top img-thumbnail" alt="baby">
+            <div class="card-body">
+                <p class="card-text font-italic font-weight-bold text-center">Baby christening registry</p>
+                <div class="text-center"><a href="BabyRegistry" class="btn btn-warning"><span class="text-center">Go!</span></a></div>
             </div>
         </div>
+
+        <div class="card col-md" style="width: 30rem;">
+            <img src="http://res.cloudinary.com/teodorascloud/image/upload/jvfe1ixxfvoiq0465trp.jpg" class="card-img-top img-thumbnail" alt="wedding">
+            <div class="card-body">
+                <p class="card-text font-italic font-weight-bold text-center">Wedding registry</p>
+                <div class="text-center"><a href="WeddingRegistry" class="btn btn-warning"><span class="text-center">Go!</span></a></div>
+            </div>
+        </div>
+
+        <div class="card col-md" style="width: 30rem;">
+            <img src="http://res.cloudinary.com/teodorascloud/image/upload/nuyjcb8nqdskfwtbdubl.jpg" class="card-img-top img-thumbnail" alt="bday">
+            <div class="card-body">
+                <p class="card-text font-italic font-weight-bold text-center">Birthday registry</p>
+                <div class="text-center"><a href="BirthdayRegistry" class="btn btn-warning"><span class="text-center">Go!</span></a></div>
+            </div>
+        </div>
+    </div>
 </form>
-<script src="~/js/site.js"></script>
+
+
 
 @section MainNavigation {
 
@@ -80,3 +71,6 @@
         </li>
     }
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="~/js/pageTitle.js"></script>

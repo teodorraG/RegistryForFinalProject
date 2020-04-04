@@ -3,7 +3,7 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+<h1 class="ml3">Register</h1>
 <form asp-controller="Account">
     @if (this.TempData["SuccessfullyRegistered"] != null)
     {
@@ -32,7 +32,7 @@
     <input asp-for="Email" class="form-control input-lg col-4" />
     <br />
     <label action="/Account/Register" asp-for="Password"><span class="text-danger">*</span> Password: </label>
-    <span class="text-danger"asp-validation-for="Password"></span>
+    <span class="text-danger" asp-validation-for="Password"></span>
     <input asp-for="Password" class="form-control input-lg col-4" type="password" />
     <br />
     <label asp-for="ConfirmPassword" action="/Account/Register"><span class="text-danger">*</span> Confirm Password: </label>
@@ -50,7 +50,6 @@
     <button type="submit" class="btn btn-warning btn-lg" id="RegisterButton">Register</button>
 
 </form>
-<script src="~/js/site.js"></script>
 
 @section MainNavigation {
 
@@ -65,9 +64,9 @@
 @section AccountNavigation {
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
-<li>
-    <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
-</li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
         <li>
             <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
         </li>
@@ -83,3 +82,6 @@
         </li>
     }
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="~/js/pageTitle.js"></script>

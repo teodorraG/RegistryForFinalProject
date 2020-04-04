@@ -2,11 +2,11 @@
     interval: 2500
 })
 
-//... Welcome sign /Home
+
 var textWrapper = document.querySelector('.ml1 .letters');
 textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-anime.timeline({ loop: true })
+anime.timeline({ loop: false })
     .add({
         targets: '.ml1 .letter',
         scale: [0.3, 1],
@@ -26,9 +26,10 @@ anime.timeline({ loop: true })
     }).add({
         targets: '.ml1',
         opacity: 0,
-        duration: 1000,
+        duration: Infinity,
         easing: "easeOutExpo",
         delay: 1000
     });
-//...End
+
+
 
