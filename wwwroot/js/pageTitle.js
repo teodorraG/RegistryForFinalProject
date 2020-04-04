@@ -1,17 +1,31 @@
-﻿var textWrapper = document.querySelector('.ml3');
-textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+﻿var textWrapper = document.querySelector('.ml11 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
 
 anime.timeline({ loop: false })
     .add({
-        targets: '.ml3 .letter',
-        opacity: [0, 1],
-        easing: "easeInOutQuad",
-        duration: 100,
-        delay: (el, i) => 150 * (i + 1)
+        targets: '.ml11 .line',
+        scaleY: [0, 1],
+        opacity: [0.5, 1],
+        easing: "easeOutExpo",
+        duration: 700
+    })
+    .add({
+        targets: '.ml11 .line',
+        translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+        easing: "easeOutExpo",
+        duration: 700,
+        delay: 100
     }).add({
-        targets: '.ml3',
+        targets: '.ml11 .letter',
+        opacity: [0, 1],
+        easing: "easeOutExpo",
+        duration: 600,
+        offset: '-=775',
+        delay: (el, i) => 34 * (i + 1)
+    }).add({
+        targets: '.ml11',
         opacity: 0,
         duration: Infinity,
         easing: "easeOutExpo",
-        delay: 800
+        delay: 1000
     });

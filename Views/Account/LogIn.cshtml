@@ -3,7 +3,12 @@
     ViewData["Title"] = "LogIn";
 }
 
-<h1 class="ml3">Sign in</h1>
+<h1 class="ml11">
+    <span class="text-wrapper">
+        <span class="line line1"></span>
+        <span class="letters">Sign in</span>
+    </span>
+</h1>
 <form asp-controller="Account">
     @if (this.TempData["ErrorChanges"] != null)
     {
