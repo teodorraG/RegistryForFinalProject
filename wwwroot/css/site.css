@@ -226,5 +226,20 @@ h1{
 
 /*..END*/
 
+/*Img hover zoom*/
 
+.img-hover-zoom {
+    height: 280px; 
+    overflow: hidden;
+}
+
+    .img-hover-zoom img {
+        transition: transform .5s ease;
+    }
+
+    .img-hover-zoom:hover img {
+        transform: scale(1.5);
+    }
+
+/*END*/
 
