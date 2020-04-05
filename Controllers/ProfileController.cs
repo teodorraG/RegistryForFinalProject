@@ -14,8 +14,8 @@ namespace RegistryForFinalProject.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly RegistryContext db = new RegistryContext();
-        public ProfileController(RegistryContext registryContext)
+        private readonly RegistryDbContext db = new RegistryDbContext();
+        public ProfileController(RegistryDbContext registryContext)
         {
             db = registryContext;
         }

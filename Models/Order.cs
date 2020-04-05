@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models
 {
-    public class Item
+    public class Order
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string Title { get; set; }
-
-        [Required]
-        public string Description { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
         public decimal Price { get; set; }
@@ -24,19 +21,14 @@ namespace RegistryForFinalProject.Models
         [Required]
         public int Quantity { get; set; }
 
-        public string Image { get; set; }
+        [Required]
+        public int AccountId { get; set; }
+        public Account Account { get; set; }
+
 
         [Required]
-        public int SellerId { get; set; }
-        public Account Seller { get; set; }
-
-        [Required]
-        public int BuyerId { get; set; }
-        public Account Buyer { get; set; }
-
-
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public int ItemId { get; set; }
+        public Item Item { get; set; }
 
     }
 }

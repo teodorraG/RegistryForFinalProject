@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models
 {
-    public class Categories
+    public class Category
     {
         [Key]
         public int Id { get; set; }
@@ -15,9 +15,7 @@ namespace RegistryForFinalProject.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        [ForeignKey("Item")]
-        public string ItemId { get; set; }
+        public ICollection<Item> Items { get; set; } = new HashSet<Item>();
 
 
     }

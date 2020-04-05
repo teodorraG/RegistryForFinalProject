@@ -8,7 +8,7 @@ using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
-    [DbContext(typeof(RegistryContext))]
+    [DbContext(typeof(RegistryDbContext))]
     [Migration("20200318153507_Initial")]
     partial class Initial
     {

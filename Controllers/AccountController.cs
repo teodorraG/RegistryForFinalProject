@@ -15,8 +15,8 @@ namespace RegistryForFinalProject.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly RegistryContext db = new RegistryContext();
-        public AccountController(RegistryContext registryContext)
+        private readonly RegistryDbContext db = new RegistryDbContext();
+        public AccountController(RegistryDbContext registryContext)
         {
             db = registryContext;
         }

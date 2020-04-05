@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RegistryForFinalProject.Models.ViewModels
+namespace RegistryForFinalProject.Models
 {
-    public class ContactViewModel
+    public class ContactUs
     {
         public string Name { get; set; }
 

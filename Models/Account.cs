@@ -26,6 +26,7 @@ namespace RegistryForFinalProject.Models
         [RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = Constant.PasswordComplexityError)]
         public string Password { get; set; }
 
+        [Required]
         public Role Role { get; set; }
 
         public string FirstName { get; set; }
@@ -35,6 +36,10 @@ namespace RegistryForFinalProject.Models
         public Gender Gender { get; set; }
 
         public string Address { get; set; }
+
+        public ICollection<Item> ItemsSold { get; set; } = new HashSet<Item>();
+        public ICollection<Item> ItemsBought { get; set; } = new HashSet<Item>();
+        public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
 
     }
 }

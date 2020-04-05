@@ -27,7 +27,7 @@ namespace RegistryForFinalProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<RegistryContext>(); 
+            services.AddDbContext<RegistryDbContext>(); 
             services.AddDistributedMemoryCache();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

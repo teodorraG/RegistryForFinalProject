@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RegistryForFinalProject.Constants;
+using RegistryForFinalProject.Models;
 using RegistryForFinalProject.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Contact(ContactViewModel contactViewModel)
+        public IActionResult Contact(ContactUs contactViewModel)
         {
 
             if (ModelState.IsValid)
