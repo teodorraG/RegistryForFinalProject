@@ -1,5 +1,6 @@
-﻿function updateTextInput(val) {
-    document.getElementById('textInput').value = val;
-}
+﻿
+//document.registrationForm.ageInputId.oninput = function () {
+//    document.registrationForm.ageOutputId.value = document.registrationForm.ageInputId.value;
+//}
 
 

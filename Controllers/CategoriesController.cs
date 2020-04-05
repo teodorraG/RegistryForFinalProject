@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,18 @@ namespace RegistryForFinalProject.Controllers
 {
     public class CategoriesController:Controller
     {
+        private readonly RegistryDbContext db = new RegistryDbContext();
+
+        public CategoriesController(RegistryDbContext registryContext)
+        {
+            db = registryContext;
+        }
         public IActionResult Categories()
         {
-
-            return View();
+            var categories = db.Categories.ToList();
+            CategoriesViewModel categoriesViewModel = new CategoriesViewModel();
+            categoriesViewModel.Categories = categories;
+            return View(categoriesViewModel);
         }
 
 

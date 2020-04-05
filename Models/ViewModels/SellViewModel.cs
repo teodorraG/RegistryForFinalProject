@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models.ViewModels
 {
-    public class CategoriesViewModel
+    public class SellViewModel
     {
-        [Required]
-        public List<Category> Categories { get; set; }
     }
 }
