@@ -294,3 +294,8 @@ h1 {
 
 /*END*/
 
+/*img upload at Sall page*/
+.file {
+    visibility: hidden;
+    position: absolute;
+}

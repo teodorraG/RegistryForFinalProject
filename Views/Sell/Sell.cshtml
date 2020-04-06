@@ -1,0 +1,114 @@
+﻿@model RegistryForFinalProject.Models.ViewModels.SellViewModel
+
+@{
+    ViewData["Title"] = "Sell";
+}
+<h1 class="ml11">
+    <span class="text-wrapper">
+        <span class="line line1"></span>
+        <span class="letters">Add item you want to sell</span>
+    </span>
+</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card-body">
+                <div class="p-3 mb-2 bg-secondary text-white"><h6>Upload photo:</h6></div>
+                <div class="ml-2 col-sm-6">
+                    <div id="msg"></div>
+                    <form method="post" asp-controller="Sell" id="image-form">
+                        <input type="file" name="img[]" class="file" accept="image/*">
+                        <div class="input-group my-3">
+                            <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+                            <div class="input-group-append">
+                                <button type="button" class="browse btn btn-warning">Browse...</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ml-2 col-sm-6">
+                <img src="https://placehold.it/200x200" id="preview" class="img-thumbnail">
+                @*<img src="https://placehold.it/200x200" id="preview" class="img-thumbnail">
+                <img src="https://placehold.it/200x200" id="preview" class="img-thumbnail">
+                <img src="https://placehold.it/200x200" id="preview" class="img-thumbnail">*@
+            </div>
+        </div>
+        <div class="w-100"></div>
+        <br />
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="p-3 mb-2 bg-secondary text-white"><h6>Item information: </h6></div>
+                    <br />
+                    <label for="exampleInputEmail1"><span class="text-danger">*</span>Title</label>
+                    <input type="email" class="form-control w-25" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">By this title your items will be searched</small>
+                    <br />
+                    <label for="price"><span class="text-danger">*</span>Price: </label>
+                    <input type="number" id="replyNumber" data-bind="value:replyNumber" placeholder="$" />
+                    <br />
+                    <br />
+                    <label for="form-text"><span class="text-danger">*</span>Description:</label>
+                    <textarea id="form-text" class="form-control md-textarea" rows="3"></textarea>
+                    <br />
+                    <button type="submit" class="btn btn-warning m-2" id="ExitButton">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">Column1</div>
+        <div class="w-100"></div>
+        <div class="col">Column3</div>
+    </div>
+</div>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="~/js/pageTitle.js"></script>
+<script src="~/js/photoUploadSell.js"></script>
+
