@@ -1,4 +1,4 @@
-﻿@model RegistryForFinalProject.Models.ContactUs
+﻿@model RegistryForFinalProject.Models.ContactUsViewModel
 @{
     ViewData["Title"] = "Contact";
 }
@@ -30,7 +30,7 @@
                         </div>
                         <div class="md-form">
                             <i class="fas fa-envelope prefix grey-text"></i>
-                            <label for="form-email"><span class="text-danger">*</span> Your email:</label>
+                            <label asp-for="Email" for="form-email"><span class="text-danger">*</span> Your email:</label>
                             <span class="text-danger" asp-validation-for="Email"></span>
                             <input type="text" id="form-email" class="form-control">
                         </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="md-form">
                             <i class="fas fa-pencil-alt prefix grey-text"></i>
-                            <label for="form-text"><span class="text-danger">*</span> Send message...</label>
+                            <label asp-for="Message" for="form-text"><span class="text-danger">*</span> Send message...</label>
                             <span class="text-danger" asp-validation-for="Message"></span>
                             <textarea id="form-text" class="form-control md-textarea" rows="3"></textarea>
                         </div>

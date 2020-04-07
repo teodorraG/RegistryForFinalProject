@@ -15,7 +15,7 @@ namespace RegistryForFinalProject.Models
         [Required]
         public string Name { get; set; }
 
-        public ICollection<Item> Items { get; set; } = new HashSet<Item>();
+        public List<Item> Items { get; set; } = new List<Item>();
 
 
     }

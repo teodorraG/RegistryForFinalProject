@@ -25,7 +25,7 @@ namespace RegistryForFinalProject.Constants
         public const string API_SECRET = "fTNzwWElxwVCvz_LsRFoLpDyG7o";
 
         //Contact form
-        public const string RequiredMessage = "it is necessary to add content";
+        public const string RequiredMessage = "it is necessary to add valid content";
 
 
     }

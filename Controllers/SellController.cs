@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,19 @@ namespace RegistryForFinalProject.Controllers
 {
     public class SellController: Controller
     {
+        private readonly RegistryDbContext db = new RegistryDbContext();
+
+
+        public SellController(RegistryDbContext registryContext)
+        {
+            db = registryContext;
+        }
         public IActionResult Sell()
         {
 
-            return View();
+            var categories = db.Categories.ToList();
+            SellViewModel sellViewModel = new SellViewModel();
+            return View(sellViewModel);
         }
         [HttpPost]
         public IActionResult Sell(SellViewModel sellViewModel)
@@ -22,6 +33,7 @@ namespace RegistryForFinalProject.Controllers
             {
                 return View("Sell");
             }
+
             return View(sellViewModel);
         }
     }

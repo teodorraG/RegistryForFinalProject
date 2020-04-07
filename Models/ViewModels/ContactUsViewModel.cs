@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models
 {
-    public class ContactUs
+    public class ContactUsViewModel
     {
         public string Name { get; set; }
 

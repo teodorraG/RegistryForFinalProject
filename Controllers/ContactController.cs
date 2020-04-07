@@ -18,7 +18,7 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Contact(ContactUs contactViewModel)
+        public IActionResult Contact(ContactUsViewModel contactViewModel)
         {
 
             if (ModelState.IsValid)

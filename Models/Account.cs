@@ -37,9 +37,9 @@ namespace RegistryForFinalProject.Models
 
         public string Address { get; set; }
 
-        public ICollection<Item> ItemsSold { get; set; } = new HashSet<Item>();
-        public ICollection<Item> ItemsBought { get; set; } = new HashSet<Item>();
-        public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+        public List<Item> ItemsSold { get; set; } = new List<Item>();
+        public List<Item> ItemsBought { get; set; } = new List<Item>();
+        public List<Order> Orders { get; set; } = new List<Order>();
 
     }
 }
