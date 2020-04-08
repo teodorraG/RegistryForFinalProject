@@ -12,7 +12,7 @@
 </h1>
 <br />
 <br />
-<form asp-controller="ShoppingCart">
+<form asp-controller="ShoppingCart" asp-action="ShoppingCart">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="container">
@@ -102,10 +102,9 @@
             <span class="text-danger" asp-validation-for="Zip"></span>
             <input asp-for="Zip" type="text" class="form-control" id="inputZip">
         </div>
-    </div>
+    </div>\<br />
     <div>
         <label>Payment</label>
-        <br />
         <ul>
             <li>Easy pay</li>
         </ul>
