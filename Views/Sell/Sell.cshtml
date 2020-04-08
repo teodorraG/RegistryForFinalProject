@@ -80,6 +80,7 @@
                                 <input asp-for="SelectedCategory" id="SelectedCategory" class="form-control input-lg col-4" />
 
                             </div>*@
+
                         <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
                             <option value="">Select</option>
                         </select>
@@ -129,6 +130,9 @@
     {
         <li>
             <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
         </li>
         <li>
             <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>

@@ -1,0 +1,164 @@
+﻿@model RegistryForFinalProject.Models.ViewModels.ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+
+<h1 class="ml11">
+    <span class="text-wrapper">
+        <span class="line line1"></span>
+        <span class="letters">Shopping cart</span>
+    </span>
+</h1>
+<br />
+<br />
+<form asp-controller="ShoppingCart">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">Product 1</h4>
+                                <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Price">$1.99</td>
+                    <td data-th="Quantity">
+                        <input type="number" class="form-control text-center" value="1">
+                    </td>
+                    <td data-th="Subtotal" class="text-center">1.99</td>
+                    <td class="actions" data-th="">
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="visible-xs">
+                    <td class="text-center"><strong>Total 1.99</strong></td>
+                </tr>
+                <tr>
+                    <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4"><span class="text-danger">*</span>First Name</label>
+            <span class="text-danger" asp-validation-for="FirstName"></span>
+            <input asp-for="FirstName" class="form-control" id="inputEmail4">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4"><span class="text-danger">*</span>Last Name</label>
+            <span class="text-danger" asp-validation-for="LastName"></span>
+            <input asp-for="LastName" class="form-control" id="inputPassword4">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputAddress"><span class="text-danger">*</span>Address</label>
+        <span class="text-danger" asp-validation-for="Address"></span>
+        <input asp-for="Address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <span class="text-danger" asp-validation-for="SecondAddres"></span>
+        <input asp-for="SecondAddres" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCity"><span class="text-danger">*</span>City</label>
+            <span class="text-danger" asp-validation-for="City"></span>
+            <input asp-for="City" type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputState">State</label>
+            <span class="text-danger" asp-validation-for="State"></span>
+            <input asp-for="City" type="text" class="form-control" id="inputZip">
+
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputZip"><span class="text-danger">*</span>Zip</label>
+            <span class="text-danger" asp-validation-for="Zip"></span>
+            <input asp-for="Zip" type="text" class="form-control" id="inputZip">
+        </div>
+    </div>
+    <div>
+        <label>Payment</label>
+        <br />
+        <ul>
+            <li>Easy pay</li>
+        </ul>
+    </div>
+    <br />
+    <br />
+    <button type="submit" class="btn btn-success">Place order</button>
+
+</form>
+
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="~/js/pageTitle.js"></script>

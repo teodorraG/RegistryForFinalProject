@@ -12,6 +12,7 @@ namespace RegistryForFinalProject.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredEmailError)]
+        [EmailAddress(ErrorMessage = Constant.RegisterInvalidEmailError)]
         public string Email { get; set; }
 
         public string Subject { get; set; }
