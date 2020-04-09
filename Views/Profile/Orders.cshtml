@@ -1,18 +1,17 @@
-﻿@model RegistryForFinalProject.Models.ViewModels.ShoppingCartViewModel
-@{
-    ViewData["Title"] = "Shopping Cart";
+﻿@{
+    ViewData["Title"] = "Orders";
 }
 
 
 <h1 class="ml11">
     <span class="text-wrapper">
         <span class="line line1"></span>
-        <span class="letters">Shopping cart</span>
+        <span class="letters">Order List</span>
     </span>
 </h1>
 <br />
 <br />
-<form asp-controller="ShoppingCart" asp-action="ShoppingCart">
+<form asp-controller="Profile" asp-action="Orders">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="container">
@@ -52,70 +51,13 @@
                     <td class="text-center"><strong>Total 1.99</strong></td>
                 </tr>
                 <tr>
-                    <td><a class="btn btn-warning" href="~/Categories/Categories" role="button"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                     <td colspan="2" class="hidden-xs"></td>
                     <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
                 </tr>
             </tfoot>
         </table>
     </div>
-
-    <br />
-    <br />
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputEmail4"><span class="text-danger">*</span>First Name</label>
-            <span class="text-danger" asp-validation-for="FirstName"></span>
-            <input asp-for="FirstName" class="form-control" id="inputEmail4">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputPassword4"><span class="text-danger">*</span>Last Name</label>
-            <span class="text-danger" asp-validation-for="LastName"></span>
-            <input asp-for="LastName" class="form-control" id="inputPassword4">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputAddress"><span class="text-danger">*</span>Address</label>
-        <span class="text-danger" asp-validation-for="Address"></span>
-        <input asp-for="Address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <span class="text-danger" asp-validation-for="SecondAddres"></span>
-        <input asp-for="SecondAddres" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputCity"><span class="text-danger">*</span>City</label>
-            <span class="text-danger" asp-validation-for="City"></span>
-            <input asp-for="City" type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="form-group col-md-3">
-            <label for="inputState">State</label>
-            <span class="text-danger" asp-validation-for="State"></span>
-            <input asp-for="City" type="text" class="form-control" id="inputZip">
-
-        </div>
-        <div class="form-group col-md-3">
-            <label for="inputZip"><span class="text-danger">*</span>Zip</label>
-            <span class="text-danger" asp-validation-for="Zip"></span>
-            <input asp-for="Zip" type="text" class="form-control" id="inputZip">
-        </div>
-    </div>
-    <br />
-    <div>
-        <label>Payment</label>
-        <ul>
-            <li>Easy pay</li>
-        </ul>
-    </div>
-    <br />
-    <br />
-    <a class="btn btn-success text-center" href="~/ShoppingCart/Confirmation" role="button">Place order</a>
-
 </form>
-
 
 @section MainNavigation {
 

@@ -1,5 +1,4 @@
-﻿@model RegistryForFinalProject.Models.ViewModels.ConfirmationViewModel
-@{
+﻿@{
     ViewData["Title"] = "Registry";
 }
 
@@ -19,18 +18,18 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <p>Thank you for placeing your order. Please visit the closest Easy pay store for paying services. With confirmation number: <strong></strong></p>
+            <p class="text-center">Thank you for placeing your order. Please visit the closest Easy pay store for paying services. With confirmation number: <strong></strong></p>
         </div>
         <div class="col-3"></div>
     </div>
     <br />
     <br />
     <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
-            <button type="button" class="btn btn-warning">Home</button>
+        <div class="col-5"></div>
+        <div class="col-2">
+            <a class="btn btn-warning text-center" href="~/Home/Index" role="button">Home</a>
         </div>
-        <div class="col-4"></div>
+        <div class="col-5"></div>
     </div>
 </form>
 

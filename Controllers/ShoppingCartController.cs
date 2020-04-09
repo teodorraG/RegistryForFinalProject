@@ -32,16 +32,7 @@ namespace RegistryForFinalProject.Controllers
 
             return View("Confirmation");
         }
-        [HttpPost]
-        public IActionResult Confirmation(ConfirmationViewModel confirmationViewModel)
-        {
 
-            if (ModelState.IsValid)
-            {
-                return View();
-            }
-            return View(confirmationViewModel);
-        }
 
     }
 }

@@ -96,5 +96,17 @@ namespace RegistryForFinalProject.Controllers
             this.TempData["ErrorComplexity"] = "Password must be 8 or more characters, to contain at least one: lower case letter, upper case letter and number";
             return RedirectToAction("Profile");
         }
+
+        public IActionResult Orders()
+        {
+
+            return View("Orders");
+        }
+
+        public IActionResult Offers()
+        {
+
+            return View("Offers");
+        }
     }
 }
