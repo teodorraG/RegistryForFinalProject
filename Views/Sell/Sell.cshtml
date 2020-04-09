@@ -84,13 +84,15 @@
                         <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
                             <option value="">Select</option>
                         </select>
-
                         <br />
                         <br />
                         <label asp-for="Description"><span class="text-danger">*</span>Description: </label>
                         <span class="text-danger" asp-validation-for="Description"></span>
                         <textarea asp-for="Description" id="form-text" class="form-control md-textarea" rows="3"></textarea>
                         <br />
+                        <input asp-for="Image1" id="Image1" name="Image1" />
+                        <input asp-for="Image2" id="Image2" name="Image2" />
+                        <input asp-for="Image3" id="Image3" name="Image3" />
                         <button type="submit" class="btn btn-warning m-2" id="ExitButton">Submit</button>
                     </div>
                 </div>

@@ -16,6 +16,9 @@ $('input[type="file"]').change(function (e) {
                 continue;
             }
             listOfPhotos[i].src = e.target.result;
+            let hiddenField = document.getElementById('Image' + (i + 1));
+            console.log(hiddenField);
+            hiddenField.value = e.target.result;
             break;
         }
     };
@@ -27,9 +30,12 @@ document.getElementById("PictureDeleteButton").addEventListener("click", DeleteP
 
 function DeletePicture() {
     for (var i = listOfPhotos.length - 1; i >= 0; i--) {
-        console.log("asd");
         if (listOfPhotos[i].src != "https://placehold.it/200x300") {
             listOfPhotos[i].src = "https://placehold.it/200x300";
+            console.log(i);
+            let hiddenField = document.getElementById('Image' + (i + 1));
+            console.log(hiddenField);
+            hiddenField.value = '';
             break;
         }
         document.getElementById("file").value = "";

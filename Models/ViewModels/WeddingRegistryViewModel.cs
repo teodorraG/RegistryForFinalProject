@@ -10,11 +10,9 @@ namespace RegistryForFinalProject.Models.ViewModels
     public class WeddingRegistryViewModel
     {
 
-        [Required(ErrorMessage = Constant.RequiredFieldError)]
-        public string BrideName { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredFieldError)]
-        public string GroomName { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string CityOfEvent { get; set; }

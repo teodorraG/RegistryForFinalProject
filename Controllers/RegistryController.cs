@@ -80,5 +80,23 @@ namespace RegistryForFinalProject.Controllers
             }
             return View(birthdayRegistryViewModel);
         }
+
+        public IActionResult ResultsBabyRegsitry()
+        {
+
+            return View("ResultsBabyRegistry");
+        }
+
+        public IActionResult ResultsWeddingRegsitry()
+        {
+
+            return View("ResultsWeddingRegsitry");
+        }
+
+        public IActionResult ResultsBirthdayRegsitry()
+        {
+
+            return View("ResultsBirthdayRegsitry");
+        }
     }
 }
