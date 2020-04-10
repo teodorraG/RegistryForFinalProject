@@ -38,7 +38,7 @@ namespace RegistryForFinalProject.Models
         public string Address { get; set; }
 
         public List<Item> ItemsSold { get; set; } = new List<Item>();
-        public List<Item> ItemsBought { get; set; } = new List<Item>();
+        //public List<Item> ItemsBought { get; set; } = new List<Item>();
         public List<Order> Orders { get; set; } = new List<Order>();
 
     }

@@ -16,14 +16,15 @@ namespace RegistryForFinalProject.Models
         public DateTime Date { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Required]
         public int Quantity { get; set; }
 
         [Required]
-        public int AccountId { get; set; }
-        public Account Account { get; set; }
+        public int BuyerId { get; set; }
+        public Account Buyer { get; set; }
 
 
         [Required]

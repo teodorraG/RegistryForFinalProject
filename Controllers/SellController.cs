@@ -25,11 +25,11 @@ namespace RegistryForFinalProject.Controllers
         }
         public IActionResult Sell()
         {
-            SellViewModel sellViewModel = new SellViewModel();
+            ItemViewModel sellViewModel = new ItemViewModel();
             return View(sellViewModel);
         }
         [HttpPost]
-        public IActionResult Sell(SellViewModel sellViewModel)
+        public IActionResult Sell(ItemViewModel sellViewModel)
         {
 
             if (ModelState.IsValid)

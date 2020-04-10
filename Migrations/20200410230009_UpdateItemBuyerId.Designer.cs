@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
     [DbContext(typeof(RegistryDbContext))]
-    partial class RegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20200410230009_UpdateItemBuyerId")]
+    partial class UpdateItemBuyerId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,6 +83,9 @@ namespace RegistryForFinalProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BuyerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -112,6 +117,8 @@ namespace RegistryForFinalProject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BuyerId");
+
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SellerId");
@@ -126,7 +133,7 @@ namespace RegistryForFinalProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BuyerId")
+                    b.Property<int>("AccountId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -143,7 +150,7 @@ namespace RegistryForFinalProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuyerId");
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("ItemId");
 
@@ -152,6 +159,12 @@ namespace RegistryForFinalProject.Migrations
 
             modelBuilder.Entity("RegistryForFinalProject.Models.Item", b =>
                 {
+                    b.HasOne("RegistryForFinalProject.Models.Account", "Buyer")
+                        .WithMany("ItemsBought")
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("RegistryForFinalProject.Models.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
@@ -167,9 +180,9 @@ namespace RegistryForFinalProject.Migrations
 
             modelBuilder.Entity("RegistryForFinalProject.Models.Order", b =>
                 {
-                    b.HasOne("RegistryForFinalProject.Models.Account", "Buyer")
+                    b.HasOne("RegistryForFinalProject.Models.Account", "Account")
                         .WithMany("Orders")
-                        .HasForeignKey("BuyerId")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

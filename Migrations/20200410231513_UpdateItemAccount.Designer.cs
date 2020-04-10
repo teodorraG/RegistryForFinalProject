@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
     [DbContext(typeof(RegistryDbContext))]
-    partial class RegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20200410231513_UpdateItemAccount")]
+    partial class UpdateItemAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,6 +83,9 @@ namespace RegistryForFinalProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -111,6 +116,8 @@ namespace RegistryForFinalProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("CategoryId");
 
@@ -152,6 +159,10 @@ namespace RegistryForFinalProject.Migrations
 
             modelBuilder.Entity("RegistryForFinalProject.Models.Item", b =>
                 {
+                    b.HasOne("RegistryForFinalProject.Models.Account", null)
+                        .WithMany("ItemsBought")
+                        .HasForeignKey("AccountId");
+
                     b.HasOne("RegistryForFinalProject.Models.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")

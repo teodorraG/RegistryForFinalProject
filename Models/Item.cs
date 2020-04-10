@@ -19,6 +19,7 @@ namespace RegistryForFinalProject.Models
         public string Description { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Required]
@@ -32,11 +33,11 @@ namespace RegistryForFinalProject.Models
         public int SellerId { get; set; }
         public Account Seller { get; set; }
 
+
+        //public int BuyerId { get; set; }
+        //public Account Buyer { get; set; }
+
         [Required]
-        public int BuyerId { get; set; }
-        public Account Buyer { get; set; }
-
-
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
