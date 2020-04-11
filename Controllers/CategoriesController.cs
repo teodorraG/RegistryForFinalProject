@@ -26,6 +26,8 @@ namespace RegistryForFinalProject.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Categories(CategoriesViewModel categoriesViewModel)
         {
 

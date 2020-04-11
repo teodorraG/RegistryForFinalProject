@@ -24,7 +24,10 @@ namespace RegistryForFinalProject.Controllers
         {
             return View();
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult LogIn(LogInViewModel logViewModel)
         {
             if (ModelState.IsValid)
@@ -57,6 +60,8 @@ namespace RegistryForFinalProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Register(AccountViewModel accViewModel)
         {
             if (ModelState.IsValid)
@@ -110,6 +115,8 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult ForgottenPassword(ForgottenPasswordViewModel forgottenPassViewModel)
         {
             if (ModelState.IsValid)

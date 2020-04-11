@@ -27,6 +27,8 @@ namespace RegistryForFinalProject.Controllers
             return View(profileViewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult UpdateAccountInfo(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
@@ -54,6 +56,8 @@ namespace RegistryForFinalProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult UpdatePassword(ProfileViewModel profileViewModel)
         {
 

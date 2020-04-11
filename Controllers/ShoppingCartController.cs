@@ -16,6 +16,8 @@ namespace RegistryForFinalProject.Controllers
             return View("ShoppingCart");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult ShoppingCart(ShoppingCartViewModel shoppingCartViewModel)
         {
 

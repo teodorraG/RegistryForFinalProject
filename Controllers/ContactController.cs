@@ -18,6 +18,8 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Contact(ContactUsViewModel contactViewModel)
         {
 

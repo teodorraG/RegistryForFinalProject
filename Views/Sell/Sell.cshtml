@@ -10,6 +10,10 @@
     </span>
 </h1>
 <form method="post" asp-controller="Sell">
+    @if (this.TempData["SuccessfullyListed"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["SuccessfullyListed"]</div>
+    }
     <div class="container">
         <div class="row">
             <div class="col">
@@ -56,8 +60,8 @@
                         <small id="emailHelp" class="form-text text-muted">By this title your items will be searched</small>
                         <br />
                         @*<label asp-for="Price"><span class="text-danger">*</span>Price: </label>
-        <span class="text-danger" asp-validation-for="Price"></span>
-        <input asp-for="Price" type="number" id="replyNumber" placeholder="$" />*@
+                            <span class="text-danger" asp-validation-for="Price"></span>
+                            <input asp-for="Price" type="number" id="replyNumber" placeholder="$" />*@
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Price)
@@ -74,20 +78,20 @@
                         <br />
                         <br />
                         @*<div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle w-25" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Category list
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @for (int i = 0; i < Model.Categories.Count; i++)
-                {
-                    <button id="CategoriesDropDown" class="dropdown-item">@Model.Categories[i].Name</button>
+                                <a class="btn btn-secondary dropdown-toggle w-25" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Category list
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @for (int i = 0; i < Model.Categories.Count; i++)
+                                    {
+                                        <button id="CategoriesDropDown" class="dropdown-item">@Model.Categories[i].Name</button>
 
-                }
+                                    }
 
-            </div>
-            <input asp-for="SelectedCategory" id="SelectedCategory" class="form-control input-lg col-4" />
+                                </div>
+                                <input asp-for="SelectedCategory" id="SelectedCategory" class="form-control input-lg col-4" />
 
-        </div>*@
+                            </div>*@
                         <label asp-for="Categories"><span class="text-danger">*</span>Select Category</label>
                         <span class="text-danger" asp-validation-for="Categories"></span>
                         <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">

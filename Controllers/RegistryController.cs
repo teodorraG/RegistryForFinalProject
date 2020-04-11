@@ -25,7 +25,7 @@ namespace RegistryForFinalProject.Controllers
 
             //var uploadParams = new ImageUploadParams()
             //{
-            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\martha.jpg")
+            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\favicon.ico")
             //};
             //cloudinary.Upload(uploadParams);
 
@@ -39,6 +39,8 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult BabyRegistry(BabyRegistryViewModel babyRegistryViewModel)
         {
             
@@ -55,6 +57,8 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult WeddingRegistry(WeddingRegistryViewModel weddingRegistryViewModel)
         {
 
@@ -71,6 +75,8 @@ namespace RegistryForFinalProject.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult BirthdayRegistry(BirthdayRegistryViewModel birthdayRegistryViewModel)
         {
 

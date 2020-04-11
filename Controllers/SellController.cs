@@ -29,6 +29,8 @@ namespace RegistryForFinalProject.Controllers
             return View(sellViewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Sell(ItemViewModel sellViewModel)
         {
 
@@ -75,9 +77,13 @@ namespace RegistryForFinalProject.Controllers
                 }
                 db.Items.Add(item);
                 db.SaveChanges();
+                this.TempData["SuccessfullyListed"] = "Successfully listed item!";
+                return RedirectToAction("Sell");
             }
 
-            return View(sellViewModel);
+            //return View(new ItemViewModel());
+
+            return View();
         }
     }
 }
