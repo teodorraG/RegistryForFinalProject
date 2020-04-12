@@ -83,7 +83,7 @@ namespace RegistryForFinalProject.Controllers
 
             //return View(new ItemViewModel());
 
-            return View();
+            return View(new ItemViewModel());
         }
     }
 }

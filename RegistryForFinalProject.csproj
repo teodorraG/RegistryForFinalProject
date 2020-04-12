@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <ApplicationIcon>favi_icon.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Migrations\20200401193237_AccountsMoreInfo.cs" />
     <Compile Remove="Migrations\20200401193237_AccountsMoreInfo.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\favi_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

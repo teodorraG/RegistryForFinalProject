@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistryForFinalProject.Constants;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,13 +13,13 @@ namespace RegistryForFinalProject.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = Constant.RequiredMessage)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = Constant.RequiredMessage)]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = Constant.RequiredMessage)]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
@@ -37,8 +38,11 @@ namespace RegistryForFinalProject.Models
         //public int BuyerId { get; set; }
         //public Account Buyer { get; set; }
 
-        [Required]
+        
+        [Required(ErrorMessage = Constant.RequiredMessage)]
         public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = Constant.RequiredMessage)]
         public Category Category { get; set; }
 
     }

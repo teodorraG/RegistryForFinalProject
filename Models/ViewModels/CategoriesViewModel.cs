@@ -10,5 +10,7 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         [Required]
         public List<Category> Categories { get; set; }
+
+        public List<Item> Items { get; set; }
     }
 }

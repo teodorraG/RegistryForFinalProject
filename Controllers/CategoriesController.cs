@@ -22,6 +22,7 @@ namespace RegistryForFinalProject.Controllers
             CategoriesViewModel categoriesViewModel = new CategoriesViewModel();
             categoriesViewModel.Categories = categories;
             return View(categoriesViewModel);
+
         }
 
 
