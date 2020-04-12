@@ -19,8 +19,24 @@ namespace RegistryForFinalProject.Controllers
         public IActionResult Categories()
         {
             var categories = db.Categories.ToList();
+            var items = db.Items.ToList();
             CategoriesViewModel categoriesViewModel = new CategoriesViewModel();
             categoriesViewModel.Categories = categories;
+            categoriesViewModel.Items = items;
+            foreach (var item in categoriesViewModel.Items)
+            {
+                //if (item.Description.Length >= 176)
+                //{
+                //    item.Description = item.Description.Substring(0, 193);
+                //    item.Description += " . . .";
+                //}
+                //if (item.Title.Length >= 44)
+                //{
+                //    item.Title = item.Description.Substring(0, 41);
+                //    item.Title += "...";
+                //}
+                
+            }
             return View(categoriesViewModel);
 
         }

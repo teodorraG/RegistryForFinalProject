@@ -33,12 +33,15 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Sell(ItemViewModel sellViewModel)
         {
+            var seller = db.Accounts.FirstOrDefault(x => x.UserName == HttpContext.Session.GetString("CurrentUser"));
+            Category category = db.Categories.FirstOrDefault(x => x.Name == sellViewModel.SelectedCategory);
+            Item item = new Item { Title = sellViewModel.Title, Price = sellViewModel.Price, Quantity = sellViewModel.Quantity, Category = category, Description = sellViewModel.Description, Seller = seller };
 
             if (ModelState.IsValid)
             {
-                var seller = db.Accounts.FirstOrDefault(x => x.UserName == HttpContext.Session.GetString("CurrentUser"));
-                Category category = db.Categories.FirstOrDefault(x => x.Name == sellViewModel.SelectedCategory);
-                Item item = new Item { Title = sellViewModel.Title, Price = sellViewModel.Price, Quantity = sellViewModel.Quantity, Category = category, Description = sellViewModel.Description, Seller = seller};
+                //var seller = db.Accounts.FirstOrDefault(x => x.UserName == HttpContext.Session.GetString("CurrentUser"));
+                //Category category = db.Categories.FirstOrDefault(x => x.Name == sellViewModel.SelectedCategory);
+                //Item item = new Item { Title = sellViewModel.Title, Price = sellViewModel.Price, Quantity = sellViewModel.Quantity, Category = category, Description = sellViewModel.Description, Seller = seller};
 
                 CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(Constant.CLOUD_NAME, Constant.API_KEY, Constant.API_SECRET);
                 Cloudinary cloudinary = new Cloudinary(account);
@@ -52,6 +55,10 @@ namespace RegistryForFinalProject.Controllers
                     var path = uploadResult.JsonObj["public_id"].ToString();
                     item.Image1 = path;
 
+                }
+                else
+                {
+                    item.Image1 = Constants.Constant.NO_IMAGE;
                 }
 
                 if (sellViewModel.Image2 != null && sellViewModel.Image2 != string.Empty)
@@ -80,6 +87,7 @@ namespace RegistryForFinalProject.Controllers
                 this.TempData["SuccessfullyListed"] = "Successfully listed item!";
                 return RedirectToAction("Sell");
             }
+            
 
             //return View(new ItemViewModel());
 

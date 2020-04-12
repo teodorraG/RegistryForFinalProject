@@ -25,7 +25,7 @@ namespace RegistryForFinalProject.Controllers
 
             //var uploadParams = new ImageUploadParams()
             //{
-            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\favicon.ico")
+            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\noImage.jpg")
             //};
             //cloudinary.Upload(uploadParams);
 

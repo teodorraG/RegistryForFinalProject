@@ -24,6 +24,8 @@ namespace RegistryForFinalProject.Constants
         public const string API_KEY = "384475583874649";
         public const string API_SECRET = "fTNzwWElxwVCvz_LsRFoLpDyG7o";
 
+        public const string NO_IMAGE = "heltc6lmr73m5gtgbv04";
+
         //Contact form
         public const string RequiredMessage = "it is necessary to add valid content";
 
