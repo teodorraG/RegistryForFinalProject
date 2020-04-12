@@ -87,10 +87,11 @@ namespace RegistryForFinalProject.Controllers
                 this.TempData["SuccessfullyListed"] = "Successfully listed item!";
                 return RedirectToAction("Sell");
             }
-            
-
-            //return View(new ItemViewModel());
-
+            if (item.CategoryId == 0)
+            {
+                this.TempData["NoCategorySelected"] = "Select category";
+                return View(new ItemViewModel());
+            }
             return View(new ItemViewModel());
         }
     }
