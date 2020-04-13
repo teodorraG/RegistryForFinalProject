@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -21,21 +22,20 @@ namespace RegistryForFinalProject.Controllers
             var categories = db.Categories.ToList();
             var items = db.Items.ToList();
             CategoriesViewModel categoriesViewModel = new CategoriesViewModel();
-            categoriesViewModel.Categories = categories;
+            foreach (var item in db.Categories)
+            {
+                categoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+            }
             categoriesViewModel.Items = items;
+
             foreach (var item in categoriesViewModel.Items)
             {
-                //if (item.Description.Length >= 176)
-                //{
-                //    item.Description = item.Description.Substring(0, 193);
-                //    item.Description += " . . .";
-                //}
-                //if (item.Title.Length >= 44)
-                //{
-                //    item.Title = item.Description.Substring(0, 41);
-                //    item.Title += "...";
-                //}
-                
+                if (item.Description.Length >= 132)
+                {
+                    item.Description = item.Description.Substring(0, 123);
+                    item.Description += " . . ";
+                }
+          
             }
             return View(categoriesViewModel);
 

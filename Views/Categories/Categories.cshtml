@@ -8,18 +8,24 @@
 <form asp-controller="Categories">
     <div class="row">
         <div class="col-md-4">
-            <div class="dropdown">
-                <button class="btn btn-warning dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Category list
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @for (int i = 0; i < Model.Categories.Count; i++)
-                    {
-                        <a class="dropdown-item" href="#">@Model.Categories[i].Name</a>
+            @*<div class="dropdown">
+            <button class="btn btn-warning dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Category list
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @for (int i = 0; i < Model.Categories.Count; i++)
+                {
+                    <a class="dropdown-item" href="#">@Model.Categories[i].Name</a>
 
-                    }
-                </div>
+                }
             </div>
+
+        </div>*@
+            @*<label asp-for="Categories"><span class="text-danger">*</span>Select Category</label>*@
+            <span class="text-danger" asp-validation-for="SelectedCategory"></span>
+            <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
+                <option value="">Select</option>
+            </select>
 
         </div>
 
@@ -27,10 +33,10 @@
             <label for="customRange1">Price range:</label>
             <div class="row">
                 <div class="col-10">
-                    <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="10000" value="10000" oninput="ageOutputId.value = ageInputId.value">
+                    <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
                 </div>
                 <div class="col-2">
-                    <output name="ageOutputName" id="ageOutputId">10000</output>
+                    <output name="ageOutputName" id="ageOutputId">1000</output>
                 </div>
             </div>
         </div>
@@ -66,27 +72,26 @@
 <br />
 <div class="container">
     <div class="row">
-       
+
         @for (int i = 0; i < Model.Items.Count; i++)
         {
-            <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
-                <div class="card">
-                    <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.Items[i].Title</h5>
-                        <p class="card-text">
-                            @Model.Items[i].Description
-                        </p>
-                        <h6 class="card-title">$@Model.Items[i].Price</h6>
-                        <a href="#" class="btn btn-warning">Check Out</a>
+                <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
+                    <div class="card" style="height: 40rem;">
+                        <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Items[i].Title</h5>
+                            <p class="card-text">
+                                @Model.Items[i].Description
+                            </p>
+                            <h6 class="card-title">$@Model.Items[i].Price</h6>
+                            <a href="#" class="btn btn-block btn-warning">Check Out</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+                }
 
-        }
-       
-    </div>
-</div>
+            </div>
+        </div>
 
 @section MainNavigation {
 

@@ -24,7 +24,8 @@ namespace RegistryForFinalProject.Models.ViewModels
         [HiddenInput]
         public string Image3 { get; set; }
 
-        [Required(ErrorMessage = Constant.RequiredMessage)]
+        [MaxLength(88)]
+        [Required]
         public string Title { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredMessage)]

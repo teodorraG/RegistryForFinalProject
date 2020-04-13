@@ -13,7 +13,8 @@ namespace RegistryForFinalProject.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = Constant.RequiredMessage)]
+        [MaxLength(88)]
+        [Required]
         public string Title { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredMessage)]

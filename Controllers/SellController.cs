@@ -39,10 +39,7 @@ namespace RegistryForFinalProject.Controllers
 
             if (ModelState.IsValid)
             {
-                //var seller = db.Accounts.FirstOrDefault(x => x.UserName == HttpContext.Session.GetString("CurrentUser"));
-                //Category category = db.Categories.FirstOrDefault(x => x.Name == sellViewModel.SelectedCategory);
-                //Item item = new Item { Title = sellViewModel.Title, Price = sellViewModel.Price, Quantity = sellViewModel.Quantity, Category = category, Description = sellViewModel.Description, Seller = seller};
-
+               
                 CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(Constant.CLOUD_NAME, Constant.API_KEY, Constant.API_SECRET);
                 Cloudinary cloudinary = new Cloudinary(account);
                 if (sellViewModel.Image1 != null && sellViewModel.Image1 != string.Empty)

@@ -30,5 +30,6 @@ namespace RegistryForFinalProject.Constants
         public const string RequiredMessage = "it is necessary to add valid content";
 
 
+
     }
 }
