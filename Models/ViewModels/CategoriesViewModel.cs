@@ -14,5 +14,6 @@ namespace RegistryForFinalProject.Models.ViewModels
         public string SelectedCategory { get; set; }
 
         public List<Item> Items { get; set; }
+
     }
 }

@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RegistryForFinalProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace RegistryForFinalProject.Controllers
 {
-    public class CategoriesController:Controller
+    public class CategoriesController : Controller
     {
         private readonly RegistryDbContext db = new RegistryDbContext();
 
@@ -35,7 +37,7 @@ namespace RegistryForFinalProject.Controllers
                     item.Description = item.Description.Substring(0, 123);
                     item.Description += " . . ";
                 }
-          
+
             }
             return View(categoriesViewModel);
 
@@ -47,13 +49,47 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Categories(CategoriesViewModel categoriesViewModel)
         {
+            var categoryName = categoriesViewModel.SelectedCategory;
+            var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
+            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId).ToList();
+            var categories = db.Categories.ToList();
+            CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
 
-            if (ModelState.IsValid)
+            foreach (var item in db.Categories)
             {
-                return View("Categories");
+                newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
             }
+            newCategoriesViewModel.Items = allItemsToDisplay;
 
-            return View(categoriesViewModel);
+            foreach (var item in allItemsToDisplay)
+            {
+                if (item.Description.Length >= 132)
+                {
+                    item.Description = item.Description.Substring(0, 123);
+                    item.Description += " . . ";
+                }
+
+            }
+            return View(newCategoriesViewModel);
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+
+        //public IActionResult Filter(CategoriesViewModel categoriesViewModel)
+        //{
+        //    var categoryName = categoriesViewModel.SelectedCategory;
+        //    var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
+        //    var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId).ToList();
+        //    var categories = db.Categories.ToList();
+        //    CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
+
+        //    foreach (var item in db.Categories)
+        //    {
+        //        newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+        //    }
+        //    newCategoriesViewModel.Items = allItemsToDisplay;
+        //    return View(newCategoriesViewModel);
+        //}
     }
 }
