@@ -49,16 +49,24 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Categories(CategoriesViewModel categoriesViewModel)
         {
-            var categoryName = categoriesViewModel.SelectedCategory;
-            var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
-            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId).ToList();
-            var categories = db.Categories.ToList();
             CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
+            var categoryName = categoriesViewModel.SelectedCategory;
 
             foreach (var item in db.Categories)
             {
                 newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
             }
+            if (categoryName == "All Categories")
+            {
+                newCategoriesViewModel.Items = db.Items.ToList();
+                return View(newCategoriesViewModel);
+            }
+
+            var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
+            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId).ToList();
+            var categories = db.Categories.ToList();
+
+            
             newCategoriesViewModel.Items = allItemsToDisplay;
 
             foreach (var item in allItemsToDisplay)
@@ -73,23 +81,22 @@ namespace RegistryForFinalProject.Controllers
             return View(newCategoriesViewModel);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
-        //public IActionResult Filter(CategoriesViewModel categoriesViewModel)
-        //{
-        //    var categoryName = categoriesViewModel.SelectedCategory;
-        //    var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
-        //    var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId).ToList();
-        //    var categories = db.Categories.ToList();
-        //    CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
+        public IActionResult Search(CategoriesViewModel categoriesViewModel)
+        {
 
-        //    foreach (var item in db.Categories)
-        //    {
-        //        newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
-        //    }
-        //    newCategoriesViewModel.Items = allItemsToDisplay;
-        //    return View(newCategoriesViewModel);
-        //}
+            var searchedItems = db.Items.Where(x => x.Title.ToLower().Contains(categoriesViewModel.Search.ToLower())).ToList();
+
+            CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
+
+            newCategoriesViewModel.Items = searchedItems;
+            foreach (var item in db.Categories)
+            {
+                newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+            }
+            return View("Categories", newCategoriesViewModel);
+        }
     }
 }

@@ -15,5 +15,9 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         public List<Item> Items { get; set; }
 
+        public string Search { get; set; }
+
+        public int Price { get; set; }
+
     }
 }

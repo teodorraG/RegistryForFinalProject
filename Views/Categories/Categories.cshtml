@@ -5,55 +5,54 @@
     ViewData["Title"] = "Buy";
 }
 
-<form asp-controller="Categories" asp-action="Categories">
+<form asp-controller="Categories" asp-action="Categories" formmethod="post">
 
-    <div class="row">
-        <div class="col-md-4">
-            <span class="text-danger" asp-validation-for="SelectedCategory"></span>
-            <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
-                <option value="">Select</option>
-            </select>
-        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="text-danger" asp-validation-for="SelectedCategory"></span>
+                <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
+                    <option>All Categories</option>
+                </select>
+            </div>
 
-        <div class="col-md-4">
-            <label for="customRange1">Price range:</label>
-            <div class="row">
-                <div class="col-10">
-                    <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
-                </div>
-                <div class="col-2">
-                    <output name="ageOutputName" id="ageOutputId">1000</output>
+            <div class="col-md-5">
+                <div class="container">
+                    <label for="customRange1">Price range:</label>
+                    <div class="row">
+                        <div class="col-10">
+                            <input asp-for="Price" type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
+                        </div>
+                        <div class="col-md-2">
+                            <output name="ageOutputName" id="ageOutputId">1000</output>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-1">
-            <button class="btn btn-success" id="filterButton" type="submit">Filter</button>
+            <div class="col-md-1">
+                <button class="btn btn-warning" id="filterButton" type="submit">Filter</button>
 
-        </div>
-
-        <div class="col-md-2">
-            @*<div class="row">*@
-            @*<div class="col-2">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                </div>
-                <div class="col-10">*@
-            <input class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search">
-            @*</div>*@
-            @*</div>*@
-        </div>
-
-        <div class="col-md-1">
-            <button class="btn btn-secondary" type="submit">Search</button>
+            </div>
         </div>
     </div>
-    <hr />
 </form>
 
-@*<form class="form-inline">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-3 w-25" type="text" placeholder="Search" aria-label="Search">
-    </form>*@
+<form asp-controller="Categories" asp-action="Search" formmethod="post">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <input asp-for="Search" class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search">
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
 <br />
 <br />
 <div class="container">
@@ -61,23 +60,23 @@
 
         @for (int i = 0; i < Model.Items.Count; i++)
         {
-                <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
-                    <div class="card" style="height: 40rem;">
-                        <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.Items[i].Title</h5>
-                            <p class="card-text">
-                                @Model.Items[i].Description
-                            </p>
-                            <h6 class="card-title">$@Model.Items[i].Price</h6>
-                            <a href="#" class="btn btn-block btn-warning">Check Out</a>
-                        </div>
+            <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
+                <div class="card" style="height: 41rem;">
+                    <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.Items[i].Title</h5>
+                        <p class="card-text">
+                            @Model.Items[i].Description
+                        </p>
+                        <h6 class="card-title">$@Model.Items[i].Price</h6>
+                        <a href="#" class="btn btn-block btn-warning">Check Out</a>
                     </div>
                 </div>
-                }
-
             </div>
-        </div>
+        }
+
+    </div>
+</div>
 
 @section MainNavigation {
 

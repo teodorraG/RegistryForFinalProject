@@ -55,5 +55,6 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         [Required(ErrorMessage = Constant.RequiredMessage)]
         public string SelectedCategory { get; set; }
+
     }
 }
