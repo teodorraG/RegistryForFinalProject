@@ -87,22 +87,22 @@ namespace RegistryForFinalProject.Controllers
             return View(birthdayRegistryViewModel);
         }
 
-        public IActionResult ResultsBabyRegsitry()
+        public IActionResult ResultsBabyRegistry()
         {
 
-            return View("ResultsBabyRegistry");
+            return View();
         }
 
-        public IActionResult ResultsWeddingRegsitry()
+        public IActionResult ResultsWeddingRegistry()
         {
 
-            return View("ResultsWeddingRegsitry");
+            return View();
         }
 
-        public IActionResult ResultsBirthdayRegsitry()
+        public IActionResult ResultsBirthdayRegistry()
         {
 
-            return View("ResultsBirthdayRegsitry");
+            return View();
         }
     }
 }
