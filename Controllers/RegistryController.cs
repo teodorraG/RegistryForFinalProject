@@ -104,5 +104,23 @@ namespace RegistryForFinalProject.Controllers
 
             return View();
         }
+
+        public IActionResult ViewRegistry()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult ViewRegistry(ViewRegistryViewModel viewRegistryViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return View("ViewRegistry");
+            }
+            return View(viewRegistryViewModel);
+        }
     }
 }
