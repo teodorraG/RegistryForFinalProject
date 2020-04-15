@@ -1,0 +1,187 @@
+﻿@using CloudinaryDotNet;
+@model RegistryForFinalProject.Models.ViewModels.PreviewItemViewModel
+
+@{
+    ViewData["Title"] = "Preview";
+}
+
+<form asp-controller="Categories" asp-action="PreviewItem" formmethod="post">
+
+    <div class="container">
+            <div class="row">
+                <br />
+                <br />
+                <div class="col-3"><a href="~/ShoppingCart/ShoppingCart" class="btn btn-block btn-warning">Add to shopping cart</a></div>
+                <div class="col-3"><a href="#" class="btn btn-block btn-secondary">Add to Registry</a></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @*<img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items.Image1}"),".jpg")" width="750" height="550" alt="">*@
+                    <div class="img-zoom-container">
+                        <img class="img-fluid" id="myimage" src="http://res.cloudinary.com/teodorascloud/image/upload/djg1gptnouoqcn3cpgef.jpg" width="450" height="250" alt=">
+                        <div id="myresult" class="img-zoom-result"></div>
+                        </div>
+                    @*</div><img class="img-fluid" src="http://res.cloudinary.com/teodorascloud/image/upload/djg1gptnouoqcn3cpgef.jpg" width="450" height="250" alt="">*@
+
+                </div>
+
+                <div class="col-md-6">
+                    @*<h3 class="my-3">@Model.Items.FirstOrDefault(x => x.Title)</h3>
+        <p>@Model.Items.FirstOrDefault(x => x.Description)</p>
+        <h3 class="my-3">@Model.Items.FirstOrDefault(x => x.Price)</h3>*@
+                    <h3 class="my-3">Title</h3>
+                    <br />
+                    <div class="container">
+                        <span id="rateMe1"></span>
+                    </div>
+                    <br />
+                    <p>Description - iwhfiheihfaihefhiwhig hiewhfhiWH WIEOHFWEHFWHEGWIEH ireigheirhghr g erigehig erg erghiergreihghergregopeef ifihe ihfierhhf irfh rei hihf  firhf f hf h h</p>
+                    <h3 class="my-3">$999.99</h3>
+
+                </div>
+            </div>
+
+            <h4 class="my-4">More pictures</h4>
+
+            <div class="row">
+
+                <div class="col-md-3 col-sm-3 mb-4">
+                    <a href="#">
+                        <img class="img-fluid" src="http://res.cloudinary.com/teodorascloud/image/upload/xm0th6mtxsejzszpo086.jpg" width="200" height="250" alt="">
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-3 mb-4">
+                    <a href="#">
+                        <img class="img-fluid" src="http://res.cloudinary.com/teodorascloud/image/upload/pqp84lprusgtbjbjnkb6.jpg" width="200" height="250" alt="">
+                    </a>
+                </div>
+
+                @*@if (Model.Items.Image2 == null)
+        {
+
+            <div class="col-md-3 col-sm-3 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://res.cloudinary.com/teodorascloud/image/upload/heltc6lmr73m5gtgbv04.jpg" width="200" height="250" alt="">
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3 col-sm-3 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items.Image2}"),".jpg")" width="200" height="250" alt="">
+                </a>
+            </div>
+        }
+        @if (Model.Items.Image3 == null)
+        {
+            <div class="col-md-3 col-sm-3 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://res.cloudinary.com/teodorascloud/image/upload/heltc6lmr73m5gtgbv04.jpg" width="200" height="250" alt="">
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3 col-sm-3 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items.Image3}"),".jpg")" width="200" height="250" alt="">
+                </a>
+            </div>
+        }*@
+                <div class="col-md-3 col-sm-3 mb-4"></div>
+                <div class="col-md-3 col-sm-3 mb-4"></div>
+
+            </div>
+            </div>
+
+
+</form>
+
+@*@for (int i = 0; i < 1; i++)
+    {
+        <div class="tab-pane active" id="pic-1"><img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="400" height="300" class="card-img-top" alt="..."></div>
+        @if (Model.Items[i + 1].Image2 == null)
+        {
+            <div class="tab-pane" id="pic-2"><img src="http://res.cloudinary.com/teodorascloud/image/upload/heltc6lmr73m5gtgbv04.jpg" width="200" height="250" class="card-img-top" alt="..."></div>
+
+        }
+        else
+        {
+            <div class="tab-pane" id="pic-2"><img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i + 1].Image2}"),".jpg")" width="200" height="250" class="card-img-top" alt="..."></div>
+        }
+        @if (Model.Items[i + 2].Image3 == null)
+        {
+            <div class="tab-pane" id="pic-3"><img src="http://res.cloudinary.com/teodorascloud/image/upload/heltc6lmr73m5gtgbv04.jpg" width="200" height="250" class="card-img-top" alt="..."></div>
+
+        }
+        else
+        {
+            <div class="tab-pane" id="pic-3"><img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i + 2].Image3}"),".jpg")" width="200" height="250" class="card-img-top" alt="..."></div>
+
+        }
+
+    }*@
+
+@*@for (int i = 0; i < Model.Items.Count; i++)
+    {
+        <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
+            <div class="card" style="height: 41rem;">
+                <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Items[i].Title</h5>
+                    <p class="card-text">
+                        @Model.Items[i].Description
+                    </p>
+                    <h6 class="card-title">$@Model.Items[i].Price</h6>
+                    <a href="#" class="btn btn-block btn-warning">Check Out</a>
+                </div>
+            </div>
+        </div>
+    }*@
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="js/addons/rating.js"></script>
+<script>imageZoom("myimage", "myresult");</script>
+<script src="~/js/PreviewItemPage.js"></script>

@@ -18,28 +18,32 @@
 
             <div class="col-md-5">
                 <div class="container">
-                    <label for="customRange1">Price range:</label>
                     <div class="row">
                         <div class="col-10">
-                            <input asp-for="Price" type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
+                            <label for="customRange1">Price range:</label>
+                            <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
                         </div>
                         <div class="col-md-2">
-                            <output name="ageOutputName" id="ageOutputId">1000</output>
+                            <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value">
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-3">
                 <button class="btn btn-warning" id="filterButton" type="submit">Filter</button>
-
             </div>
         </div>
     </div>
 </form>
 
 <form asp-controller="Categories" asp-action="Search" formmethod="post">
-    
+    @if (this.TempData["Search"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["Search"]</div>
+    }
+
     <div class="container">
         <div class="row">
             <div class="col-md-10">
@@ -69,7 +73,7 @@
                             @Model.Items[i].Description
                         </p>
                         <h6 class="card-title">$@Model.Items[i].Price</h6>
-                        <a href="#" class="btn btn-block btn-warning">Check Out</a>
+                        <a href="PreviewItem" class="btn btn-block btn-warning">Check Out</a>
                     </div>
                 </div>
             </div>

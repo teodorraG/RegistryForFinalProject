@@ -50,6 +50,7 @@ namespace RegistryForFinalProject.Controllers
         public IActionResult Categories(CategoriesViewModel categoriesViewModel)
         {
             CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
+
             var categoryName = categoriesViewModel.SelectedCategory;
 
             foreach (var item in db.Categories)
@@ -58,12 +59,21 @@ namespace RegistryForFinalProject.Controllers
             }
             if (categoryName == "All Categories")
             {
-                newCategoriesViewModel.Items = db.Items.ToList();
+                newCategoriesViewModel.Items = db.Items.Where(x=>x.Price <= categoriesViewModel.Price).ToList();
+                foreach (var item in newCategoriesViewModel.Items)
+                {
+                    if (item.Description.Length >= 132)
+                    {
+                        item.Description = item.Description.Substring(0, 123);
+                        item.Description += " . . ";
+                    }
+
+                }
                 return View(newCategoriesViewModel);
             }
 
             var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
-            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId).ToList();
+            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId && x.Price <= categoriesViewModel.Price).ToList();
             var categories = db.Categories.ToList();
 
             
@@ -86,17 +96,53 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Search(CategoriesViewModel categoriesViewModel)
         {
+            var searchResult = categoriesViewModel.Search;
+            if (searchResult == null)
+            {
+                this.TempData["Search"] = "No entered content";
+                return RedirectToAction("Categories");
+            }
 
             var searchedItems = db.Items.Where(x => x.Title.ToLower().Contains(categoriesViewModel.Search.ToLower())).ToList();
 
             CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
 
             newCategoriesViewModel.Items = searchedItems;
+
             foreach (var item in db.Categories)
             {
                 newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
             }
+
+            foreach (var item in newCategoriesViewModel.Items)
+            {
+                if (item.Description.Length >= 132)
+                {
+                    item.Description = item.Description.Substring(0, 123);
+                    item.Description += " . . ";
+                }
+
+            }
+
             return View("Categories", newCategoriesViewModel);
+        }
+
+        public IActionResult PreviewItem()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult PreviewItem(PreviewItemViewModel previewItemViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return View("PreviewItem");
+            }
+            return View(previewItemViewModel);
         }
     }
 }
