@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
     [DbContext(typeof(RegistryDbContext))]
-    partial class RegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20200417190025_ShoppingCart")]
+    partial class ShoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,33 +153,6 @@ namespace RegistryForFinalProject.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("RegistryForFinalProject.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsPurchased")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
             modelBuilder.Entity("RegistryForFinalProject.Models.Item", b =>
                 {
                     b.HasOne("RegistryForFinalProject.Models.Category", "Category")
@@ -202,22 +177,7 @@ namespace RegistryForFinalProject.Migrations
                         .IsRequired();
 
                     b.HasOne("RegistryForFinalProject.Models.Item", "Item")
-                        .WithMany("Orders")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RegistryForFinalProject.Models.ShoppingCart", b =>
-                {
-                    b.HasOne("RegistryForFinalProject.Models.Account", "Account")
-                        .WithMany("ShoppingCarts")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("RegistryForFinalProject.Models.Item", "Item")
-                        .WithMany("ShoppingCarts")
+                        .WithMany()
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

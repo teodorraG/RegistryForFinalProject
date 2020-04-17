@@ -127,10 +127,12 @@ namespace RegistryForFinalProject.Controllers
             return View("Categories", newCategoriesViewModel);
         }
 
-        public IActionResult PreviewItem()
+        public IActionResult PreviewItem(string id)
         {
+            var item = db.Items.FirstOrDefault(x => x.Id == int.Parse(id));
+            PreviewItemViewModel previewItemViewModel = new PreviewItemViewModel { Item = item };
 
-            return View();
+            return View(previewItemViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -144,5 +146,21 @@ namespace RegistryForFinalProject.Controllers
             }
             return View(previewItemViewModel);
         }
+
+        //[HttpGet]
+        //public ActionResult Index(int? page)
+        //{
+        //    var dummyItems = Enumerable.Range(1, 150).Select(x => "Item " + x);
+        //    var productItems = Enumerable.Range(1, 150).Select(x => "Item " + x);
+        //    var pager = new Pager(productItems.Count(), page);
+
+        //    var viewModel = new CategoriesViewModel
+        //    {
+        //        Items = productItems.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+        //        Pager = pager
+        //    };
+
+        //    return View(viewModel);
+        //}
     }
 }

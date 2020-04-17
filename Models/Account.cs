@@ -41,5 +41,8 @@ namespace RegistryForFinalProject.Models
         //public List<Item> ItemsBought { get; set; } = new List<Item>();
         public List<Order> Orders { get; set; } = new List<Order>();
 
+        public List<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
+
+
     }
 }

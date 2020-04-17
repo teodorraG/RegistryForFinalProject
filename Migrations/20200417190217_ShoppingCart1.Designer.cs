@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
     [DbContext(typeof(RegistryDbContext))]
-    partial class RegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20200417190217_ShoppingCart1")]
+    partial class ShoppingCart1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,9 +164,7 @@ namespace RegistryForFinalProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsPurchased")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasColumnType("bit");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
@@ -202,7 +202,7 @@ namespace RegistryForFinalProject.Migrations
                         .IsRequired();
 
                     b.HasOne("RegistryForFinalProject.Models.Item", "Item")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -211,13 +211,13 @@ namespace RegistryForFinalProject.Migrations
             modelBuilder.Entity("RegistryForFinalProject.Models.ShoppingCart", b =>
                 {
                     b.HasOne("RegistryForFinalProject.Models.Account", "Account")
-                        .WithMany("ShoppingCarts")
+                        .WithMany()
                         .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RegistryForFinalProject.Models.Item", "Item")
-                        .WithMany("ShoppingCarts")
+                        .WithMany()
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

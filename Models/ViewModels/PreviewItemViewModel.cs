@@ -7,7 +7,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class PreviewItemViewModel
     {
-        public List<Item> Items { get; set; }
+        public Item Item { get; set; }
 
     }
 }
