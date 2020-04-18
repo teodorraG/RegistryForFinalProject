@@ -131,36 +131,48 @@ namespace RegistryForFinalProject.Controllers
         {
             var item = db.Items.FirstOrDefault(x => x.Id == int.Parse(id));
             PreviewItemViewModel previewItemViewModel = new PreviewItemViewModel { Item = item };
-
+            HttpContext.Session.SetString("CurrentItem", item.Id.ToString());
             return View(previewItemViewModel);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
 
+        [HttpPost]
         public IActionResult PreviewItem(PreviewItemViewModel previewItemViewModel)
         {
+            int itemId = int.Parse(HttpContext.Session.GetString("CurrentItem"));
+            string username = HttpContext.Session.GetString("CurrentUser");
+            var user = db.Accounts.FirstOrDefault(x => x.UserName == username);
+            db.ShoppingCarts.Add(new ShoppingCart { ItemId = itemId, AccountId = user.Id });
+            db.SaveChanges();
+            return RedirectToAction("ShoppingCart", "ShoppingCart");
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
 
-            if (ModelState.IsValid)
+        //public IActionResult PreviewItem(PreviewItemViewModel previewItemViewModel)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        return View("PreviewItem");
+        //    }
+        //    return View(previewItemViewModel);
+        //}
+
+        [HttpGet]
+        public ActionResult Index(int? page)
+        {
+            List<Item> productItems = db.Items.ToList();
+            var pager = new Pager(productItems.Count(), page);
+
+            var viewModel = new CategoriesViewModel
             {
-                return View("PreviewItem");
-            }
-            return View(previewItemViewModel);
+                Items = productItems.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToList(),
+                Pager = pager
+            };
+
+            return View(viewModel);
         }
 
-        //[HttpGet]
-        //public ActionResult Index(int? page)
-        //{
-        //    var dummyItems = Enumerable.Range(1, 150).Select(x => "Item " + x);
-        //    var productItems = Enumerable.Range(1, 150).Select(x => "Item " + x);
-        //    var pager = new Pager(productItems.Count(), page);
-
-        //    var viewModel = new CategoriesViewModel
-        //    {
-        //        Items = productItems.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
-        //        Pager = pager
-        //    };
-
-        //    return View(viewModel);
-        //}
+        
     }
 }

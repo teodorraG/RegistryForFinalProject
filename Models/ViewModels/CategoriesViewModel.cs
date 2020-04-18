@@ -19,7 +19,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         public int Price { get; set; }
 
-        public Pager Pager { get; set; }
+        public Pager Pager { get; set; } = new Pager(102, 1);
 
     }
 
@@ -27,7 +27,6 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         public Pager(int totalItems, int? page, int pageSize = 10)
         {
-            // calculate total, start and end pages
             var totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
             var currentPage = page != null ? (int)page : 1;
             var startPage = currentPage - 5;

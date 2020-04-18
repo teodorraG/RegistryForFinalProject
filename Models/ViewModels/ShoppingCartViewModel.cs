@@ -9,7 +9,11 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class ShoppingCartViewModel
     {
-        public Item Item { get; set; }
+        public ShoppingCartViewModel()
+        {
+            Items = new List<Item>();
+        }
+        public List<Item> Items { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredFieldError)]
         public string FirstName { get; set; }
