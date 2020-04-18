@@ -45,12 +45,12 @@
                             </div>
                         </td>
                         <td data-th="Price">
-                            $@Model.Items[i].Price
+                            <label id="@string.Concat("Price",i)">$@Model.Items[i].Price</label>
                         </td>
                         <td data-th="Quantity">
-                            <input type="number" class="form-control text-center" value="1">
+                            <input type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1">
                         </td>
-                        <td data-th="Subtotal" class="text-center">@{ var finalPrice = Model.Items[i].Quantity * @Model.Items[i].Price;} @finalPrice</td>
+                        <td data-th="Subtotal" class="text-center"><label id="@string.Concat("Subtotal",i)">$@Model.Items[i].Price</label></td>
                         <td class="actions" data-th="">
                             <button type="submit" asp-action="RemoveItem" asp-controller="ShoppingCart" action="post" asp-route-id="@Model.Items[i].Id" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                         </td>
@@ -64,7 +64,7 @@
                 <tr>
                     <td><a class="btn btn-warning" href="~/Categories/Categories" role="button"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                     <td colspan="2" class="hidden-xs"></td>
-                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                    <td class="hidden-xs text-center"><strong>Total $<label id="Total" onload="CalculateTotal()"></label></strong></td>
                 </tr>
             </tfoot>
         </table>
@@ -172,3 +172,4 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="~/js/pageTitle.js"></script>
+<script src="~/js/CalculatePriceAndSubtotal.js"></script>
