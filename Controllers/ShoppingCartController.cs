@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RegistryForFinalProject.Controllers 
+namespace RegistryForFinalProject.Controllers
 {
     public class ShoppingCartController : Controller
     {
@@ -26,7 +26,10 @@ namespace RegistryForFinalProject.Controllers
             var items = new List<Item>();
             foreach (var item in currentShoppingCartItems)
             {
-                items.Add(db.Items.FirstOrDefault(x=>x.Id == item.ItemId));
+                if (!item.IsPurchased)
+                {
+                    items.Add(db.Items.FirstOrDefault(x => x.Id == item.ItemId));
+                }
             }
             ShoppingCartViewModel shoppingCartViewModel = new ShoppingCartViewModel { Items = items };
             return View(shoppingCartViewModel);
@@ -36,10 +39,47 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult ShoppingCart(ShoppingCartViewModel shoppingCartViewModel)
         {
-
+            for (int i = 0; i < shoppingCartViewModel.Items.Count; i++)
+            {
+                var item = db.Items.FirstOrDefault(x => x.Id == shoppingCartViewModel.Items[i].Id);
+                shoppingCartViewModel.Items[i].Title = item.Title;
+                shoppingCartViewModel.Items[i].Price = item.Price;
+                shoppingCartViewModel.Items[i].Description = item.Description;
+                shoppingCartViewModel.Items[i].SellerId = item.SellerId;
+                shoppingCartViewModel.Items[i].CategoryId = item.CategoryId;
+            }
+            ModelState.Clear();
+            TryValidateModel(shoppingCartViewModel);
             if (ModelState.IsValid)
             {
-                return View();
+                var currentUserName = HttpContext.Session.GetString("CurrentUser");
+                var buyer = db.Accounts.FirstOrDefault(x => x.UserName == currentUserName);
+                foreach (var item in shoppingCartViewModel.Items)
+                {
+                    var currentItem = db.Items.FirstOrDefault(x => x.Id == item.Id);
+                    if (currentItem.Quantity < item.Quantity)
+                    {
+                        return View();
+                    }
+                    Order order = new Order
+                    {
+                        BuyerId = buyer.Id,
+                        Date = DateTime.Now,
+                        ItemId = item.Id,
+                        Price = currentItem.Price * currentItem.Quantity,
+                        Quantity = item.Quantity
+                    };
+                    db.Orders.Add(order);
+                    
+                    currentItem.Quantity -= item.Quantity;
+                }
+                var currentShoppingCart = db.ShoppingCarts.Where(x => x.AccountId == buyer.Id).ToList();
+                foreach (var item in currentShoppingCart)
+                {
+                    item.IsPurchased = true;
+                }
+                db.SaveChanges();
+                return View("Confirmation");
             }
             return View(shoppingCartViewModel);
         }

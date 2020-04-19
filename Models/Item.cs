@@ -43,7 +43,6 @@ namespace RegistryForFinalProject.Models
         [Required(ErrorMessage = Constant.RequiredMessage)]
         public int CategoryId { get; set; }
 
-        [Required(ErrorMessage = Constant.RequiredMessage)]
         public Category Category { get; set; }
 
         public List<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
