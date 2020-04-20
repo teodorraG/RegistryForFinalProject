@@ -1,0 +1,176 @@
+﻿@*@model RegistryForFinalProject.Models.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit Item";
+}
+<h1 class="ml11">
+    <span class="text-wrapper">
+        <span class="line line1"></span>
+        <span class="letters">Edit</span>
+    </span>
+</h1>
+<form asp-controller="EditItem">
+    @if (this.TempData["SuccessfullyListed"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["SuccessfullyListed"]</div>
+    }
+    @if (this.TempData["NoCategorySelected"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NoCategorySelected"]</div>
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card-body">
+                    <div class="p-3 mb-2 bg-secondary text-white"><h6>Upload photo:</h6></div>
+                    <div class="ml-2 col-sm-4">
+                        <div id="msg"></div>
+                        <div id="image-form">
+                            <input type="file" name="img[]" class="file" accept="image/*">
+                            <div class="input-group my-3">
+                                <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+                                <div class="input-group-append">
+                                    <button type="button" class="browse btn btn-warning">Browse...</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" id="PictureDeleteButton" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <img src="https://placehold.it/200x300" id="preview" class="img-thumbnail">
+                    </div>
+                    <div class="col-4">
+                        <img src="https://placehold.it/200x300" id="preview" class="img-thumbnail">
+                    </div>
+                    <div class="col-4">
+                        <img src="https://placehold.it/200x300" id="preview" class="img-thumbnail">
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-100"></div>
+            <br />
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="p-3 mb-2 bg-secondary text-white"><h6>Item information: </h6></div>
+                        <br />
+                        <label asp-for="Title"><span class="text-danger">*</span>Title: </label>
+                        <span class="text-danger" asp-validation-for="Title"></span>
+                        <input asp-for="Title" class="form-control input-lg col-4" />
+                        <small id="emailHelp" class="form-text text-muted">By this title your items will be searched</small>
+                        <br />
+                        <label asp-for="Price"><span class="text-danger">*</span>Price: </label>
+                            <span class="text-danger" asp-validation-for="Price"></span>
+                            <input asp-for="Price" type="number" id="replyNumber" placeholder="$" />
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Price)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Price)
+                            @Html.ValidationMessageFor(model => model.Price)
+                        </div>
+                        <br />
+                        <br />
+                        <label asp-for="Quantity">Quantity: </label>
+                        <span class="text-danger" asp-validation-for="Quantity"></span>
+                        <input asp-for="Quantity" min="1" value="1" class="form-control input-lg col-4" />
+                        <br />
+                        <br />
+                        <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle w-25" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Category list
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @for (int i = 0; i < Model.Categories.Count; i++)
+                                    {
+                                        <button id="CategoriesDropDown" class="dropdown-item">@Model.Categories[i].Name</button>
+
+                                    }
+
+                                </div>
+                                <input asp-for="SelectedCategory" id="SelectedCategory" class="form-control input-lg col-4" />
+
+                            </div>
+                        <label asp-for="Categories"><span class="text-danger">*</span>Select Category</label>
+                        <span class="text-danger" asp-validation-for="Categories"></span>
+                        <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
+                            <option value="">Select</option>
+                        </select>
+                        <br />
+                        <br />
+                        <label asp-for="Description"><span class="text-danger">*</span>Description: </label>
+                        <span class="text-danger" asp-validation-for="Description"></span>
+                        <textarea asp-for="Description" id="form-text" class="form-control md-textarea" rows="3"></textarea>
+                        <br />
+                        <input asp-for="Image1" id="Image1" name="Image1" />
+                        <input asp-for="Image2" id="Image2" name="Image2" />
+                        <input asp-for="Image3" id="Image3" name="Image3" />
+                        <button type="submit" class="btn btn-warning m-2" id="ExitButton">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="container">
+        <div class="row">
+            <div class="col">Column1</div>
+            <div class="w-100"></div>
+            <div class="col">Column3</div>
+        </div>
+    </div>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+        </li>
+
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="~/js/pageTitle.js"></script>
+<script src="~/js/photoUploadSell.js"></script>*@
+

@@ -9,5 +9,7 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         public Item Item { get; set; }
 
+        public Account Account { get; set; }
+
     }
 }

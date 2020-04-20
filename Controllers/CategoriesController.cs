@@ -22,7 +22,7 @@ namespace RegistryForFinalProject.Controllers
         public IActionResult Categories()
         {
             var categories = db.Categories.ToList();
-            var items = db.Items.ToList();
+            var items = db.Items.Where(x=>x.Quantity > 0).ToList();
             CategoriesViewModel categoriesViewModel = new CategoriesViewModel();
             foreach (var item in db.Categories)
             {
@@ -138,14 +138,21 @@ namespace RegistryForFinalProject.Controllers
         [HttpPost]
         public IActionResult PreviewItem(PreviewItemViewModel previewItemViewModel)
         {
-            int itemId = int.Parse(HttpContext.Session.GetString("CurrentItem"));
-            var alreadyInCart = db.ShoppingCarts.FirstOrDefault(x => x.ItemId == itemId);
+            string userName = HttpContext.Session.GetString("CurrentUser");
+            var currentUserId = db.Accounts.FirstOrDefault(x => x.UserName == userName).Id;
 
+            int itemId = int.Parse(HttpContext.Session.GetString("CurrentItem"));
+            var alreadyInCart = db.ShoppingCarts.FirstOrDefault(x => x.ItemId == itemId && x.AccountId == currentUserId && x.IsPurchased == false);
             if (alreadyInCart != null)
             {
-                this.TempData["AlreadyInCart"] = "This item is already in your shopping cart";
-                return RedirectToAction("ShoppingCart", "ShoppingCart");
+                //if (alreadyInCart != null && alreadyInCart.IsPurchased == false && currentUserId == alreadyInCart.AccountId)
+                //{
+                    this.TempData["AlreadyInCart"] = "This item is already in your shopping cart";
+                    return RedirectToAction("ShoppingCart", "ShoppingCart");
+                //}
             }
+
+            
 
             string username = HttpContext.Session.GetString("CurrentUser");
             var user = db.Accounts.FirstOrDefault(x => x.UserName == username);

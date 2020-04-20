@@ -6,21 +6,24 @@
 }
 
 <form asp-controller="Categories" asp-action="PreviewItem" formaction="post">
-    @*@if (this.TempData["AlreadyInCart"] != null)
-        {
-            <div class="alert alert-danger">@this.TempData["AlreadyInCart"]</div>
-        }*@
-
     <br />
-    <button type="submit" class="btn btn-block btn-warning">Add to shopping cart</button>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-block btn-warning">Add to shopping cart</button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 </form>
 <br />
 <form asp-controller="Categories" asp-action="PreviewItem" formaction="post">
-
-
-    <button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#exampleModal">
-        Add to registry
-    </button>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#exampleModal">Add to registry</button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
     <br />
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

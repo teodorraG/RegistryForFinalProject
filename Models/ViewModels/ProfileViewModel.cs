@@ -34,6 +34,5 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         public List<Order> Orders { get; set; }
 
-
     }
 }

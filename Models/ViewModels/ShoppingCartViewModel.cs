@@ -1,4 +1,5 @@
 ﻿using RegistryForFinalProject.Constants;
+using RegistryForFinalProject.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,5 +34,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         [Required(ErrorMessage = Constant.RequiredMessage)]
         public int Zip { get; set; }
+
+        public PaymentMethod  PaymentMethod{ get; set; }
     }
 }

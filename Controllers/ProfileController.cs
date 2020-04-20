@@ -148,5 +148,40 @@ namespace RegistryForFinalProject.Controllers
             this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
             return RedirectToAction("Offers");
         }
+
+        //public IActionResult EditItem(int id)
+        //{
+        //    var userName = HttpContext.Session.GetString("CurrentUser");
+        //    var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
+        //    var item = db.Items.FirstOrDefault(x => x.Id == id);
+
+        //    ItemViewModel itemViewModel = new ItemViewModel 
+        //    { 
+        //        Title = item.Title, 
+        //        Description = item.Description, 
+        //        Price = item.Price, 
+        //        Quantity = item.Quantity, 
+        //        Categories = item.CategoryId, 
+        //        Image1 = item.Image1, 
+        //        Image2 = item.Image2, 
+        //        Image3 = item.Image3
+        //    };
+        //    return View(profileViewModel);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult EditItem(int id)
+        //{
+        //    var userName = HttpContext.Session.GetString("CurrentUser");
+        //    var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
+        //    var item = db.Items.FirstOrDefault(x => x.Id == id);
+
+        //    var itemToRemoveFromDb = db.Items.FirstOrDefault(x => x.Id == item.Id && x.SellerId == account.Id);
+        //    db.Items.Remove(itemToRemoveFromDb);
+        //    db.SaveChanges();
+        //    this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
+        //    return RedirectToAction("Offers");
+        //}
     }
 }

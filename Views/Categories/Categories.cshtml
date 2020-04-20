@@ -25,7 +25,7 @@
                 <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
             </div>
             <div class="col-md-2">
-                <button class="btn btn-warning" id="filterButton" type="submit">Filter</button>
+                <button class="btn btn-warning" id="filterButton" type="submit">Filter Results</button>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
         @for (int i = 0; i < Model.Items.Count; i++)
         {
             <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
-                <div class="card" style="height: 41rem;">
+                <div class="card" style="height: 35rem;">
                     <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
                     <div class="row">
                         <div class="card-body">

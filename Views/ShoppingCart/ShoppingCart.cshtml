@@ -18,6 +18,14 @@
     {
         <div class="alert alert-danger">@this.TempData["AlreadyInCart"]</div>
     }
+    @if (this.TempData["SuccessfullyPlacedOrder"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["SuccessfullyPlacedOrder"]</div>
+    }
+    @if (this.TempData["NotEnoughQuantity"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NotEnoughQuantity"]</div>
+    }
     <div class="container">
 
         <table id="cart" class="table table-hover table-condensed">
@@ -50,7 +58,7 @@
                             <label id="@string.Concat("Price",i)">$@Model.Items[i].Price</label>
                         </td>
                         <td data-th="Quantity">
-                            <input asp-for="Items[i].Quantity" type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1" min="1" max="@Model.Items[i].Quantity">
+                            <input asp-for="Items[i].Quantity" type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1" min="1" >
                         </td>
                         <td data-th="Subtotal" class="text-center"><label id="@string.Concat("Subtotal",i)">$@Model.Items[i].Price</label></td>
                         <td class="actions" data-th="">
@@ -120,14 +128,14 @@
     <br />
     <ul class="list-unstyled">
         <li>
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <input class="form-check-input" type="radio" asp-for="PaymentMethod" value="Easy Pay" checked>
             <label class="form-check-label" for="exampleRadios1">
                 <strong>Easy Pay</strong>
             </label>
         </li>
 
         <li>
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+            <input class="form-check-input" type="radio" asp-for="PaymentMethod" value="Delivery">
             <label class="form-check-label" for="exampleRadios2">
                 <strong>Delivery</strong>
             </label>

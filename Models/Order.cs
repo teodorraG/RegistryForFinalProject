@@ -30,24 +30,30 @@ namespace RegistryForFinalProject.Models
 
         [Required]
         public int ItemId { get; set; }
+
         public Item Item { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
         public string EasyPayNumber { get; set; }
 
-        //public string FirstName { get; set; }
+        [Required]
+        public string FirstName { get; set; }
 
-        //public string LastName { get; set; }
+        [Required]
+        public string LastName { get; set; }
 
-        //public string Address1 { get; set; }
+        [Required]
+        public string Address1 { get; set; }
 
-        //public string Address2 { get; set; }
+        public string Address2 { get; set; }
 
-        //public string City { get; set; }
+        [Required]
+        public string City { get; set; }
 
-        //public string State { get; set; }
+        public string State { get; set; }
 
-        //public int Zip { get; set; }
+        [Required]
+        public int Zip { get; set; }
 
     }
 }

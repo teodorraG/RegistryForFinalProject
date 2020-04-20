@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Models;
 using RegistryForFinalProject.Models.ViewModels;
+using RegistryForFinalProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,12 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult ShoppingCart(ShoppingCartViewModel shoppingCartViewModel)
         {
+            string easyPayNumber = string.Empty;
+            if (shoppingCartViewModel.PaymentMethod == Enums.PaymentMethod.EasyPay)
+            {
+                EasyPayNumberGenerator generator = new EasyPayNumberGenerator();
+                easyPayNumber = generator.GenerateEasyPayNumber();
+            }
             for (int i = 0; i < shoppingCartViewModel.Items.Count; i++)
             {
                 var item = db.Items.FirstOrDefault(x => x.Id == shoppingCartViewModel.Items[i].Id);
@@ -58,28 +65,41 @@ namespace RegistryForFinalProject.Controllers
                 foreach (var item in shoppingCartViewModel.Items)
                 {
                     var currentItem = db.Items.FirstOrDefault(x => x.Id == item.Id);
-                    //if (currentItem.Quantity < item.Quantity)
-                    //{
-                    //    this.TempData["NotEnoughQuantity"] = "Sorry, not enough quantity, please check in stock items";
-                    //    return RedirectToAction("ShoppingCart");
-                    //}
+                    if (currentItem.Quantity < item.Quantity)
+                    {
+                        this.TempData["NotEnoughQuantity"] = $"Sorry, not enough quantity from item {currentItem.Title} with quantity left - {currentItem.Quantity}, please check in stock items";
+                        return RedirectToAction("ShoppingCart");
+                    }
+
+
                     Order order = new Order
                     {
                         BuyerId = buyer.Id,
                         Date = DateTime.Now,
                         ItemId = item.Id,
                         Price = currentItem.Price * currentItem.Quantity,
-                        Quantity = item.Quantity
+                        Quantity = item.Quantity,
+                        PaymentMethod = shoppingCartViewModel.PaymentMethod,
+                        FirstName = shoppingCartViewModel.FirstName,
+                        LastName = shoppingCartViewModel.LastName,
+                        Address1 = shoppingCartViewModel.Address,
+                        Address2 = shoppingCartViewModel.SecondAddres,
+                        City = shoppingCartViewModel.City,
+                        State = shoppingCartViewModel.State,
+                        Zip = shoppingCartViewModel.Zip
+                        
                     };
+                    if (easyPayNumber != null)
+                    {
+                        order.EasyPayNumber = easyPayNumber;
+                    }
                     db.Orders.Add(order);
-                    
                     currentItem.Quantity -= item.Quantity;
-
                     //if (currentItem.Quantity <= 0)
                     //{
                     //    var deleteItem = db.Categories.FirstOrDefault(x => x.Id == currentItem.Id);
                     //    db.Categories.Remove(deleteItem);
-                    //        db.SaveChanges();
+                    //    db.SaveChanges();
                     //}
                 }
                 var currentShoppingCart = db.ShoppingCarts.Where(x => x.AccountId == buyer.Id).ToList();
@@ -88,15 +108,24 @@ namespace RegistryForFinalProject.Controllers
                     item.IsPurchased = true;
                 }
                 db.SaveChanges();
-                return View("Confirmation");
+
+                if (shoppingCartViewModel.PaymentMethod == Enums.PaymentMethod.Delivery)
+                {
+                    this.TempData["SuccessfullyPlacedOrder"] = "Your order has been placed successfully";
+                    return RedirectToAction("ShoppingCart");
+                }
+                else
+                {
+                    return View("Confirmation",easyPayNumber);
+                }
+
             }
             return View(shoppingCartViewModel);
         }
 
 
-        public IActionResult Confirmation()
+        public IActionResult Confirmation(string easyPayNumber)
         {
-
             return View("Confirmation");
         }
 
