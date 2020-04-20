@@ -68,6 +68,10 @@ namespace RegistryForFinalProject.Controllers
                     var path = uploadResult.JsonObj["public_id"].ToString();
                     item.Image2 = path;
                 }
+                else
+                {
+                    item.Image2 = Constants.Constant.NO_IMAGE;
+                }
 
                 if (sellViewModel.Image3 != null && sellViewModel.Image3 != string.Empty)
                 {
@@ -78,6 +82,10 @@ namespace RegistryForFinalProject.Controllers
                     var uploadResult = cloudinary.Upload(uploadParams);
                     var path = uploadResult.JsonObj["public_id"].ToString();
                     item.Image3 = path;
+                }
+                else
+                {
+                    item.Image3 = Constants.Constant.NO_IMAGE;
                 }
                 db.Items.Add(item);
                 db.SaveChanges();

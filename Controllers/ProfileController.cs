@@ -115,14 +115,38 @@ namespace RegistryForFinalProject.Controllers
                 items.Add(currentItem);
             }
 
-            OrdersViewModel profileViewModel = new OrdersViewModel { Items = items };
-            return View(profileViewModel);
+            OrdersViewModel ordersViewModel = new OrdersViewModel { Items = items };
+            return View(ordersViewModel);
         }
 
         public IActionResult Offers()
         {
+            var currentUserName = HttpContext.Session.GetString("CurrentUser");
+            var sellerId = db.Accounts.FirstOrDefault(x => x.UserName == currentUserName).Id;
+            var currentSelledItems = db.Items.Where(x => x.SellerId == sellerId).ToList();
+            var items = new List<Item>();
 
-            return View("Offers");
+            foreach (var item in currentSelledItems)
+            {
+                items.Add(item);
+            }
+
+            OffersViewModel offersViewModel = new OffersViewModel { Items = items };
+            return View(offersViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveItem(int id)
+        {
+            var userName = HttpContext.Session.GetString("CurrentUser");
+            var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
+            var item = db.Items.FirstOrDefault(x => x.Id == id);
+
+            var itemToRemoveFromDb = db.Items.FirstOrDefault(x => x.Id == item.Id && x.SellerId == account.Id);
+            db.Items.Remove(itemToRemoveFromDb);
+            db.SaveChanges();
+            this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
+            return RedirectToAction("Offers");
         }
     }
 }

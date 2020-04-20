@@ -49,7 +49,7 @@
                             <label id="@string.Concat("Price",i)">$@Model.Items[i].Price</label>
                         </td>
                         <td data-th="Quantity">
-                            <input asp-for="Items[i].Quantity" min="1" type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1">
+                            <input asp-for="Items[i].Quantity" type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1" min="1" max="@Model.Items[i].Quantity">
                         </td>
                         <td data-th="Subtotal" class="text-center"><label id="@string.Concat("Subtotal",i)">$@Model.Items[i].Price</label></td>
                         <td class="actions" data-th="">

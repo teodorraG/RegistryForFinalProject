@@ -50,6 +50,7 @@ namespace RegistryForFinalProject.Controllers
             }
             ModelState.Clear();
             TryValidateModel(shoppingCartViewModel);
+
             if (ModelState.IsValid)
             {
                 var currentUserName = HttpContext.Session.GetString("CurrentUser");
@@ -57,11 +58,11 @@ namespace RegistryForFinalProject.Controllers
                 foreach (var item in shoppingCartViewModel.Items)
                 {
                     var currentItem = db.Items.FirstOrDefault(x => x.Id == item.Id);
-                    if (currentItem.Quantity < item.Quantity)
-                    {
-                        this.TempData["NotEnoughQuantity"] = "Sorry, not enough quantity, please check in stock items";
-                        return RedirectToAction("ShoppingCart");
-                    }
+                    //if (currentItem.Quantity < item.Quantity)
+                    //{
+                    //    this.TempData["NotEnoughQuantity"] = "Sorry, not enough quantity, please check in stock items";
+                    //    return RedirectToAction("ShoppingCart");
+                    //}
                     Order order = new Order
                     {
                         BuyerId = buyer.Id,
