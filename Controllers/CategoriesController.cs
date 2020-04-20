@@ -139,24 +139,20 @@ namespace RegistryForFinalProject.Controllers
         public IActionResult PreviewItem(PreviewItemViewModel previewItemViewModel)
         {
             int itemId = int.Parse(HttpContext.Session.GetString("CurrentItem"));
+            var alreadyInCart = db.ShoppingCarts.FirstOrDefault(x => x.ItemId == itemId);
+
+            if (alreadyInCart != null)
+            {
+                this.TempData["AlreadyInCart"] = "This item is already in your shopping cart";
+                return RedirectToAction("ShoppingCart", "ShoppingCart");
+            }
+
             string username = HttpContext.Session.GetString("CurrentUser");
             var user = db.Accounts.FirstOrDefault(x => x.UserName == username);
             db.ShoppingCarts.Add(new ShoppingCart { ItemId = itemId, AccountId = user.Id });
             db.SaveChanges();
             return RedirectToAction("ShoppingCart", "ShoppingCart");
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-
-        //public IActionResult PreviewItem(PreviewItemViewModel previewItemViewModel)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        return View("PreviewItem");
-        //    }
-        //    return View(previewItemViewModel);
-        //}
 
         [HttpGet]
         public ActionResult Index(int? page)

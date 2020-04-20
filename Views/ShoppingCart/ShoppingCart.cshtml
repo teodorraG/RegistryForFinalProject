@@ -13,9 +13,10 @@
 <br />
 <br />
 <form asp-controller="ShoppingCart" asp-action="ShoppingCart" method="post">
-    @if (this.TempData["NotEnoughQuantity"] != null)
+
+    @if (this.TempData["AlreadyInCart"] != null)
     {
-        <div class="alert alert-danger">@this.TempData["NotEnoughQuantity"]</div>
+        <div class="alert alert-danger">@this.TempData["AlreadyInCart"]</div>
     }
     <div class="container">
 
@@ -38,7 +39,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-2 hidden-xs"><img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/", $"{Model.Items[i].Image1}"), ".jpg")" width="100" height="100" alt="..." class="img-responsive" /></div>
-                                    <div class="col-sm-10 align-self-center col-md-3">
+                                    <div class="col-sm-10">
                                         <input type="hidden" asp-for="Items[i].Id">
                                         <h5 class="nomargin ml-5"><label for="Items[@i].Title">@Model.Items[i].Title</label></h5>
                                     </div>
@@ -159,13 +160,13 @@
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
         </li>
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
         </li>
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
         </li>
 
     }

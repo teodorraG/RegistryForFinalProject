@@ -16,22 +16,15 @@
                 </select>
             </div>
 
-            <div class="col-md-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-10">
-                            <label for="customRange1">Price range:</label>
-                            <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
-                        </div>
-                        <div class="col-md-2">
-                            <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value">
-                        </div>
+            <div class="col-md-4">
 
-                    </div>
-                </div>
+                <label for="customRange1">Price range:</label>
+                <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
             </div>
-
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
+            </div>
+            <div class="col-md-2">
                 <button class="btn btn-warning" id="filterButton" type="submit">Filter</button>
             </div>
         </div>
@@ -67,14 +60,18 @@
             <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
                 <div class="card" style="height: 41rem;">
                     <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.Items[i].Title</h5>
-                        <p class="card-text">
-                            @Model.Items[i].Description
-                        </p>
-                        <h6 class="card-title">$@Model.Items[i].Price</h6>
-                        <a href="PreviewItem/@Model.Items[i].Id" class="btn btn-block btn-warning">Check Out</a>
+                    <div class="row">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Items[i].Title</h5>
+                            <p class="card-text">
+                                @Model.Items[i].Description
+                            </p>
+                            <h6 class="card-title">$@Model.Items[i].Price</h6>
+                        </div>
                     </div>
+                </div>
+                <div>
+                    <a href="PreviewItem/@Model.Items[i].Id" class="btn btn-block btn-warning">Check Out</a>
                 </div>
             </div>
         }
@@ -134,15 +131,14 @@
     @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
     {
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
         </li>
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
         </li>
         <li>
-            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut">Sign out</a>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
         </li>
-
     }
     else
     {
