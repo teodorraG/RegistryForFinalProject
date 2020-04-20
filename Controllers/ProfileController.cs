@@ -103,8 +103,20 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Orders()
         {
+            var currentUserName = HttpContext.Session.GetString("CurrentUser");
+            var ordererId = db.Accounts.FirstOrDefault(x => x.UserName == currentUserName).Id;
+            var currentOrderedItems = db.Orders.Where(x => x.BuyerId == ordererId).ToList();
+            var items = new List<Item>();
 
-            return View("Orders");
+            foreach (var item in currentOrderedItems)
+            {
+                var currentItem = db.Items.FirstOrDefault(x => x.Id == item.ItemId);
+                currentItem.Quantity = item.Quantity;
+                items.Add(currentItem);
+            }
+
+            OrdersViewModel profileViewModel = new OrdersViewModel { Items = items };
+            return View(profileViewModel);
         }
 
         public IActionResult Offers()

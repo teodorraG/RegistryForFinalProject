@@ -13,9 +13,12 @@
 <br />
 <br />
 <form asp-controller="ShoppingCart" asp-action="ShoppingCart" method="post">
-
+    @if (this.TempData["NotEnoughQuantity"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NotEnoughQuantity"]</div>
+    }
     <div class="container">
-        
+
         <table id="cart" class="table table-hover table-condensed">
             <thead>
                 <tr>
@@ -38,11 +41,8 @@
                                     <div class="col-sm-10 align-self-center col-md-3">
                                         <input type="hidden" asp-for="Items[i].Id">
                                         <h5 class="nomargin ml-5"><label for="Items[@i].Title">@Model.Items[i].Title</label></h5>
-                                        @*<p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>*@
                                     </div>
                                 </div>
-                                
-
                             </div>
                         </td>
                         <td data-th="Price">
@@ -57,11 +57,11 @@
                         </td>
                     </tr>
                 }
-                </tbody>
+            </tbody>
             <tfoot>
                 @*<tr class="visible-xs">
-                    <td class="text-center"><strong>Total 1.99</strong></td>
-                </tr>*@
+                        <td class="text-center"><strong>Total 1.99</strong></td>
+                    </tr>*@
                 <tr>
                     <td><a class="btn btn-warning" href="~/Categories/Categories" role="button"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                     <td colspan="2" class="hidden-xs"></td>
@@ -115,12 +115,23 @@
         </div>
     </div>
     <br />
-    <div>
-        <label>Payment</label>
-        <ul>
-            <li>Easy pay</li>
-        </ul>
-    </div>
+    <label>Choose your payment method:</label>
+    <br />
+    <ul class="list-unstyled">
+        <li>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+                <strong>Easy Pay</strong>
+            </label>
+        </li>
+
+        <li>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+            <label class="form-check-label" for="exampleRadios2">
+                <strong>Delivery</strong>
+            </label>
+        </li>
+    </ul>
     <br />
     <br />
     <button class="btn btn-success text-center" asp-controller="ShoppingCart" asp-action="ShoppingCart" formmethod="post" type="submit" role="button">Place order</button>

@@ -7,8 +7,11 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class OrdersViewModel
     {
-        public Item Item { get; set; }
+        public OrdersViewModel()
+        {
+            Items = new List<Item>();
+        }
+        public List<Item> Items { get; set; }
 
-        public Account Account { get; set; }
     }
 }

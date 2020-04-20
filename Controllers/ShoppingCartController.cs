@@ -59,7 +59,8 @@ namespace RegistryForFinalProject.Controllers
                     var currentItem = db.Items.FirstOrDefault(x => x.Id == item.Id);
                     if (currentItem.Quantity < item.Quantity)
                     {
-                        return View();
+                        this.TempData["NotEnoughQuantity"] = "Sorry, not enough quantity, please check in stock items";
+                        return RedirectToAction("ShoppingCart");
                     }
                     Order order = new Order
                     {
@@ -72,6 +73,13 @@ namespace RegistryForFinalProject.Controllers
                     db.Orders.Add(order);
                     
                     currentItem.Quantity -= item.Quantity;
+
+                    //if (currentItem.Quantity <= 0)
+                    //{
+                    //    var deleteItem = db.Categories.FirstOrDefault(x => x.Id == currentItem.Id);
+                    //    db.Categories.Remove(deleteItem);
+                    //        db.SaveChanges();
+                    //}
                 }
                 var currentShoppingCart = db.ShoppingCarts.Where(x => x.AccountId == buyer.Id).ToList();
                 foreach (var item in currentShoppingCart)
