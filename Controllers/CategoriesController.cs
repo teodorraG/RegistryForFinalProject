@@ -59,7 +59,7 @@ namespace RegistryForFinalProject.Controllers
             }
             if (categoryName == "All Categories")
             {
-                newCategoriesViewModel.Items = db.Items.Where(x=>x.Price <= categoriesViewModel.Price).ToList();
+                newCategoriesViewModel.Items = db.Items.Where(x=>x.Price <= categoriesViewModel.Price && x.Quantity > 0).ToList();
                 foreach (var item in newCategoriesViewModel.Items)
                 {
                     if (item.Description.Length >= 132)
@@ -73,7 +73,7 @@ namespace RegistryForFinalProject.Controllers
             }
 
             var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
-            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId && x.Price <= categoriesViewModel.Price).ToList();
+            var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId && x.Price <= categoriesViewModel.Price && x.Quantity > 0).ToList();
             var categories = db.Categories.ToList();
 
             
@@ -103,7 +103,7 @@ namespace RegistryForFinalProject.Controllers
                 return RedirectToAction("Categories");
             }
 
-            var searchedItems = db.Items.Where(x => x.Title.ToLower().Contains(categoriesViewModel.Search.ToLower())).ToList();
+            var searchedItems = db.Items.Where(x => x.Title.ToLower().Contains(" " + categoriesViewModel.Search.ToLower() + " ")).ToList();
 
             CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
 
@@ -114,7 +114,7 @@ namespace RegistryForFinalProject.Controllers
                 newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
             }
 
-            foreach (var item in newCategoriesViewModel.Items)
+            foreach (var item in newCategoriesViewModel.Items.Where(x=>x.Quantity > 0))
             {
                 if (item.Description.Length >= 132)
                 {
@@ -161,20 +161,7 @@ namespace RegistryForFinalProject.Controllers
             return RedirectToAction("ShoppingCart", "ShoppingCart");
         }
 
-        [HttpGet]
-        public ActionResult Index(int? page)
-        {
-            List<Item> productItems = db.Items.ToList();
-            var pager = new Pager(productItems.Count(), page);
-
-            var viewModel = new CategoriesViewModel
-            {
-                Items = productItems.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToList(),
-                Pager = pager
-            };
-
-            return View(viewModel);
-        }
+        
 
         
     }

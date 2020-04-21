@@ -57,8 +57,8 @@
 
         @for (int i = 0; i < Model.Items.Count; i++)
         {
-            <div class="col-sm-6 align-self-center col-md-3 mb-3" style="width: 18rem;">
-                <div class="card" style="height: 35rem;">
+            <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
+                <div class="card" style="height: 35rem;" id="@string.Concat("more", $"{i}")">
                     <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
                     <div class="row">
                         <div class="card-body">
@@ -75,38 +75,14 @@
                 </div>
             </div>
         }
+    <div class="container">
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2"><button class="btn btn-secondary btn-lg btn-block" onclick="ViewMore()" id="ViewMoreButton">View more</button></div>
+            <div class="col-5"></div>
+        </div>
+    </div>
 
-        @if (Model.Pager.EndPage > 1)
-        {
-            <ul class="pagination">
-                @if (Model.Pager.CurrentPage > 1)
-                {
-                    <li>
-                        <a href="/Categories/Categories">First</a>
-                    </li>
-                    <li>
-                        <a href="/Categories/Categories?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
-                    </li>
-                }
-
-                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-                {
-                    <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                        <a href="/Categories/Categories?page=@Model.Pager">@Model.Pager</a>
-                    </li>
-                }
-
-                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                {
-                    <li>
-                        <a href="/Categories/Categories?page=@(Model.Pager.CurrentPage + 1)">Next</a>
-                    </li>
-                    <li>
-                        <a href="/Categories/Categories?page=@(Model.Pager.TotalPages)">Last</a>
-                    </li>
-                }
-            </ul>
-        }
 
     </div>
 </div>
@@ -152,3 +128,4 @@
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script src="~/js/categoryPrice.js"></script>
+<script src="~/js/ShowMore.js"></script>
