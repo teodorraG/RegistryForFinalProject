@@ -49,5 +49,8 @@ namespace RegistryForFinalProject.Models
 
         public List<Order> Orders { get; set; } = new List<Order>();
 
+        public List<RegistryItems> RegistryItems { get; set; } = new List<RegistryItems>();
+
+
     }
 }

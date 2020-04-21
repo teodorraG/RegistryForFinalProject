@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
     [DbContext(typeof(RegistryDbContext))]
-    partial class RegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20200421211403_Registry")]
+    partial class Registry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,6 +105,9 @@ namespace RegistryForFinalProject.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("RegistryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SellerId")
                         .HasColumnType("int");
 
@@ -114,6 +119,8 @@ namespace RegistryForFinalProject.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("RegistryId");
 
                     b.HasIndex("SellerId");
 
@@ -213,21 +220,6 @@ namespace RegistryForFinalProject.Migrations
                     b.ToTable("Registries");
                 });
 
-            modelBuilder.Entity("RegistryForFinalProject.Models.RegistryItems", b =>
-                {
-                    b.Property<int>("RegistryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RegistryId", "ItemId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("RegistryItems");
-                });
-
             modelBuilder.Entity("RegistryForFinalProject.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("Id")
@@ -263,6 +255,12 @@ namespace RegistryForFinalProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RegistryForFinalProject.Models.Registry", "Registry")
+                        .WithMany("Items")
+                        .HasForeignKey("RegistryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RegistryForFinalProject.Models.Account", "Seller")
                         .WithMany("ItemsSold")
                         .HasForeignKey("SellerId")
@@ -290,21 +288,6 @@ namespace RegistryForFinalProject.Migrations
                     b.HasOne("RegistryForFinalProject.Models.Account", "Account")
                         .WithMany("Registries")
                         .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RegistryForFinalProject.Models.RegistryItems", b =>
-                {
-                    b.HasOne("RegistryForFinalProject.Models.Item", "Item")
-                        .WithMany("RegistryItems")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RegistryForFinalProject.Models.Registry", "Registry")
-                        .WithMany("Items")
-                        .HasForeignKey("RegistryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

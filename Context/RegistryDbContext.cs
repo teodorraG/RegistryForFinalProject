@@ -14,6 +14,8 @@ namespace RegistryForFinalProject.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Registry> Registries { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,11 +38,6 @@ namespace RegistryForFinalProject.Contexts
                       .HasForeignKey(x => x.SellerId)
                       .OnDelete(DeleteBehavior.Restrict);
 
-                //entity.HasMany(x => x.ItemsBought)
-                //      .WithOne(x => x.Buyer)
-                //      .HasForeignKey(x => x.BuyerId)
-                //      .OnDelete(DeleteBehavior.Restrict);
-
                 entity.HasMany(x => x.Orders)
                       .WithOne(x => x.Buyer)
                       .HasForeignKey(x => x.BuyerId)
@@ -51,12 +48,22 @@ namespace RegistryForFinalProject.Contexts
                       .HasForeignKey(x => x.AccountId)
                       .OnDelete(DeleteBehavior.Restrict);
 
+                entity.HasMany(x => x.Registries)
+                      .WithOne(x => x.Account)
+                      .HasForeignKey(x => x.AccountId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
             });
 
             modelBuilder.Entity<ShoppingCart>()
             .Property("IsPurchased")
             .HasDefaultValue(false);
 
+            modelBuilder.Entity<RegistryItems>(entity =>
+            {
+                entity.HasKey(x => new { x.RegistryId, x.ItemId });
+            });
         }
+
     }
 }
