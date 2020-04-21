@@ -22,6 +22,14 @@ namespace RegistryForFinalProject.Controllers
         }
         public IActionResult LogIn()
         {
+            //var currentUserName = HttpContext.Session.GetString("CurrentUser");
+            //var registeredAccount = db.Accounts.FirstOrDefault(x => x.UserName == currentUserName);
+
+            //if (registeredAccount == null)
+            //{
+            //    return RedirectToAction("NotFoundError", "Error");
+
+            //}
             return View();
         }
 
