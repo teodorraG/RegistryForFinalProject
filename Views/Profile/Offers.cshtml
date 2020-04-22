@@ -55,7 +55,7 @@
                         <td data-th="Subtotal" class="text-center">@{var price = Model.Items[i].Price * Model.Items[i].Quantity;} @price</td>
                         <td class="actions" data-th="">
                             <button type="submit" asp-action="RemoveItem" asp-controller="Profile" action="post" asp-route-id="@Model.Items[i].Id" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
-                            <button class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="submit" asp-action="RedirectToEditItem" asp-controller="Profile" action="get" asp-route-id="@Model.Items[i].Id" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></button>
                         </td>
                     </tr>
                 }

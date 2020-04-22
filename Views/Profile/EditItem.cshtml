@@ -1,4 +1,4 @@
-﻿@*@model RegistryForFinalProject.Models.ViewModels.ProfileViewModel
+﻿@model RegistryForFinalProject.Models.ViewModels.ItemViewModel
 
 @{
     ViewData["Title"] = "Edit Item";
@@ -9,7 +9,7 @@
         <span class="letters">Edit</span>
     </span>
 </h1>
-<form asp-controller="EditItem">
+<form asp-controller="Profile" asp-action="EditItem">
     @if (this.TempData["SuccessfullyListed"] != null)
     {
         <div class="alert alert-success">@this.TempData["SuccessfullyListed"]</div>
@@ -40,13 +40,13 @@
 
                 <div class="row">
                     <div class="col-4">
-                        <img src="https://placehold.it/200x300" id="preview" class="img-thumbnail">
+                        <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Image1}"),".jpg")" alt="" id="preview" class="img-thumbnail">
                     </div>
                     <div class="col-4">
-                        <img src="https://placehold.it/200x300" id="preview" class="img-thumbnail">
+                        <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Image2}"),".jpg")" alt="" id="preview" class="img-thumbnail">
                     </div>
                     <div class="col-4">
-                        <img src="https://placehold.it/200x300" id="preview" class="img-thumbnail">
+                        <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Image3}"),".jpg")" alt="" id="preview" class="img-thumbnail">
                     </div>
                 </div>
 
@@ -66,36 +66,14 @@
                         <label asp-for="Price"><span class="text-danger">*</span>Price: </label>
                             <span class="text-danger" asp-validation-for="Price"></span>
                             <input asp-for="Price" type="number" id="replyNumber" placeholder="$" />
-
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.Price)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Price)
-                            @Html.ValidationMessageFor(model => model.Price)
-                        </div>
                         <br />
                         <br />
                         <label asp-for="Quantity">Quantity: </label>
                         <span class="text-danger" asp-validation-for="Quantity"></span>
-                        <input asp-for="Quantity" min="1" value="1" class="form-control input-lg col-4" />
+                        <input asp-for="Quantity" min="1"  class="form-control input-lg col-4" />
                         <br />
                         <br />
-                        <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle w-25" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Category list
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @for (int i = 0; i < Model.Categories.Count; i++)
-                                    {
-                                        <button id="CategoriesDropDown" class="dropdown-item">@Model.Categories[i].Name</button>
-
-                                    }
-
-                                </div>
-                                <input asp-for="SelectedCategory" id="SelectedCategory" class="form-control input-lg col-4" />
-
-                            </div>
+                       
                         <label asp-for="Categories"><span class="text-danger">*</span>Select Category</label>
                         <span class="text-danger" asp-validation-for="Categories"></span>
                         <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
@@ -110,7 +88,7 @@
                         <input asp-for="Image1" id="Image1" name="Image1" />
                         <input asp-for="Image2" id="Image2" name="Image2" />
                         <input asp-for="Image3" id="Image3" name="Image3" />
-                        <button type="submit" class="btn btn-warning m-2" id="ExitButton">Submit</button>
+                        <button type="submit" class="btn btn-warning m-2" id="ExitButton">Update information</button>
                     </div>
                 </div>
 
@@ -119,14 +97,6 @@
     </div>
 </form>
 
-
-<div class="container">
-        <div class="row">
-            <div class="col">Column1</div>
-            <div class="w-100"></div>
-            <div class="col">Column3</div>
-        </div>
-    </div>
 
 @section MainNavigation {
 
@@ -172,5 +142,5 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script src="~/js/pageTitle.js"></script>
-<script src="~/js/photoUploadSell.js"></script>*@
+<script src="~/js/photoUploadSell.js"></script>
 

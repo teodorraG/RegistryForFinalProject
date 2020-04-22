@@ -8,7 +8,10 @@ using RegistryForFinalProject.Models.ViewModels;
 using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Services;
 using Microsoft.AspNetCore.Http;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using RegistryForFinalProject.Constants;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -149,39 +152,119 @@ namespace RegistryForFinalProject.Controllers
             return RedirectToAction("Offers");
         }
 
-        //public IActionResult EditItem(int id)
-        //{
-        //    var userName = HttpContext.Session.GetString("CurrentUser");
-        //    var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
-        //    var item = db.Items.FirstOrDefault(x => x.Id == id);
+        public IActionResult EditItem()
+        {
+            int id = int.Parse(HttpContext.Session.GetString("ItemId"));
+            var item = db.Items.FirstOrDefault(x => x.Id == id);
 
-        //    ItemViewModel itemViewModel = new ItemViewModel 
-        //    { 
-        //        Title = item.Title, 
-        //        Description = item.Description, 
-        //        Price = item.Price, 
-        //        Quantity = item.Quantity, 
-        //        Categories = item.CategoryId, 
-        //        Image1 = item.Image1, 
-        //        Image2 = item.Image2, 
-        //        Image3 = item.Image3
-        //    };
-        //    return View(profileViewModel);
-        //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult EditItem(int id)
-        //{
-        //    var userName = HttpContext.Session.GetString("CurrentUser");
-        //    var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
-        //    var item = db.Items.FirstOrDefault(x => x.Id == id);
+            ItemViewModel itemViewModel = new ItemViewModel
+            {
+                Title = item.Title,
+                Description = item.Description,
+                Price = item.Price,
+                Quantity = item.Quantity,
+                Image1 = item.Image1,
+                Image2 = item.Image2,
+                Image3 = item.Image3,
+                SelectedCategory = db.Categories.FirstOrDefault(x => x.Id == item.CategoryId).Name
+            };
+            return View(itemViewModel);
+        }
 
-        //    var itemToRemoveFromDb = db.Items.FirstOrDefault(x => x.Id == item.Id && x.SellerId == account.Id);
-        //    db.Items.Remove(itemToRemoveFromDb);
-        //    db.SaveChanges();
-        //    this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
-        //    return RedirectToAction("Offers");
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditItem(ItemViewModel itemViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int id = int.Parse(HttpContext.Session.GetString("ItemId"));
+                var item = db.Items.FirstOrDefault(x => x.Id == id);
+                Category category = db.Categories.FirstOrDefault(x => x.Name == itemViewModel.SelectedCategory);
+                item.Title = itemViewModel.Title;
+                item.Price = itemViewModel.Price;
+                item.Quantity = itemViewModel.Quantity;
+                item.Category = category;
+                item.Description = itemViewModel.Description;
+
+                CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(Constant.CLOUD_NAME, Constant.API_KEY, Constant.API_SECRET);
+                Cloudinary cloudinary = new Cloudinary(account);
+                if (itemViewModel.Image1 != string.Empty && itemViewModel.Image1 != null)
+                {
+
+                    if (itemViewModel.Image1.Length > 100)
+                    {
+                            var uploadParams = new ImageUploadParams()
+                            {
+                                File = new FileDescription(itemViewModel.Image1)
+                            };
+                            var uploadResult = cloudinary.Upload(uploadParams);
+                            var path = uploadResult.JsonObj["public_id"].ToString();
+                            item.Image1 = path;
+                    }
+                }
+                else
+                {
+                    item.Image1 = Constants.Constant.NO_IMAGE;
+                }
+
+                if (itemViewModel.Image2 != string.Empty && itemViewModel.Image2 != null)
+                {
+
+                    if (itemViewModel.Image2.Length > 100)
+                    {
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(itemViewModel.Image2)
+                        };
+                        var uploadResult = cloudinary.Upload(uploadParams);
+                        var path = uploadResult.JsonObj["public_id"].ToString();
+                        item.Image2 = path;
+                    }
+                }
+                else
+                {
+                    item.Image2 = Constants.Constant.NO_IMAGE;
+                }
+
+
+                if (itemViewModel.Image3 != string.Empty && itemViewModel.Image3 != null)
+                {
+
+                    if (itemViewModel.Image3.Length > 100)
+                    {
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(itemViewModel.Image3)
+                        };
+                        var uploadResult = cloudinary.Upload(uploadParams);
+                        var path = uploadResult.JsonObj["public_id"].ToString();
+                        item.Image3 = path;
+                    }
+                }
+                else
+                {
+                    item.Image3 = Constants.Constant.NO_IMAGE;
+                }
+                db.SaveChanges();
+
+                return RedirectToAction("Offers");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RedirectToEditItem(string id)
+        {
+            //var item = db.Items.FirstOrDefault(x => x.Id == itemViewModel.);
+
+            //var itemToRemoveFromDb = db.Items.FirstOrDefault(x => x.Id == item.Id && x.SellerId == account.Id);
+            //db.Items.Remove(itemToRemoveFromDb);
+            //db.SaveChanges();
+            //this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
+            HttpContext.Session.SetString("ItemId", id);
+            return RedirectToAction("EditItem", "Profile");
+        }
     }
 }
