@@ -9,13 +9,11 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class LogInViewModel
     {
-        //[MinLength(5, ErrorMessage = "The username must be between 5 and 15 characters")]
-        //[MaxLength(15, ErrorMessage = "The username must be between 5 and 15 characters")]
+
         [Required(ErrorMessage = Constant.RegisterUsernameRequiredError)]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = Constant.RequiredPasswardError)]
-        //[RegularExpression(pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Password must contain at least one: lower case letter, upper case letter and number")]
         public string Password { get; set; }
     }
 }

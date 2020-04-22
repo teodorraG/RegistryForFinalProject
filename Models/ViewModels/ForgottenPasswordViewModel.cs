@@ -10,8 +10,6 @@ namespace RegistryForFinalProject.Models.ViewModels
 {
     public class ForgottenPasswordViewModel
     {
-        [Key]
-        public int Id { get; set; }
 
         [EmailAddress(ErrorMessage = Constant.RegisterInvalidEmailError)]
         [Required(ErrorMessage = Constant.RequiredEmailError)]

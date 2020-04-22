@@ -135,6 +135,7 @@ namespace RegistryForFinalProject.Controllers
                     return RedirectToAction("ForgottenPassword");
                 }
             }
+            this.TempData["NotMatchingEmail"] = "Sorry, this email doesn't exist";
             return View();
         }
     }

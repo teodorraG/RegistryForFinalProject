@@ -247,7 +247,7 @@ namespace RegistryForFinalProject.Controllers
                     item.Image3 = Constants.Constant.NO_IMAGE;
                 }
                 db.SaveChanges();
-
+                this.TempData["SuccessfullyEdited"] = "Your item was successfully edited";
                 return RedirectToAction("Offers");
             }
             return View();
