@@ -1,61 +1,63 @@
-﻿@model RegistryForFinalProject.Models.ViewModels.OrdersViewModel
+﻿@*@model RegistryForFinalProject.Models.ViewModels.RegistryRepositoryViewModel
 @{
-    ViewData["Title"] = "Orders";
+    ViewData["Title"] = "Registry Repository";
 }
 
 
 <h1 class="ml11">
     <span class="text-wrapper">
         <span class="line line1"></span>
-        <span class="letters">Order List</span>
+        <span class="letters">Your Registries</span>
     </span>
 </h1>
 <br />
 <br />
-<form asp-controller="Profile" asp-action="Orders" formaction="get">
 
-    <div class="container">
+<form asp-controller="Profile" asp-action="RegistryRepository" formaction="get">
+    <div class="p-3 mb-2 bg-secondary text-white"><h6>Baby baptism registries:</h6></div>
 
-        <table id="cart" class="table table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th style="width:50%">Product</th>
-                    <th style="width:10%">Price</th>
-                    <th style="width:8%">Quantity</th>
-                    <th style="width:22%" class="text-center">Subtotal</th>
-                    <th style="width:10%">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Items.Count; i++)
+    @if (Model.Registry.RegistryType ==)
+    { 
+        <div class="container">
+            <div class="row">
+                @for (int i = 0; i < Model.Registries.Count; i++)
                 {
-                    <tr>
-                        <td data-th="Product">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-2 hidden-xs"><img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/", $"{Model.Items[i].Image1}"), ".jpg")" width="100" height="100" alt="..." class="img-responsive" /></div>
-                                    <div class="col-sm-10">
-                                        <h5 class="nomargin ml-5">@Model.Items[i].Title</h5>
-                                    </div>
+                    <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
+                        <div class="card" style="height: 20rem;">
+                            <img src="http://res.cloudinary.com/teodorascloud/image/upload/bi8xo1acchgl6llox9ml.jpg" class="card-img-top img-thumbnail" alt="baby">                            <div class="row">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Registries[i].Name</h5>
+                                    <p class="card-text">
+                                        @Model.Registries[i].Location
+                                    </p>
+                                    <h6 class="card-title">$@Model.Registries[i].DateOfEvent</h6>
                                 </div>
                             </div>
-                        </td>
-                        <td data-th="Price">
-                            @Model.Items[i].Price
-                        </td>
-                        <td data-th="Quantity">
-                            @Model.Items[i].Quantity
-                        </td>
-                        <td data-th="Subtotal" class="text-center">@{var price = Model.Items[i].Price * Model.Items[i].Quantity;} @price</td>
-                        <td data-th="Quantity">
-                            @Model.Items[i].Orders[i].ShippingStatus
-                        </td>
-                    </tr>
+                        </div>
+                        <div>
+                            <a href="PreviewItem/@Model.Registries[i].Id" class="btn btn-block btn-warning">Select</a>
+                        </div>
+                    </div>
                 }
+                <div class="container">
+                    <div class="row">
+                        <div class="col-5"></div>
+                        <div class="col-2"><button class="btn btn-secondary btn-lg btn-block" onclick="ViewMore()" id="ViewMoreButton">View more</button></div>
+                        <div class="col-5"></div>
+                    </div>
+                </div>
 
-            </tbody>
-        </table>
-    </div>
+
+            </div>
+        </div>
+    }
+    <div class="p-3 mb-2 bg-secondary text-white"><h6>Wedding registries:</h6></div>
+
+
+
+    <div class="p-3 mb-2 bg-secondary text-white"><h6>Birthday registries:</h6></div>
+
+
 </form>
 
 @section MainNavigation {
@@ -102,4 +104,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="~/js/pageTitle.js"></script>
+<script src="~/js/pageTitle.js"></script>*@

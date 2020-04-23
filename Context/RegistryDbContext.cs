@@ -38,7 +38,7 @@ namespace RegistryForFinalProject.Contexts
                       .HasForeignKey(x => x.SellerId)
                       .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasMany(x => x.Orders)
+                entity.HasMany(x => x.OrdersBought)
                       .WithOne(x => x.Buyer)
                       .HasForeignKey(x => x.BuyerId)
                       .OnDelete(DeleteBehavior.Restrict);
@@ -51,6 +51,11 @@ namespace RegistryForFinalProject.Contexts
                 entity.HasMany(x => x.Registries)
                       .WithOne(x => x.Account)
                       .HasForeignKey(x => x.AccountId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasMany(x => x.OrdersSold)
+                      .WithOne(x => x.Seller)
+                      .HasForeignKey(x => x.SellerId)
                       .OnDelete(DeleteBehavior.Restrict);
 
             });

@@ -25,7 +25,7 @@ namespace RegistryForFinalProject.Controllers
 
             //var uploadParams = new ImageUploadParams()
             //{
-            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\notFound.png")
+            //    File = new FileDescription(@"C:\Users\teodo\OneDrive\Desktop\REGISTRY\registryRepo\wedd.jpg")
             //};
             //cloudinary.Upload(uploadParams);
 
@@ -41,7 +41,7 @@ namespace RegistryForFinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult BabyRegistry(BabyRegistryViewModel babyRegistryViewModel)
+        public IActionResult BabyRegistry(RegistryViewModel babyRegistryViewModel)
         {
             
             if (ModelState.IsValid)
@@ -121,6 +121,31 @@ namespace RegistryForFinalProject.Controllers
                 return View("ViewRegistry");
             }
             return View(viewRegistryViewModel);
+        }
+
+        public IActionResult RegistryRepository()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult RegistryRepository(RegistryViewModel registryViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Registry registry = new Registry
+                {
+                    Name = registryViewModel.Name,
+                    Location = registryViewModel.City,
+                    DateOfEvent = registryViewModel.DateOfEvent,
+                    RegistryType = ViewBag["Title"].ToString().Split(" ").First()
+                };
+            }
+            return View(registryViewModel);
         }
     }
 }

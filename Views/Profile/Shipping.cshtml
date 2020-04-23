@@ -1,0 +1,158 @@
+﻿@model RegistryForFinalProject.Models.ViewModels.ShippingViewModel
+@{
+    ViewData["Title"] = "Shipping";
+}
+
+
+<h1 class="ml11">
+    <span class="text-wrapper">
+        <span class="line line1"></span>
+        <span class="letters">Items for Shipping</span>
+    </span>
+</h1>
+<br />
+<br />
+<form asp-controller="Profile" asp-action="Shipping" formaction="get">
+
+
+
+
+    @for (int i = 0; i < Model.Orders.Count; i++)
+    {
+        <div class="container">
+            <table id="cart" class="table table-hover table-condensed">
+                <thead>
+
+                    <tr>
+                        <th style="width:50%">Product</th>
+                        <th style="width:10%">Price</th>
+                        <th style="width:8%">Quantity</th>
+                        <th style="width:22%" class="text-center">Subtotal</th>
+                        <th style="width:10%">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-th="Product">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-2 hidden-xs"><img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/", $"{Model.Items[i].Image1}"), ".jpg")" width="100" height="100" alt="..." class="img-responsive" /></div>
+                                    <div class="col-sm-10">
+                                        <h5 class="nomargin ml-5">@Model.Items[i].Title</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">
+                            @Model.Items[i].Price
+                        </td>
+                        <td data-th="Quantity">
+                            @Model.Orders[i].Quantity
+                        </td>
+                        <td data-th="Subtotal" class="text-center">@{var price = Model.Items[i].Price * Model.Orders[i].Quantity;} @price</td>
+                        <td data-th="Status">
+                            @*@Html.DropDownListFor(m => m.Orders[i].ShippingStatus,
+                                new SelectList(Enum.GetValues(typeof(ShippingStatus))))*@
+                        </td>
+                    </tr>
+                </tbody>
+
+                <table id="info" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">State>
+                            <th scope="col">ZIP</th>
+                            <th scope="col">EasyPayNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td data-th="First Name">
+                                @Model.Orders[i].FirstName
+                            </td>
+                            <td data-th="Last Name">
+                                @Model.Orders[i].LastName
+                            </td>
+                            <td data-th="Price">
+                                @Model.Orders[i].Address1
+                            </td>
+                            <td data-th="Price">
+                                @Model.Orders[i].City
+                            </td>
+                            <td data-th="State">
+                                @Model.Orders[i].State
+                            </td>
+                            <td data-th="ZIP">
+                                @Model.Orders[i].Zip
+                            </td>
+                            <td data-th="Price">
+                                @Model.Orders[i].EasyPayNumber
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                    <div class="col-4"><button type="submit" class="btn btn-warning m-2 d-md-block" id="ExitButton">Update status</button></div>
+                </div>
+                <br />
+                <br />
+        </div>
+
+    }
+
+
+</form>
+
+    @section MainNavigation {
+
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+            </li>
+        }
+    }
+
+    @section AccountNavigation {
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+        {
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+            </li>
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+            </li>
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+            </li>
+
+        }
+        else
+        {
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+            </li>
+            <li>
+                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+        }
+    }
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="~/js/pageTitle.js"></script>

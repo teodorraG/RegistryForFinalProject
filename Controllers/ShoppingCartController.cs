@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RegistryForFinalProject.Contexts;
+using RegistryForFinalProject.Enums;
 using RegistryForFinalProject.Models;
 using RegistryForFinalProject.Models.ViewModels;
 using RegistryForFinalProject.Services;
@@ -86,7 +87,9 @@ namespace RegistryForFinalProject.Controllers
                         Address2 = shoppingCartViewModel.SecondAddres,
                         City = shoppingCartViewModel.City,
                         State = shoppingCartViewModel.State,
-                        Zip = shoppingCartViewModel.Zip
+                        Zip = shoppingCartViewModel.Zip,
+                        SellerId = currentItem.SellerId,
+                        ShippingStatus = ShippingStatus.Processing
                         
                     };
                     if (easyPayNumber != null)

@@ -1,4 +1,4 @@
-﻿@model RegistryForFinalProject.Models.ViewModels.BabyRegistryViewModel
+﻿@model RegistryForFinalProject.Models.ViewModels.RegistryViewModel
 @{
     ViewData["Title"] = "Baby Registry";
 }
@@ -41,7 +41,7 @@
                     <p>Do you confirm starting a registry?</p>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-warning text-center" href="BabyRegistry/ResultsBabyRegistry" role="button">Yes</a>
+                    <button asp-controller="Registry"  asp-action="RegistryRepository" formmethod="post" type="button" class="btn btn-secondary" role="button">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 </div>
             </div>

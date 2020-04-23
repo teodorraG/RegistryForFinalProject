@@ -194,13 +194,13 @@ namespace RegistryForFinalProject.Controllers
 
                     if (itemViewModel.Image1.Length > 100)
                     {
-                            var uploadParams = new ImageUploadParams()
-                            {
-                                File = new FileDescription(itemViewModel.Image1)
-                            };
-                            var uploadResult = cloudinary.Upload(uploadParams);
-                            var path = uploadResult.JsonObj["public_id"].ToString();
-                            item.Image1 = path;
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(itemViewModel.Image1)
+                        };
+                        var uploadResult = cloudinary.Upload(uploadParams);
+                        var path = uploadResult.JsonObj["public_id"].ToString();
+                        item.Image1 = path;
                     }
                 }
                 else
@@ -265,6 +265,36 @@ namespace RegistryForFinalProject.Controllers
             //this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
             HttpContext.Session.SetString("ItemId", id);
             return RedirectToAction("EditItem", "Profile");
+        }
+
+        public IActionResult Shipping()
+        {
+            var userName = HttpContext.Session.GetString("CurrentUser");
+            var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
+            var userItems = db.Items.Where(x => x.SellerId == account.Id).ToList();
+
+            ShippingViewModel shippingViewModel = new ShippingViewModel();
+
+            foreach (var order in db.Orders.Where(x => x.SellerId == account.Id && x.ShippingStatus != Enums.ShippingStatus.Done).ToList())
+            {
+                shippingViewModel.Orders.Add(order);
+                shippingViewModel.Items.Add(db.Items.FirstOrDefault(x=>x.Id == order.ItemId));
+                
+            }
+
+            return View(shippingViewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Shipping(ShippingViewModel shippingViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return View("Shipping");
+            }
+            return View(shippingViewModel);
         }
     }
 }

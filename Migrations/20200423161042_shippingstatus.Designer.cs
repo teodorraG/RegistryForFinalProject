@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistryForFinalProject.Contexts;
 
 namespace RegistryForFinalProject.Migrations
 {
     [DbContext(typeof(RegistryDbContext))]
-    partial class RegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20200423161042_shippingstatus")]
+    partial class shippingstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,9 +169,6 @@ namespace RegistryForFinalProject.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ShippingStatus")
                         .HasColumnType("int");
 
@@ -184,8 +183,6 @@ namespace RegistryForFinalProject.Migrations
                     b.HasIndex("BuyerId");
 
                     b.HasIndex("ItemId");
-
-                    b.HasIndex("SellerId");
 
                     b.ToTable("Orders");
                 });
@@ -281,7 +278,7 @@ namespace RegistryForFinalProject.Migrations
             modelBuilder.Entity("RegistryForFinalProject.Models.Order", b =>
                 {
                     b.HasOne("RegistryForFinalProject.Models.Account", "Buyer")
-                        .WithMany("OrdersBought")
+                        .WithMany("Orders")
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -290,12 +287,6 @@ namespace RegistryForFinalProject.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RegistryForFinalProject.Models.Account", "Seller")
-                        .WithMany("OrdersSold")
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

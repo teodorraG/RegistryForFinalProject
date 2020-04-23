@@ -65,11 +65,10 @@
                         <br />
 
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.Price)
+                            <label asp-for="Price"><span class="text-danger">*</span>Price: </label>
+                            <input asp-for="Price" type="number" placeholder="1.0" step="0.01" min="0.01" />
                         </div>
                         <div class="editor-field">
-                            @Html.EditorFor(model => model.Price)
-                            @Html.ValidationMessageFor(model => model.Price)
                         </div>
                         <br />
                         <br />

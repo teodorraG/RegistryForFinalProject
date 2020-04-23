@@ -34,5 +34,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         public List<Order> Orders { get; set; }
 
+        public ShippingStatus ShippingStatus { get; set; }
+
     }
 }

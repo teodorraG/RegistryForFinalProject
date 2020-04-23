@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryForFinalProject.Models.ViewModels
 {
-    public class BabyRegistryViewModel
+    public class RegistryViewModel
     {
 
         [Required(ErrorMessage = Constant.RequiredFieldError)]

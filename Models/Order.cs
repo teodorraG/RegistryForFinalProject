@@ -55,5 +55,12 @@ namespace RegistryForFinalProject.Models
         [Required]
         public int Zip { get; set; }
 
+        public ShippingStatus ShippingStatus { get; set; }
+
+        [Required]
+        public int SellerId { get; set; }
+
+        public Account Seller { get; set; }
+
     }
 }

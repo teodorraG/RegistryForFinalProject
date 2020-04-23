@@ -63,17 +63,18 @@
                         <input asp-for="Title" class="form-control input-lg col-4" />
                         <small id="emailHelp" class="form-text text-muted">By this title your items will be searched</small>
                         <br />
-                        <label asp-for="Price"><span class="text-danger">*</span>Price: </label>
-                            <span class="text-danger" asp-validation-for="Price"></span>
-                            <input asp-for="Price" type="number" id="replyNumber" placeholder="$" />
+                        <div class="editor-label">
+                            <label asp-for="Price"><span class="text-danger">*</span>Price: </label>
+                            <input asp-for="Price" type="number" placeholder="1.0" step="0.01" min="0.01" />
+                        </div>
                         <br />
                         <br />
                         <label asp-for="Quantity">Quantity: </label>
                         <span class="text-danger" asp-validation-for="Quantity"></span>
-                        <input asp-for="Quantity" min="1"  class="form-control input-lg col-4" />
+                        <input asp-for="Quantity" min="1" class="form-control input-lg col-4" />
                         <br />
                         <br />
-                       
+
                         <label asp-for="Categories"><span class="text-danger">*</span>Select Category</label>
                         <span class="text-danger" asp-validation-for="Categories"></span>
                         <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
