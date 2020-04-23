@@ -132,6 +132,9 @@ namespace RegistryForFinalProject.Controllers
             var item = db.Items.FirstOrDefault(x => x.Id == int.Parse(id));
             PreviewItemViewModel previewItemViewModel = new PreviewItemViewModel { Item = item };
             HttpContext.Session.SetString("CurrentItem", item.Id.ToString());
+            var currentUser = HttpContext.Session.GetString("CurrentUser");
+            var user = db.Accounts.FirstOrDefault(x => x.UserName == currentUser);
+            previewItemViewModel.Registries = db.Registries.Where(x => x.AccountId == user.Id).ToList();
             return View(previewItemViewModel);
         }
 
@@ -161,8 +164,23 @@ namespace RegistryForFinalProject.Controllers
             return RedirectToAction("ShoppingCart", "ShoppingCart");
         }
 
-        
+        [HttpPost]
+        public IActionResult AddItemToRegistry(PreviewItemViewModel previewItemViewModel, int itemId)
+        {
+            var currentUsername = HttpContext.Session.GetString("CurrentUser");
+            var user = db.Accounts.FirstOrDefault(x => x.UserName == currentUsername);
+            var registriesForUser = db.Registries.FirstOrDefault(x => x.DateOfEvent == Convert.ToDateTime(previewItemViewModel.SelectedValue));
+            RegistryItems registryItems = new RegistryItems
+            {
+                RegistryId = registriesForUser.Id,
+                ItemId = itemId
+            };
+            db.RegistryItems.Add(registryItems);
+            db.SaveChanges();
+            return RedirectToAction("Categories");
+        }
 
-        
+
+
     }
 }

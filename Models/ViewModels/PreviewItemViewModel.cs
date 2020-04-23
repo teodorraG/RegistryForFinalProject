@@ -9,7 +9,9 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         public Item Item { get; set; }
 
-        public Account Account { get; set; }
+        public List<Registry> Registries { get; set; }
+
+        public string SelectedValue { get; set; }
 
     }
 }

@@ -174,5 +174,16 @@ namespace RegistryForFinalProject.Controllers
             }
             return View(viewRegistryViewModel);
         }
+
+        public IActionResult FindRegistry(RegistryViewModel registryViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var registiresResult = db.Registries.Where(x => x.Name == registryViewModel.Name && x.Location == registryViewModel.City && x.DateOfEvent == registryViewModel.DateOfEvent).ToList();
+                RegistryRepositoryViewModel registryRepositoryViewModel = new RegistryRepositoryViewModel { Registries = registiresResult };
+                return View("RegistryResults", registryRepositoryViewModel);
+            }
+            return View("Registry");
+        }
     }
 }

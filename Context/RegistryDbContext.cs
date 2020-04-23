@@ -15,7 +15,7 @@ namespace RegistryForFinalProject.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Registry> Registries { get; set; }
-
+        public DbSet<RegistryItems> RegistryItems { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

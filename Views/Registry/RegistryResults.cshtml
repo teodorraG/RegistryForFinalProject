@@ -35,7 +35,7 @@
                     <td>@Model.Registries[i].Location</td>
                     <td>@Model.Registries[i].DateOfEvent</td>
                     <td>@Model.Registries[i].RegistryType</td>
-                    <td><a class="btn btn-warning" href="~/Registry/ViewRegistry" role="button">View</a></td>
+                    <td><button asp-controller="Registry" asp-action="ViewRegistry" formmethod="post" type="submit" class="btn btn-warning btn-lg" role="button">View</button></td>
                 </tr>
             }
 

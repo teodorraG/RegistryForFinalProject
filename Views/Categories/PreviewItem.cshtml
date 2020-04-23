@@ -5,16 +5,16 @@
     ViewData["Title"] = "Preview";
 }
 
-    <form asp-controller="Categories" asp-action="PreviewItem" formaction="post">
-        <br />
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-block btn-warning">Add to shopping cart</button>
-            </div>
-            <div class="col-md-4"></div>
+<form asp-controller="Categories" asp-action="PreviewItem" formaction="post">
+    <br />
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-block btn-warning">Add to shopping cart</button>
         </div>
-    </form>
+        <div class="col-md-4"></div>
+    </div>
+</form>
 <br />
 <form asp-controller="Categories" asp-action="PreviewItem" formaction="post">
 
@@ -30,20 +30,40 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose registry</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Choose registry by date of event</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    @*@for (int i = 0; i < length; i++)
+                    <ul class="list-unstyled">
+                        @*@if (Model.Registries.Count > 0)
+                        {
+                            <li>
+                                <input type="radio" asp-for="SelectedValue" value="@Model.Registries[0].DateOfEvent" checked>
+                                <label>
+                                    <strong>@Model.Registries[0].DateOfEvent</strong>
+                                </label>
+                            </li>
+                        }*@
+                        @for (int i = 0; i < Model.Registries.Count; i++)
                         {
 
-                        }*@
+                            <li>
+                                <input  type="radio" asp-for="SelectedValue" value="@Model.Registries[i].DateOfEvent">
+                                <label>
+                                    <strong>@Model.Registries[i].DateOfEvent</strong>
+                                </label>
+                            </li>
+
+
+                        }
+                    </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-warning">Add</button>
+                    <button asp-controller="Categories" asp-action="AddItemToRegistry" asp-route-itemId="@Model.Item.Id" formmethod="post" type="submit" class="btn btn-warning btn-lg" role="button">Add</button>
                 </div>
             </div>
         </div>
@@ -102,20 +122,20 @@
                     </div>
                 </div>
             </div>
-        <div class="col-md-3 col-sm-3 mb-4">
-            <a data-toggle="modal" data-target=".bootstrapmodal2"><img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Item.Image3}"),".jpg")" width="200" height="250" alt=""></a>
-            <div class="modal fade bootstrapmodal2">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Item.Image3}"),".jpg")" alt="">
+            <div class="col-md-3 col-sm-3 mb-4">
+                <a data-toggle="modal" data-target=".bootstrapmodal2"><img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Item.Image3}"),".jpg")" width="200" height="250" alt=""></a>
+                <div class="modal fade bootstrapmodal2">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img class="img-fluid" src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Item.Image3}"),".jpg")" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>  
     <div class="col-md-3 col-sm-3 mb-4"></div>
     <div class="col-md-3 col-sm-3 mb-4"></div>
 </form>
