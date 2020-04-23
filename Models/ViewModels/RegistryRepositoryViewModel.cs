@@ -9,12 +9,8 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         public RegistryRepositoryViewModel()
         {
-            BabyRegistries = new List<Registry>();
-            WeddingRegistries = new List<Registry>();
-            BirthdayRegistries = new List<Registry>();
+            Registries = new List<Registry>();
         }
-        public List<Registry> BabyRegistries { get; set; }
-        public List<Registry> WeddingRegistries { get; set; }
-        public List<Registry> BirthdayRegistries { get; set; }
+        public List<Registry> Registries { get; set; }
     }
 }

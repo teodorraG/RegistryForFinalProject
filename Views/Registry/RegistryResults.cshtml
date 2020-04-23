@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Search results";
+﻿@model RegistryForFinalProject.Models.ViewModels.RegistryRepositoryViewModel
+@{
+    ViewData["Title"] = "Searched results";
 }
 
 <div class="textJs">
@@ -12,7 +13,7 @@
 </div>
 <br />
 <br />
-<form asp-controller="Registry" asp-action="ResultsBirthdayRegistry">
+<form asp-controller="Registry" asp-action="RegistryResults">
 
     <table class="table table-hover">
         <thead>
@@ -20,18 +21,24 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Location</th>
-                <th scope="col">Date and Time</th>
+                <th scope="col">Date and time</th>
+                <th scope="col">Registry type</th>
                 <th scope="col">#</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>18:30</td>
-                <td><a class="btn btn-warning" href="~/Registry/ViewRegistry" role="button">View</a></td>
-            </tr>
+            @for (int i = 0; i < Model.Registries.Count; i++)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@Model.Registries[i].Name</td>
+                    <td>@Model.Registries[i].Location</td>
+                    <td>@Model.Registries[i].DateOfEvent</td>
+                    <td>@Model.Registries[i].RegistryType</td>
+                    <td><a class="btn btn-warning" href="~/Registry/ViewRegistry" role="button">View</a></td>
+                </tr>
+            }
+
         </tbody>
     </table>
 

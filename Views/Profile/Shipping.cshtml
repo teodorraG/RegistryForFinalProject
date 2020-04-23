@@ -1,4 +1,5 @@
 ﻿@model RegistryForFinalProject.Models.ViewModels.ShippingViewModel
+@using RegistryForFinalProject.Enums;
 @{
     ViewData["Title"] = "Shipping";
 }
@@ -12,7 +13,7 @@
 </h1>
 <br />
 <br />
-<form asp-controller="Profile" asp-action="Shipping" formaction="get">
+<form asp-controller="Profile" asp-action="Shipping" formaction="post">
 
 
 
@@ -44,6 +45,7 @@
                             </div>
                         </td>
                         <td data-th="Price">
+                            <input type="hidden" asp-for="Orders[i].Id" />
                             @Model.Items[i].Price
                         </td>
                         <td data-th="Quantity">
@@ -51,6 +53,13 @@
                         </td>
                         <td data-th="Subtotal" class="text-center">@{var price = Model.Items[i].Price * Model.Orders[i].Quantity;} @price</td>
                         <td data-th="Status">
+
+                            <select asp-for="Orders[i].ShippingStatus"
+                                    asp-items="@(new SelectList(Enum.GetValues(typeof(ShippingStatus))))">
+                            </select>
+
+
+
                             @*@Html.DropDownListFor(m => m.Orders[i].ShippingStatus,
                                 new SelectList(Enum.GetValues(typeof(ShippingStatus))))*@
                         </td>
@@ -64,7 +73,7 @@
                             <th scope="col">Last Name</th>
                             <th scope="col">Address</th>
                             <th scope="col">City</th>
-                            <th scope="col">State>
+                            <th scope="col">State</th>
                             <th scope="col">ZIP</th>
                             <th scope="col">EasyPayNumber</th>
                         </tr>
@@ -78,10 +87,10 @@
                             <td data-th="Last Name">
                                 @Model.Orders[i].LastName
                             </td>
-                            <td data-th="Price">
+                            <td data-th="Address">
                                 @Model.Orders[i].Address1
                             </td>
-                            <td data-th="Price">
+                            <td data-th="City">
                                 @Model.Orders[i].City
                             </td>
                             <td data-th="State">
@@ -90,7 +99,7 @@
                             <td data-th="ZIP">
                                 @Model.Orders[i].Zip
                             </td>
-                            <td data-th="Price">
+                            <td data-th="EPNumber">
                                 @Model.Orders[i].EasyPayNumber
                             </td>
                         </tr>
@@ -100,10 +109,11 @@
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4"></div>
-                    <div class="col-4"><button type="submit" class="btn btn-warning m-2 d-md-block" id="ExitButton">Update status</button></div>
+                    <div class="col-4"><button type="submit" class="btn btn-warning m-2 d-md-block"  action="post" asp-route-id="@i" asp-action="Shipping" asp-controller="Profile">Update status</button></div>
                 </div>
                 <br />
                 <br />
+
         </div>
 
     }
@@ -111,48 +121,48 @@
 
 </form>
 
-    @section MainNavigation {
+@section MainNavigation {
 
-        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
-        {
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
-            </li>
-        }
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+        </li>
     }
+}
 
-    @section AccountNavigation {
-        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
-        {
-            <li>
-                <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
-            </li>
-            <li>
-                <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
-            </li>
-            <li>
-                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
-            </li>
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+        </li>
 
-        }
-        else
-        {
-            <li>
-                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
-            </li>
-            <li>
-                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-            </li>
-        }
     }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="~/js/pageTitle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="~/js/pageTitle.js"></script>

@@ -287,14 +287,35 @@ namespace RegistryForFinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Shipping(ShippingViewModel shippingViewModel)
+        public IActionResult Shipping(ShippingViewModel shippingViewModel, string id)
         {
-
-            if (ModelState.IsValid)
+            var currentOrder = db.Orders.FirstOrDefault(x => x.Id == shippingViewModel.Orders[int.Parse(id)].Id);
+            if (shippingViewModel.Orders[int.Parse(id)].ShippingStatus == Enums.ShippingStatus.Cancelled)
             {
-                return View("Shipping");
+                currentOrder.ShippingStatus = Enums.ShippingStatus.Cancelled;
+
             }
-            return View(shippingViewModel);
+            else if (shippingViewModel.Orders[int.Parse(id)].ShippingStatus == Enums.ShippingStatus.Delivered)
+            {
+                currentOrder.ShippingStatus = Enums.ShippingStatus.Delivered;
+
+            }
+            else if (shippingViewModel.Orders[int.Parse(id)].ShippingStatus == Enums.ShippingStatus.Done)
+            {
+                currentOrder.ShippingStatus = Enums.ShippingStatus.Done;
+
+            }
+            else if (shippingViewModel.Orders[int.Parse(id)].ShippingStatus == Enums.ShippingStatus.Processing)
+            {
+                currentOrder.ShippingStatus = Enums.ShippingStatus.Processing;
+
+            }
+            else if (shippingViewModel.Orders[int.Parse(id)].ShippingStatus == Enums.ShippingStatus.Shipped)
+            {
+                currentOrder.ShippingStatus = Enums.ShippingStatus.Shipped;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Shipping");
         }
     }
 }

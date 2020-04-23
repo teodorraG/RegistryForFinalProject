@@ -12,6 +12,10 @@
 </div>
 
 <form asp-controller="Registry">
+    @if (this.TempData["SuccessfullyCreatedRegistry"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["SuccessfullyCreatedRegistry"]</div>
+    }
     <br />
     <br />
     <br />

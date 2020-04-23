@@ -1,4 +1,4 @@
-﻿@model RegistryForFinalProject.Models.ViewModels.WeddingRegistryViewModel
+﻿@model RegistryForFinalProject.Models.ViewModels.RegistryViewModel
 @{
     ViewData["Title"] = "Wedding Registry";
 }
@@ -12,21 +12,22 @@
 <hr />
 <h3 class="font-italic text-secondary font-weight-bold">Please fill out the form ...</h3>
 <form asp-controller="Registry">
+   
     <br />
-    <label action="/Registry/WeddingRegistry" asp-for="Name"><span class="text-danger">*</span> Name of Bride/Groom: </label>
+    <label action="/Registry/BabyRegistry" asp-for="Name"><span class="text-danger">*</span> Bride/Groom name: </label>
     <span class="text-danger" asp-validation-for="Name"></span>
-    <input asp-for="Name" class="form-control input-lg col-4" />
+    <input asp-for="Name" type="text" class="form-control input-lg col-4" />
     <br />
-    <label action="/Registry/WeddingRegistry" asp-for="CityOfEvent"><span class="text-danger">*</span> Location of Event: </label>
-    <span class="text-danger" asp-validation-for="CityOfEvent"></span>
-    <input asp-for="CityOfEvent" class="form-control input-lg col-4" />
+    <label action="/Registry/BabyRegistry" asp-for="City"><span class="text-danger">*</span> Location of Event: </label>
+    <span class="text-danger" asp-validation-for="City"></span>
+    <input asp-for="City" class="form-control input-lg col-4" />
     <br />
-    <label action="/Registry/WeddingRegistry" asp-for="DateOfEvent"><span class="text-danger">*</span> Date of Event: </label>
+    <label action="/Registry/BabyRegistry" asp-for="DateOfEvent"><span class="text-danger">*</span> Date of Event: </label>
     <span class="text-danger" asp-validation-for="DateOfEvent"></span>
     <input asp-for="DateOfEvent" class="form-control input-lg col-4" />
     <br />
     <br />
-    @* <button type="submit" class="btn btn-warning btn-lg" id="RegistryButton">Create Registry</button>*@
+    @*<button type="submit" class="btn btn-warning btn-lg" id="RegistryButton">Create Registry</button>*@
     <a class="btn btn-warning btn-lg" data-toggle="modal" data-target=".bootstrapmodal">Create Registry</a>
     <div class="modal fade bootstrapmodal">
         <div class="modal-dialog">
@@ -41,7 +42,7 @@
                     <p>Do you confirm starting a registry?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning">Yes</button>
+                    <button asp-controller="Registry" asp-action="RegistryRepository" formmethod="post" type="submit" asp-route-registryType="Wedding" class="btn btn-secondary" role="button">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 </div>
             </div>
@@ -51,10 +52,9 @@
     <br />
     <h4>or</h4>
     <br />
-    <a class="btn btn-warning btn-lg" href="~/Registry/ResultsWeddingRegistry" role="button">Find Registry</a>
+    <a class="btn btn-warning btn-lg" href="~/Registry/RegistryResults" role="button">Find Registry</a>
+    @*<button type="submit" class="btn btn-warning btn-lg" id="RegistryButton">Find Registry</button>*@
     <br />
-
-
 </form>
 
 @section MainNavigation {

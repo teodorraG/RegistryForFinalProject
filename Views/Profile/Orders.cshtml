@@ -48,7 +48,7 @@
                         </td>
                         <td data-th="Subtotal" class="text-center">@{var price = Model.Items[i].Price * Model.Items[i].Quantity;} @price</td>
                         <td data-th="Quantity">
-                            @Model.Items[i].Orders[i].ShippingStatus
+                            @Model.Items[i].Orders[0].ShippingStatus
                         </td>
                     </tr>
                 }
