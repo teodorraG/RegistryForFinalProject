@@ -9,5 +9,8 @@ namespace RegistryForFinalProject.Models.ViewModels
     {
         public List<Item> Items { get; set; } = new List<Item>();
 
+        public int AccountId { get; set; }
+
+        public int RegistryId { get; set; }
     }
 }

@@ -38,6 +38,7 @@ namespace RegistryForFinalProject.Controllers
                 {
                     var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
                     HttpContext.Session.SetString("CurrentUser", user.UserName);
+                    HttpContext.Session.SetString("CurrentUserId", user.Id.ToString());
                     return RedirectToAction("Index", "Home");
                 }
                 else

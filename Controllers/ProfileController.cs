@@ -257,7 +257,7 @@ namespace RegistryForFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult RedirectToEditItem(string id)
         {
-            
+
             HttpContext.Session.SetString("ItemId", id);
             return RedirectToAction("EditItem", "Profile");
         }
@@ -334,9 +334,16 @@ namespace RegistryForFinalProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult RegistryRepository(CategoriesRegistryViewModel categoriesRegistryViewModel, int id)
+        public IActionResult RegistryRepository(int id)
         {
 
+           
+            return RedirectToAction("CategoriesRegistry", "Profile", new { id = id });
+
+        }
+
+        public IActionResult CategoriesRegistry(int id)
+        {
             var registryItems = db.RegistryItems.Where(x => x.RegistryId == id).ToList();
 
             List<Item> items = new List<Item>();
@@ -353,14 +360,49 @@ namespace RegistryForFinalProject.Controllers
 
             }
 
-
-            categoriesRegistryViewModel = new CategoriesRegistryViewModel
+            CategoriesRegistryViewModel categoriesRegistryViewModel = new CategoriesRegistryViewModel
             {
-                Items = items
+                Items = items,
+                RegistryId = id
             };
-            return View("CategoriesRegistry", categoriesRegistryViewModel);
-
+            if (registryItems.Count > 0)
+            {
+                categoriesRegistryViewModel.AccountId = db.Registries.FirstOrDefault(x => x.Id == registryItems[0].RegistryId).AccountId;
+            }
+            return View(categoriesRegistryViewModel);
         }
 
+        [HttpPost]
+        public IActionResult CategoriesRegistry(CategoriesRegistryViewModel categoriesRegistryViewModel,int id)
+        {
+
+            return RedirectToAction("PreviewRegistryItems",new { id = id });
+        }
+
+        public IActionResult PreviewRegistryItems(int id)
+        {
+            var item = db.Items.FirstOrDefault(x => x.Id == id);
+            PreviewRegistryItemsViewModel previewRegistryItemsViewModel = new PreviewRegistryItemsViewModel { Item = item };
+            var currentUser = HttpContext.Session.GetString("CurrentUser");
+            var user = db.Accounts.FirstOrDefault(x => x.UserName == currentUser);
+            previewRegistryItemsViewModel.Registries = db.Registries.Where(x => x.AccountId == user.Id).ToList();
+            return View(previewRegistryItemsViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult PreviewRegistryItems(PreviewRegistryItemsViewModel previewRegistryItemsViewModel, int id)
+        {
+            
+            return RedirectToAction("Categories", "PreviewItem");
+        }
+
+        public IActionResult DeleteItem(int id, int registryId)
+        {
+            var registryItems = db.RegistryItems.FirstOrDefault(x => x.ItemId == id && x.RegistryId == registryId);
+            db.RegistryItems.Remove(registryItems);
+            db.SaveChanges();
+            return RedirectToAction("CategoriesRegistry", new { id = registryId });
+        }
     }
 }

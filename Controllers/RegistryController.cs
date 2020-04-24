@@ -193,5 +193,11 @@ namespace RegistryForFinalProject.Controllers
             this.TempData["NotFoundRegistryForm"] = Constant.NotFoundRegistryForm;
             return View("Registry");
         }
+
+        //[HttpPost]
+        public IActionResult RedirectToRegistry(int id)
+        {
+            return RedirectToAction("CategoriesRegistry", "Profile", new { id = id });
+        }
     }
 }

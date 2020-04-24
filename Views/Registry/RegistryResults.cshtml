@@ -38,7 +38,7 @@
                     <td>@Model.Registries[i].Location</td>
                     <td>@Model.Registries[i].DateOfEvent</td>
                     <td>@Model.Registries[i].RegistryType</td>
-                    <td><button asp-controller="Registry" asp-action="ViewRegistry" formmethod="post" type="submit" class="btn btn-warning btn-lg" role="button">View</button></td>
+                    <td><button asp-controller="Registry" asp-action="RedirectToRegistry" asp-route-id="@Model.Registries[i].Id" formmethod="post" type="submit" class="btn btn-warning btn-lg" role="button">View</button></td>
                 </tr>
             }
 

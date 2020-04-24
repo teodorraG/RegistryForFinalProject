@@ -5,38 +5,41 @@
     ViewData["Title"] = "Buy from Registry";
 }
 
-    <form asp-controller="Profile" asp-action="CategoriesRegistry" formmethod="post">
+<form asp-controller="Profile" asp-action="CategoriesRegistry" formmethod="post">
 
-        <div class="container">
-            <div class="row">
+    <div class="container">
+        <div class="row">
 
-                @for (int i = 0; i < Model.Items.Count; i++)
-                {
-                <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
-                    <div class="card" style="height: 35rem;" id="@string.Concat("more", $"{i}")">
-                        <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
-                        <div class="row">
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Items[i].Title</h5>
-                                <p class="card-text">
-                                    @Model.Items[i].Description
-                                </p>
-                                <h6 class="card-title">$@Model.Items[i].Price</h6>
-                            </div>
+            @for (int i = 0; i < Model.Items.Count; i++)
+            {
+            <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
+                <div class="card" style="height: 35rem;" id="@string.Concat("more", $"{i}")">
+                    <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
+                    <div class="row">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Items[i].Title</h5>
+                            <p class="card-text">
+                                @Model.Items[i].Description
+                            </p>
+                            <h6 class="card-title">$@Model.Items[i].Price</h6>
                         </div>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-block btn-warning" action="post" asp-route-id="@Model.Items[i].Id" asp-action="RegistryRepository" asp-controller="Profile">Select</button>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-block btn-danger" action="post" asp-route-id="@Model.Items[i].Id" asp-action="RegistryRepository" asp-controller="Profile">Delete</button>
-                    </div>
                 </div>
+                <div>
+                    <button type="submit" class="btn btn-block btn-warning" action="post" asp-route-id="@Model.Items[i].Id" asp-action="CategoriesRegistry" asp-controller="Profile">Select</button>
+                </div>
+                @if (int.Parse(HttpContextAccessor.HttpContext.Session.GetString("CurrentUserId")) == Model.AccountId)
+                {
+                    <div>
+                        <button type="submit" class="btn btn-block btn-danger" action="post" asp-route-id="@Model.Items[i].Id" asp-route-registryId="@Model.RegistryId" asp-action="DeleteItem" asp-controller="Profile">Delete</button>
+                    </div>
                 }
             </div>
+            }
         </div>
+    </div>
 
-    </form>
+</form>
 
 
 @section MainNavigation {
