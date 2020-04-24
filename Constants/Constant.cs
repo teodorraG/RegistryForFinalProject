@@ -27,7 +27,7 @@ namespace RegistryForFinalProject.Constants
         public const string NO_IMAGE = "heltc6lmr73m5gtgbv04";
 
         //Contact form
-        public const string RequiredMessage = "it is necessary to add valid content";
+        public const string RequiredMessage = "It is necessary to add valid content";
 
         //TempData:
 
@@ -40,25 +40,36 @@ namespace RegistryForFinalProject.Constants
         public const string NotMatchingEmail = "Sorry, this email doesn't exist";
 
         //CategoriesController
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
-        //public const string RequiredMessage = 
+        public const string Search = "No entered content";
+        public const string AlreadyInCart = "This item is already in your shopping cart";
+        public const string AddedItemToRegistry = "Successfully added item to registry";
 
+        //ProfileController
 
+        public const string InvalidGender = "Select your gender type";
+        public const string MadeChanges = "Your changes have been saved";
+        public const string NoDataEntered = "Enter valid data";
+        public const string MatchingPassword = "The new password matches current password";
+        public const string MadeChangesToPass = "Your changes have been saved";
+        public const string ErrorChanges = "Make sure your password is valid";
+        public const string ErrorComplexity = "Password must be 8 or more characters, to contain at least one: lower case letter, upper case letter and number";
+        public const string PermanentlyDeletedItem = "Permanently deleted item";
+        public const string SuccessfullyEdited = "Your item was successfully edited";
+        public const string SuccessfullyChangedStatus = "The status has been changed successfully";
+
+        //RegistryController
+        public const string SuccessfullyCreatedRegistry = "Successfully created registry!";
+        public const string IncorrectRegistryForm = "Incorrect registry form";
+        public const string NotFoundRegistry = "Not found registry";
+        public const string NotFoundRegistryForm = "Not found registry, make sure the form is filled correctly";
+
+        //SellController
+        public const string SuccessfullyListed = "Successfully listed item!";
+        public const string NoCategorySelected = "Select category";
+
+        //ShoppingCartController
+        public const string NotEnoughQuantity = "Sorry, not enough quantity from item {0} with quantity left: {1}, please check in stock items";
+        public const string SuccessfullyPlacedOrder = "Your order has been placed successfully";
 
     }
 }

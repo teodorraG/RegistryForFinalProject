@@ -89,12 +89,12 @@ namespace RegistryForFinalProject.Controllers
                 }
                 db.Items.Add(item);
                 db.SaveChanges();
-                this.TempData["SuccessfullyListed"] = "Successfully listed item!";
+                this.TempData["SuccessfullyListed"] = Constant.SuccessfullyListed;
                 return RedirectToAction("Sell");
             }
             if (item.CategoryId == 0)
             {
-                this.TempData["NoCategorySelected"] = "Select category";
+                this.TempData["NoCategorySelected"] = Constant.NoCategorySelected;
                 return View(new ItemViewModel());
             }
             return View(new ItemViewModel());

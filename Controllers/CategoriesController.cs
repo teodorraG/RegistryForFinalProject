@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RegistryForFinalProject.Models;
 using Microsoft.AspNetCore.Http;
+using RegistryForFinalProject.Constants;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -99,7 +100,7 @@ namespace RegistryForFinalProject.Controllers
             var searchResult = categoriesViewModel.Search;
             if (searchResult == null)
             {
-                this.TempData["Search"] = "No entered content";
+                this.TempData["Search"] = Constant.Search;
                 return RedirectToAction("Categories");
             }
 
@@ -148,11 +149,8 @@ namespace RegistryForFinalProject.Controllers
             var alreadyInCart = db.ShoppingCarts.FirstOrDefault(x => x.ItemId == itemId && x.AccountId == currentUserId && x.IsPurchased == false);
             if (alreadyInCart != null)
             {
-                //if (alreadyInCart != null && alreadyInCart.IsPurchased == false && currentUserId == alreadyInCart.AccountId)
-                //{
-                    this.TempData["AlreadyInCart"] = "This item is already in your shopping cart";
+                this.TempData["AlreadyInCart"] = Constant.AlreadyInCart;
                     return RedirectToAction("ShoppingCart", "ShoppingCart");
-                //}
             }
 
             
@@ -165,6 +163,7 @@ namespace RegistryForFinalProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddItemToRegistry(PreviewItemViewModel previewItemViewModel, int itemId)
         {
             var currentUsername = HttpContext.Session.GetString("CurrentUser");
@@ -177,11 +176,9 @@ namespace RegistryForFinalProject.Controllers
             };
             db.RegistryItems.Add(registryItems);
             db.SaveChanges();
-            this.TempData["AddedItemToRegistry"] = "Successfully added item to registry";
+            this.TempData["AddedItemToRegistry"] = Constant.AddedItemToRegistry;
             return RedirectToAction("Categories");
         }
-
-
 
     }
 }

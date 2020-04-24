@@ -146,10 +146,10 @@ namespace RegistryForFinalProject.Controllers
                 }
                 db.Registries.Add(registry);
                 db.SaveChanges();
-                this.TempData["SuccessfullyCreatedRegistry"] = "Successfully created registry!";
+                this.TempData["SuccessfullyCreatedRegistry"] = Constant.SuccessfullyCreatedRegistry;
                 return View("Registry");
             }
-            this.TempData["IncorrectRegistryForm"] = "Incorrect registry form";
+            this.TempData["IncorrectRegistryForm"] = Constant.IncorrectRegistryForm;
             return View("Registry");
         }
 
@@ -184,13 +184,13 @@ namespace RegistryForFinalProject.Controllers
                 var registiresResult = db.Registries.Where(x => x.Name == registryViewModel.Name && x.Location == registryViewModel.City && x.DateOfEvent == registryViewModel.DateOfEvent).ToList();
                 if (registiresResult.Count() == 0)
                 {
-                    this.TempData["NotFoundRegistry"] = "Not found registry";
+                    this.TempData["NotFoundRegistry"] = Constant.NotFoundRegistry;
                     return View("Registry");
                 }
                 RegistryRepositoryViewModel registryRepositoryViewModel = new RegistryRepositoryViewModel { Registries = registiresResult };
                 return View("RegistryResults", registryRepositoryViewModel);
             }
-            this.TempData["NotFoundRegistryForm"] = "Not found registry make sure the form is filled correctly";
+            this.TempData["NotFoundRegistryForm"] = Constant.NotFoundRegistryForm;
             return View("Registry");
         }
     }

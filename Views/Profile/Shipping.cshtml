@@ -14,9 +14,15 @@
 <br />
 <br />
 <form asp-controller="Profile" asp-action="Shipping" formaction="post">
-
-
-
+ 
+    @if (this.TempData["SuccessfullyChangedStatus"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["SuccessfullyChangedStatus"]</div>
+    }
+    <br />
+    <p class="text-danger text-center">Please note that when a Status turns to "Done" the item will not be visible at this page</p>
+    <br />
+    <br />
 
     @for (int i = 0; i < Model.Orders.Count; i++)
     {
@@ -109,7 +115,7 @@
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4"></div>
-                    <div class="col-4"><button type="submit" class="btn btn-warning m-2 d-md-block"  action="post" asp-route-id="@i" asp-action="Shipping" asp-controller="Profile">Update status</button></div>
+                    <div class="col-4"><button type="submit" class="btn btn-warning m-2 d-md-block" action="post" asp-route-id="@i" asp-action="Shipping" asp-controller="Profile">Update status</button></div>
                 </div>
                 <br />
                 <br />

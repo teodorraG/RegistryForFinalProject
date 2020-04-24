@@ -49,11 +49,11 @@ namespace RegistryForFinalProject.Controllers
                 }
                 else if (profileViewModel.Gender == 0)
                 {
-                    this.TempData["InvalidGender"] = "Select your gender type";
+                    this.TempData["InvalidGender"] = Constant.InvalidGender;
                     return RedirectToAction("Profile");
                 }
                 db.SaveChanges();
-                this.TempData["MadeChanges"] = "Your changes have been saved";
+                this.TempData["MadeChanges"] = Constant.MadeChanges;
             }
             return RedirectToAction("Profile");
         }
@@ -68,7 +68,7 @@ namespace RegistryForFinalProject.Controllers
             {
                 if (profileViewModel.CurrentPassword == null || profileViewModel.NewPassword == null)
                 {
-                    this.TempData["NoDataEntered"] = "Enter valid data";
+                    this.TempData["NoDataEntered"] = Constant.NoDataEntered;
                     return RedirectToAction("Profile");
                 }
                 else if (profileViewModel.CurrentPassword != null && profileViewModel.NewPassword != null)
@@ -82,25 +82,25 @@ namespace RegistryForFinalProject.Controllers
 
                     if (password == newPassword)
                     {
-                        this.TempData["MatchingPassword"] = "The new password matches current password";
+                        this.TempData["MatchingPassword"] = Constant.MatchingPassword;
                         return RedirectToAction("Profile");
                     }
                     else if (password == account.Password)
                     {
                         account.Password = PasswordEncodingService.GetHashSha256(profileViewModel.NewPassword);
                         db.SaveChanges();
-                        this.TempData["MadeChanges"] = "Your changes have been saved";
+                        this.TempData["MadeChangesToPass"] = Constant.MadeChangesToPass;
                         return RedirectToAction("Profile");
                     }
                     else
                     {
-                        this.TempData["ErrorChanges"] = "Make sure your password is valid";
+                        this.TempData["ErrorChanges"] = Constant.ErrorChanges;
                         return RedirectToAction("Profile");
                     }
                 }
             }
             //return LocalRedirect("~/Account/LogIn");
-            this.TempData["ErrorComplexity"] = "Password must be 8 or more characters, to contain at least one: lower case letter, upper case letter and number";
+            this.TempData["ErrorComplexity"] = Constant.ErrorComplexity;
             return RedirectToAction("Profile");
         }
 
@@ -148,7 +148,7 @@ namespace RegistryForFinalProject.Controllers
             var itemToRemoveFromDb = db.Items.FirstOrDefault(x => x.Id == item.Id && x.SellerId == account.Id);
             db.Items.Remove(itemToRemoveFromDb);
             db.SaveChanges();
-            this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
+            this.TempData["PermanentlyDeletedItem"] = Constant.PermanentlyDeletedItem;
             return RedirectToAction("Offers");
         }
 
@@ -247,7 +247,7 @@ namespace RegistryForFinalProject.Controllers
                     item.Image3 = Constants.Constant.NO_IMAGE;
                 }
                 db.SaveChanges();
-                this.TempData["SuccessfullyEdited"] = "Your item was successfully edited";
+                this.TempData["SuccessfullyEdited"] = Constant.SuccessfullyEdited;
                 return RedirectToAction("Offers");
             }
             return View();
@@ -257,12 +257,7 @@ namespace RegistryForFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult RedirectToEditItem(string id)
         {
-            //var item = db.Items.FirstOrDefault(x => x.Id == itemViewModel.);
-
-            //var itemToRemoveFromDb = db.Items.FirstOrDefault(x => x.Id == item.Id && x.SellerId == account.Id);
-            //db.Items.Remove(itemToRemoveFromDb);
-            //db.SaveChanges();
-            //this.TempData["PermanentlyDeletedItem"] = "Permanently deleted item";
+            
             HttpContext.Session.SetString("ItemId", id);
             return RedirectToAction("EditItem", "Profile");
         }
@@ -315,6 +310,7 @@ namespace RegistryForFinalProject.Controllers
                 currentOrder.ShippingStatus = Enums.ShippingStatus.Shipped;
             }
             db.SaveChanges();
+            this.TempData["SuccessfullyChangedStatus"] = Constant.SuccessfullyChangedStatus;
             return RedirectToAction("Shipping");
         }
 
@@ -365,54 +361,6 @@ namespace RegistryForFinalProject.Controllers
             return View("CategoriesRegistry", categoriesRegistryViewModel);
 
         }
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-
-        //public IActionResult CategoriesRegistry(CategoriesRegistryViewModel categoriesViewModel)
-        //{
-        //    CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
-
-        //    var categoryName = categoriesViewModel.SelectedCategory;
-
-        //    foreach (var item in db.Categories)
-        //    {
-        //        newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
-        //    }
-        //    if (categoryName == "All Categories")
-        //    {
-        //        newCategoriesViewModel.Items = db.Items.Where(x => x.Price <= categoriesViewModel.Price && x.Quantity > 0).ToList();
-        //        foreach (var item in newCategoriesViewModel.Items)
-        //        {
-        //            if (item.Description.Length >= 132)
-        //            {
-        //                item.Description = item.Description.Substring(0, 123);
-        //                item.Description += " . . ";
-        //            }
-
-        //        }
-        //        return View(newCategoriesViewModel);
-        //    }
-
-        //    var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
-        //    var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId && x.Price <= categoriesViewModel.Price && x.Quantity > 0).ToList();
-        //    var categories = db.Categories.ToList();
-
-
-        //    newCategoriesViewModel.Items = allItemsToDisplay;
-
-        //    foreach (var item in allItemsToDisplay)
-        //    {
-        //        if (item.Description.Length >= 132)
-        //        {
-        //            item.Description = item.Description.Substring(0, 123);
-        //            item.Description += " . . ";
-        //        }
-
-        //    }
-        //    return View(newCategoriesViewModel);
-        //}
 
     }
 }

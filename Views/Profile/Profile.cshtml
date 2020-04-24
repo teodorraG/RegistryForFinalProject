@@ -12,9 +12,9 @@
 </h1>
 <br />
 <form asp-controller="Profile" asp-action="UpdateAccountInfo" formmethod="post">
-    @if (this.TempData["MadeChanges"] != null)
+    @if (this.TempData["MadeChangesToPass"] != null)
     {
-        <div class="alert alert-success">@this.TempData["MadeChanges"]</div>
+        <div class="alert alert-success">@this.TempData["MadeChangesToPass"]</div>
     }
     @if (this.TempData["ErrorChanges"] != null)
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RegistryForFinalProject.Constants;
 using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Enums;
 using RegistryForFinalProject.Models;
@@ -68,7 +69,8 @@ namespace RegistryForFinalProject.Controllers
                     var currentItem = db.Items.FirstOrDefault(x => x.Id == item.Id);
                     if (currentItem.Quantity < item.Quantity)
                     {
-                        this.TempData["NotEnoughQuantity"] = $"Sorry, not enough quantity from item {currentItem.Title} with quantity left - {currentItem.Quantity}, please check in stock items";
+                        //this.TempData["NotEnoughQuantity"] = $"Sorry, not enough quantity from item {currentItem.Title} with quantity left - {currentItem.Quantity}, please check in stock items";
+                        this.TempData["NotEnoughQuantity"] = string.Format(Constant.NotEnoughQuantity, currentItem.Title, currentItem.Quantity);
                         return RedirectToAction("ShoppingCart");
                     }
 
@@ -98,12 +100,6 @@ namespace RegistryForFinalProject.Controllers
                     }
                     db.Orders.Add(order);
                     currentItem.Quantity -= item.Quantity;
-                    //if (currentItem.Quantity <= 0)
-                    //{
-                    //    var deleteItem = db.Categories.FirstOrDefault(x => x.Id == currentItem.Id);
-                    //    db.Categories.Remove(deleteItem);
-                    //    db.SaveChanges();
-                    //}
                 }
                 var currentShoppingCart = db.ShoppingCarts.Where(x => x.AccountId == buyer.Id).ToList();
                 foreach (var item in currentShoppingCart)
@@ -114,7 +110,7 @@ namespace RegistryForFinalProject.Controllers
 
                 if (shoppingCartViewModel.PaymentMethod == Enums.PaymentMethod.Delivery)
                 {
-                    this.TempData["SuccessfullyPlacedOrder"] = "Your order has been placed successfully";
+                    this.TempData["SuccessfullyPlacedOrder"] = Constant.SuccessfullyPlacedOrder;
                     return RedirectToAction("ShoppingCart");
                 }
                 else
