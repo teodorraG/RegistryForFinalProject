@@ -317,5 +317,24 @@ namespace RegistryForFinalProject.Controllers
             db.SaveChanges();
             return RedirectToAction("Shipping");
         }
+
+        public IActionResult RegistryRepository()
+        {
+            var userName = HttpContext.Session.GetString("CurrentUser");
+            var account = db.Accounts.FirstOrDefault(x => x.UserName == userName).Id;
+
+            var userRegistries = db.Registries.Where(x => x.AccountId == account).ToList();
+
+            var registries = new List<Registry>();
+
+            foreach (var reg in userRegistries)
+            {
+                registries.Add(reg);
+            }
+
+            RegistryRepositoryViewModel registryRepositoryViewModel = new RegistryRepositoryViewModel {Registries = registries };
+            return View("RegistryRepository", registryRepositoryViewModel);
+        }
+
     }
 }

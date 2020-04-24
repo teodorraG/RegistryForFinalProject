@@ -177,6 +177,7 @@ namespace RegistryForFinalProject.Controllers
             };
             db.RegistryItems.Add(registryItems);
             db.SaveChanges();
+            this.TempData["AddedItemToRegistry"] = "Successfully added item to registry";
             return RedirectToAction("Categories");
         }
 

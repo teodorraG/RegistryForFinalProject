@@ -14,7 +14,10 @@
 <br />
 <br />
 <form asp-controller="Registry" asp-action="RegistryResults">
-
+    @if (this.TempData["NotFoundRegistry"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NotFoundRegistry"]</div>
+    }
     <table class="table table-hover">
         <thead>
             <tr>

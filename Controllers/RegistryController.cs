@@ -180,9 +180,15 @@ namespace RegistryForFinalProject.Controllers
             if (ModelState.IsValid)
             {
                 var registiresResult = db.Registries.Where(x => x.Name == registryViewModel.Name && x.Location == registryViewModel.City && x.DateOfEvent == registryViewModel.DateOfEvent).ToList();
+                if (registiresResult.Count() == 0)
+                {
+                    this.TempData["NotFoundRegistry"] = "Not found registry";
+                    return View("Registry");
+                }
                 RegistryRepositoryViewModel registryRepositoryViewModel = new RegistryRepositoryViewModel { Registries = registiresResult };
                 return View("RegistryResults", registryRepositoryViewModel);
             }
+            this.TempData["NotFoundRegistryForm"] = "Not found registry make sure the form is filled correctly";
             return View("Registry");
         }
     }

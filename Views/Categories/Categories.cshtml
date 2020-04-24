@@ -5,31 +5,35 @@
     ViewData["Title"] = "Buy";
 }
 
-<form asp-controller="Categories" asp-action="Categories" formmethod="post">
+    <form asp-controller="Categories" asp-action="Categories" formmethod="post">
+        @if (this.TempData["AddedItemToRegistry"] != null)
+        {
+            <div class="alert alert-success">@this.TempData["AddedItemToRegistry"]</div>
+        }
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <span class="text-danger" asp-validation-for="SelectedCategory"></span>
-                <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
-                    <option>All Categories</option>
-                </select>
-            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="text-danger" asp-validation-for="SelectedCategory"></span>
+                    <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
+                        <option>All Categories</option>
+                    </select>
+                </div>
 
-            <div class="col-md-4">
+                <div class="col-md-4">
 
-                <label for="customRange1">Price range:</label>
-                <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
-            </div>
-            <div class="col-md-2">
-                <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-warning" id="filterButton" type="submit">Filter Results</button>
+                    <label for="customRange1">Price range:</label>
+                    <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-warning" id="filterButton" type="submit">Filter Results</button>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
 <form asp-controller="Categories" asp-action="Search" formmethod="post">
     @if (this.TempData["Search"] != null)

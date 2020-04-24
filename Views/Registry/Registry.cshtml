@@ -16,6 +16,14 @@
     {
         <div class="alert alert-success">@this.TempData["SuccessfullyCreatedRegistry"]</div>
     }
+    @if (this.TempData["NotFoundRegistry"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NotFoundRegistry"]</div>
+    }
+    @if (this.TempData["NotFoundRegistryForm"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["NotFoundRegistryForm"]</div>
+    }
     <br />
     <br />
     <br />
