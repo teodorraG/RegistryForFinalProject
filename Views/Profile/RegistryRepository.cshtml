@@ -14,31 +14,30 @@
 <br />
 <br />
 
-<form asp-controller="Profile" asp-action="RegistryRepository" formaction="get">
+<form asp-controller="Profile" asp-action="RegistryRepository" formaction="post">
     <div class="p-3 mb-2 bg-secondary text-white"><h6>Baby baptism registries:</h6></div>
 
     <div class="container">
         <div class="row">
-            @for (int i = 0; i < Model.Registries.Count; i++)
-            {
-                //if (Model.Registries[i].RegistryType == (Enum.GetValues(typeof(RegistryType))))
-                //{
+            @foreach (var registry in Model.Registries.Where(x => x.RegistryType == RegistryType.Baby).ToList())
 
-                //}
+            {
+
                 <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
                     <div class="card" style="height: 24rem;">
-                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/bi8xo1acchgl6llox9ml.jpg" class="card-img-top img-thumbnail" alt="baby">                            <div class="row">
+                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/bi8xo1acchgl6llox9ml.jpg" class="card-img-top img-thumbnail" alt="baby">                          
+                        <div class="row">
                             <div class="card-body">
-                                <h5 class="card-title">@Model.Registries[i].Name</h5>
+                                <h5 class="card-title">@registry.Name</h5>
                                 <p class="card-text">
-                                    @Model.Registries[i].Location
+                                    @registry.Location
                                 </p>
-                                <h6 class="card-title">@Model.Registries[i].DateOfEvent</h6>
+                                <h6 class="card-title">@registry.DateOfEvent</h6>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <a href="PreviewItem/@Model.Registries[i].Items[i].ItemId" class="btn btn-block btn-warning">Select</a>
+                        <button type="submit" class="btn btn-block btn-warning" action="post" asp-route-id="@registry.Id" asp-action="RegistryRepository" asp-controller="Profile">Select</button>
                     </div>
                 </div>
             }
@@ -48,10 +47,65 @@
 
     <div class="p-3 mb-2 bg-secondary text-white"><h6>Wedding registries:</h6></div>
 
+    <div class="container">
+        <div class="row">
+            @foreach (var registry in Model.Registries.Where(x => x.RegistryType == RegistryType.Wedding).ToList())
+
+            {
+
+                <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
+                    <div class="card" style="height: 24rem;">
+                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/wyojjohygkfnhfo6nqen.jpg" class="card-img-top img-thumbnail" alt="baby">
+                        <div class="row">
+                            <div class="card-body">
+                                <h5 class="card-title">@registry.Name</h5>
+                                <p class="card-text">
+                                    @registry.Location
+                                </p>
+                                <h6 class="card-title">@registry.DateOfEvent</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-block btn-warning" action="post" asp-route-id="@registry.Id" asp-action="RegistryRepository" asp-controller="Profile">Select</button>
+                    </div>
+                </div>
+
+            }
+        </div>
+        </div>
+
 
 
     <div class="p-3 mb-2 bg-secondary text-white"><h6>Birthday registries:</h6></div>
 
+    <div class="container">
+        <div class="row">
+            @foreach (var registry in Model.Registries.Where(x => x.RegistryType == RegistryType.Birthday).ToList())
+
+            {
+
+                <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
+                    <div class="card" style="height: 24rem;">
+                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/q989hqichvisi7nh3kb9.jpg" class="card-img-top img-thumbnail" alt="baby">                            
+                        <div class="row">
+                            <div class="card-body">
+                                <h5 class="card-title">@registry.Name</h5>
+                                <p class="card-text">
+                                    @registry.Location
+                                </p>
+                                <h6 class="card-title">@registry.DateOfEvent</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-block btn-warning" action="post" asp-route-id="@registry.Id" asp-action="RegistryRepository" asp-controller="Profile">Select</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
 
 </form>
 

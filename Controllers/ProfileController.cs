@@ -278,8 +278,8 @@ namespace RegistryForFinalProject.Controllers
             foreach (var order in db.Orders.Where(x => x.SellerId == account.Id && x.ShippingStatus != Enums.ShippingStatus.Done).ToList())
             {
                 shippingViewModel.Orders.Add(order);
-                shippingViewModel.Items.Add(db.Items.FirstOrDefault(x=>x.Id == order.ItemId));
-                
+                shippingViewModel.Items.Add(db.Items.FirstOrDefault(x => x.Id == order.ItemId));
+
             }
 
             return View(shippingViewModel);
@@ -332,9 +332,87 @@ namespace RegistryForFinalProject.Controllers
                 registries.Add(reg);
             }
 
-            RegistryRepositoryViewModel registryRepositoryViewModel = new RegistryRepositoryViewModel {Registries = registries };
+            RegistryRepositoryViewModel registryRepositoryViewModel = new RegistryRepositoryViewModel { Registries = registries };
             return View("RegistryRepository", registryRepositoryViewModel);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegistryRepository(CategoriesRegistryViewModel categoriesRegistryViewModel, int id)
+        {
+
+            var registryItems = db.RegistryItems.Where(x => x.RegistryId == id).ToList();
+
+            List<Item> items = new List<Item>();
+
+            foreach (var item in registryItems)
+            {
+                var currentItem = db.Items.FirstOrDefault(x => x.Id == item.ItemId);
+                if (currentItem.Description.Length >= 132)
+                {
+                    item.Item.Description = item.Item.Description.Substring(0, 123);
+                    item.Item.Description += " . . ";
+                }
+                items.Add(currentItem);
+
+            }
+
+
+            categoriesRegistryViewModel = new CategoriesRegistryViewModel
+            {
+                Items = items
+            };
+            return View("CategoriesRegistry", categoriesRegistryViewModel);
+
+        }
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+
+        //public IActionResult CategoriesRegistry(CategoriesRegistryViewModel categoriesViewModel)
+        //{
+        //    CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();
+
+        //    var categoryName = categoriesViewModel.SelectedCategory;
+
+        //    foreach (var item in db.Categories)
+        //    {
+        //        newCategoriesViewModel.Categories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+        //    }
+        //    if (categoryName == "All Categories")
+        //    {
+        //        newCategoriesViewModel.Items = db.Items.Where(x => x.Price <= categoriesViewModel.Price && x.Quantity > 0).ToList();
+        //        foreach (var item in newCategoriesViewModel.Items)
+        //        {
+        //            if (item.Description.Length >= 132)
+        //            {
+        //                item.Description = item.Description.Substring(0, 123);
+        //                item.Description += " . . ";
+        //            }
+
+        //        }
+        //        return View(newCategoriesViewModel);
+        //    }
+
+        //    var categoryId = db.Categories.FirstOrDefault(x => x.Name == categoryName).Id;
+        //    var allItemsToDisplay = db.Items.Where(x => x.CategoryId == categoryId && x.Price <= categoriesViewModel.Price && x.Quantity > 0).ToList();
+        //    var categories = db.Categories.ToList();
+
+
+        //    newCategoriesViewModel.Items = allItemsToDisplay;
+
+        //    foreach (var item in allItemsToDisplay)
+        //    {
+        //        if (item.Description.Length >= 132)
+        //        {
+        //            item.Description = item.Description.Substring(0, 123);
+        //            item.Description += " . . ";
+        //        }
+
+        //    }
+        //    return View(newCategoriesViewModel);
+        //}
 
     }
 }

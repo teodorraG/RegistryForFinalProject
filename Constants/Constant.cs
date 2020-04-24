@@ -29,6 +29,35 @@ namespace RegistryForFinalProject.Constants
         //Contact form
         public const string RequiredMessage = "it is necessary to add valid content";
 
+        //TempData:
+
+        //Contact
+        public const string SuccessfullySentEmail = "Your message was sent successfully";
+
+        //AccountController
+        public const string SuccessfullyRegistered = "Successfully registered. Please Sign In to continue!";
+        public const string SentEmail = "An email has been sent to you.";
+        public const string NotMatchingEmail = "Sorry, this email doesn't exist";
+
+        //CategoriesController
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+        //public const string RequiredMessage = 
+
 
 
     }

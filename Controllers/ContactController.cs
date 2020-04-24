@@ -26,7 +26,7 @@ namespace RegistryForFinalProject.Controllers
 
             if (ModelState.IsValid)
             {
-                this.TempData["SuccessfullySentEmail"] = "Your message was sent successfully";
+                this.TempData["SuccessfullySentEmail"] = Constant.SuccessfullySentEmail;
                 return View("Contact");
             }
 

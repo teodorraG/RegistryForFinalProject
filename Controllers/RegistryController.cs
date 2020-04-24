@@ -146,8 +146,10 @@ namespace RegistryForFinalProject.Controllers
                 }
                 db.Registries.Add(registry);
                 db.SaveChanges();
+                this.TempData["SuccessfullyCreatedRegistry"] = "Successfully created registry!";
+                return View("Registry");
             }
-            this.TempData["SuccessfullyCreatedRegistry"] = "Successfully created registry!";
+            this.TempData["IncorrectRegistryForm"] = "Incorrect registry form";
             return View("Registry");
         }
 

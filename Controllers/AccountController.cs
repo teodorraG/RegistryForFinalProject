@@ -22,14 +22,7 @@ namespace RegistryForFinalProject.Controllers
         }
         public IActionResult LogIn()
         {
-            //var currentUserName = HttpContext.Session.GetString("CurrentUser");
-            //var registeredAccount = db.Accounts.FirstOrDefault(x => x.UserName == currentUserName);
 
-            //if (registeredAccount == null)
-            //{
-            //    return RedirectToAction("NotFoundError", "Error");
-
-            //}
             return View();
         }
 
@@ -84,8 +77,6 @@ namespace RegistryForFinalProject.Controllers
                 }
                 if (ViewData["UsernameError"] != null || ViewData["EmailError"] != null)
                 {
-                    //??
-                    //&&
                     return View();
                 }
                 int termsCheckBox = Request.Form["TermsCheckBox"].Count;
@@ -101,11 +92,8 @@ namespace RegistryForFinalProject.Controllers
                     };
                     db.Accounts.Add(account);
                     db.SaveChanges();
-                    //??
-                    // termsCheckBox = 0;
-                    // ageCheckBox =0;
-                    //return View("SuccessfullyRegistered");
-                    this.TempData["SuccessfullyRegistered"] = "Successfully registered. Please Sign In to continue!";
+
+                    this.TempData["SuccessfullyRegistered"] = Constant.SuccessfullyRegistered;
                     return View();
                 }
                 else
@@ -131,11 +119,11 @@ namespace RegistryForFinalProject.Controllers
             {
                 if (db.Accounts.FirstOrDefault(x => x.Email == forgottenPassViewModel.Email) != null)
                 {
-                    this.TempData["SentEmail"] = "An email has been sent to you.";
+                    this.TempData["SentEmail"] = Constant.SentEmail;
                     return RedirectToAction("ForgottenPassword");
                 }
             }
-            this.TempData["NotMatchingEmail"] = "Sorry, this email doesn't exist";
+            this.TempData["NotMatchingEmail"] = Constant.NotMatchingEmail;
             return View();
         }
     }

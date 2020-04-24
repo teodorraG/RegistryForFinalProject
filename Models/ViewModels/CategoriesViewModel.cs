@@ -13,7 +13,7 @@ namespace RegistryForFinalProject.Models.ViewModels
 
         public string SelectedCategory { get; set; }
 
-        public List<Item> Items { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
 
         public string Search { get; set; }
 
