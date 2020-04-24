@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RegistryForFinalProject.Models;
 using Microsoft.AspNetCore.Http;
 using RegistryForFinalProject.Constants;
+using RegistryForFinalProject.Services;
 
 namespace RegistryForFinalProject.Controllers
 {
@@ -97,6 +98,7 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Search(CategoriesViewModel categoriesViewModel)
         {
+            
             var searchResult = categoriesViewModel.Search;
             if (searchResult == null)
             {
@@ -104,6 +106,12 @@ namespace RegistryForFinalProject.Controllers
                 return RedirectToAction("Categories");
             }
 
+            SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+            if (sQLInjectionProtectionService.HasMaliciousCharacters(categoriesViewModel.Search))
+            {
+                HttpContext.Session.SetString("MaliciousSymbols", Constant.MaliciousSymbols);
+                return RedirectToAction("Categories");
+            }
             var searchedItems = db.Items.Where(x => x.Title.ToLower().Contains(" " + categoriesViewModel.Search.ToLower() + " ")).ToList();
 
             CategoriesViewModel newCategoriesViewModel = new CategoriesViewModel();

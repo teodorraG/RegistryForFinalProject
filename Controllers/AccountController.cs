@@ -34,6 +34,12 @@ namespace RegistryForFinalProject.Controllers
             if (ModelState.IsValid)
             {
                 var password = PasswordEncodingService.GetHashSha256(logViewModel.Password);
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(logViewModel.UserName))
+                {
+                    ViewData["MaliciousSymbols"] = Constant.MaliciousSymbols;
+                    return View();
+                }
                 if (db.Accounts.FirstOrDefault(x=>x.UserName == logViewModel.UserName && x.Password == password) != null)
                 {
                     var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
@@ -68,6 +74,14 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> { accViewModel.UserName, accViewModel.Email, accViewModel.Password, accViewModel.ConfirmPassword };
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                    ViewData["MaliciousSymbols"] = Constant.MaliciousSymbols;
+                    return View();
+                }
+
                 if (db.Accounts.FirstOrDefault(x=>x.UserName == accViewModel.UserName) != null)
                 {
                     ViewData["UsernameError"] = Constant.UsernameAlreadyExists;
@@ -118,6 +132,12 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(forgottenPassViewModel.Email))
+                {
+                    ViewData["MaliciousSymbols"] = Constant.MaliciousSymbols;
+                    return View();
+                }
                 if (db.Accounts.FirstOrDefault(x => x.Email == forgottenPassViewModel.Email) != null)
                 {
                     this.TempData["SentEmail"] = Constant.SentEmail;

@@ -62,6 +62,18 @@ namespace RegistryForFinalProject.Controllers
 
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> {
+                    shoppingCartViewModel.FirstName, shoppingCartViewModel.LastName,
+                    shoppingCartViewModel.Address, shoppingCartViewModel.SecondAddres,
+                    shoppingCartViewModel.City, shoppingCartViewModel.State,
+                };
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                    HttpContext.Session.SetString("MaliciousSymbols", Constant.MaliciousSymbols);
+                    return RedirectToAction("ShoppingCart");
+                }
+
                 var currentUserName = HttpContext.Session.GetString("CurrentUser");
                 var buyer = db.Accounts.FirstOrDefault(x => x.UserName == currentUserName);
                 foreach (var item in shoppingCartViewModel.Items)

@@ -12,6 +12,10 @@
 </h1>
 <hr />
 <form asp-controller="Contact">
+    @if (ViewData["MaliciousSymbols"] != null)
+    {
+        <p class="text-danger">@ViewData["MaliciousSymbols"]</p>
+    }
     @if (this.TempData["SuccessfullySentEmail"] != null)
     {
         <div class="alert alert-success">@this.TempData["SuccessfullySentEmail"]</div>

@@ -6,6 +6,11 @@
 }
 
     <form asp-controller="Categories" asp-action="Categories" formmethod="post">
+        @if (HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols") != null)
+        {
+            <p class="text-danger">@HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols")</p>
+            HttpContextAccessor.HttpContext.Session.Remove("MaliciousSymbols");
+        }
         @if (this.TempData["AddedItemToRegistry"] != null)
         {
             <div class="alert alert-success">@this.TempData["AddedItemToRegistry"]</div>

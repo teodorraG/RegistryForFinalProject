@@ -71,5 +71,8 @@ namespace RegistryForFinalProject.Constants
         public const string NotEnoughQuantity = "Sorry, not enough quantity from item {0} with quantity left: {1}, please check in stock items";
         public const string SuccessfullyPlacedOrder = "Your order has been placed successfully";
 
+
+        //SqlInjection
+        public const string MaliciousSymbols = "The symbols you have entered are not allowed.";
     }
 }

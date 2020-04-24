@@ -7,6 +7,7 @@ using RegistryForFinalProject.Constants;
 using RegistryForFinalProject.Contexts;
 using RegistryForFinalProject.Models;
 using RegistryForFinalProject.Models.ViewModels;
+using RegistryForFinalProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,13 +34,21 @@ namespace RegistryForFinalProject.Controllers
 
         public IActionResult Sell(ItemViewModel sellViewModel)
         {
+          
             var seller = db.Accounts.FirstOrDefault(x => x.UserName == HttpContext.Session.GetString("CurrentUser"));
             Category category = db.Categories.FirstOrDefault(x => x.Name == sellViewModel.SelectedCategory);
             Item item = new Item { Title = sellViewModel.Title, Price = sellViewModel.Price, Quantity = sellViewModel.Quantity, Category = category, Description = sellViewModel.Description, Seller = seller };
 
             if (ModelState.IsValid)
             {
-               
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> { sellViewModel.Title, sellViewModel.Description };
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                    HttpContext.Session.SetString("MaliciousSymbols", Constant.MaliciousSymbols);
+                    return RedirectToAction("Sell");
+                }
+
                 CloudinaryDotNet.Account account = new CloudinaryDotNet.Account(Constant.CLOUD_NAME, Constant.API_KEY, Constant.API_SECRET);
                 Cloudinary cloudinary = new Cloudinary(account);
                 if (sellViewModel.Image1 != null && sellViewModel.Image1 != string.Empty)

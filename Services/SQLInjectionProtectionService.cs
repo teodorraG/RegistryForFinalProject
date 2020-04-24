@@ -9,6 +9,10 @@ namespace RegistryForFinalProject.Services
     {
         public bool HasMaliciousCharacters(string input)
         {
+            if (input == null)
+            {
+                return false;
+            }
             char[] maliciousCharacters = new char[]
             {
                 '<','>','%','"',';'
@@ -26,6 +30,38 @@ namespace RegistryForFinalProject.Services
                 if (input.ToLower().Contains(w))
                 {
                     return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasMaliciousCharacters(List<string> ListOfInputs)
+        {
+            if (ListOfInputs == null)
+            {
+                return false;
+            }
+            char[] maliciousCharacters = new char[]
+               {
+                '<','>','%','"',';'
+               };
+            string[] maliciousWords = { "--", "xp_cmdshell", "drop", "update" };
+
+            foreach (var item in ListOfInputs)
+            {
+                foreach (char c in item)
+                {
+                    if (maliciousCharacters.Contains(c))
+                    {
+                        return true;
+                    }
+                }
+                foreach (var w in maliciousWords)
+                {
+                    if (item.ToLower().Contains(w))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

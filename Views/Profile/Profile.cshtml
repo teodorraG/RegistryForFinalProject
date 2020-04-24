@@ -12,6 +12,11 @@
 </h1>
 <br />
 <form asp-controller="Profile" asp-action="UpdateAccountInfo" formmethod="post">
+    @if (HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols") != null)
+    {
+        <p class="text-danger">@HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols")</p>
+        HttpContextAccessor.HttpContext.Session.Remove("MaliciousSymbols");
+    }
     @if (this.TempData["MadeChangesToPass"] != null)
     {
         <div class="alert alert-success">@this.TempData["MadeChangesToPass"]</div>

@@ -2,6 +2,7 @@
 using RegistryForFinalProject.Constants;
 using RegistryForFinalProject.Models;
 using RegistryForFinalProject.Models.ViewModels;
+using RegistryForFinalProject.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,6 +27,14 @@ namespace RegistryForFinalProject.Controllers
 
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> { contactViewModel.Name, contactViewModel.Email, contactViewModel.Subject, contactViewModel.Message };
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                    ViewData["MaliciousSymbols"] = Constant.MaliciousSymbols;
+                    return View();
+                }
+
                 this.TempData["SuccessfullySentEmail"] = Constant.SuccessfullySentEmail;
                 return View("Contact");
             }

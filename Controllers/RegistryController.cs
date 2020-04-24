@@ -123,6 +123,13 @@ namespace RegistryForFinalProject.Controllers
 
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> { registryViewModel.Name, registryViewModel.City };
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                    HttpContext.Session.SetString("MaliciousSymbols", Constant.MaliciousSymbols);
+                    return View("Registry");
+                }
                 var currentUser = HttpContext.Session.GetString("CurrentUser");
                 var user = db.Accounts.FirstOrDefault(x => x.UserName == currentUser);
                 Registry registry = new Registry

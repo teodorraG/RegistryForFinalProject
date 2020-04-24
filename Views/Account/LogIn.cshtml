@@ -10,6 +10,10 @@
     </span>
 </h1>
 <form asp-controller="Account">
+    @if (ViewData["MaliciousSymbols"] != null)
+    {
+        <p class="text-danger">@ViewData["MaliciousSymbols"]</p>
+    }
     @if (this.TempData["ErrorChanges"] != null)
     {
         <div class="alert alert-danger">@this.TempData["ErrorChanges"]</div>

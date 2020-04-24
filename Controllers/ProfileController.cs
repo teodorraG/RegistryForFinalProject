@@ -36,6 +36,14 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> { profileViewModel.FirstName, profileViewModel.LastName, profileViewModel.Address };
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                   HttpContext.Session.SetString("MaliciousSymbols", Constant.MaliciousSymbols);
+                   return RedirectToAction("Profile");
+                }
+
                 var userName = HttpContext.Session.GetString("CurrentUser");
                 var account = db.Accounts.FirstOrDefault(x => x.UserName == userName);
 
@@ -66,6 +74,7 @@ namespace RegistryForFinalProject.Controllers
 
             if (ModelState.IsValid)
             {
+
                 if (profileViewModel.CurrentPassword == null || profileViewModel.NewPassword == null)
                 {
                     this.TempData["NoDataEntered"] = Constant.NoDataEntered;
@@ -99,7 +108,6 @@ namespace RegistryForFinalProject.Controllers
                     }
                 }
             }
-            //return LocalRedirect("~/Account/LogIn");
             this.TempData["ErrorComplexity"] = Constant.ErrorComplexity;
             return RedirectToAction("Profile");
         }
@@ -178,6 +186,14 @@ namespace RegistryForFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                SQLInjectionProtectionService sQLInjectionProtectionService = new SQLInjectionProtectionService();
+                List<string> dataList = new List<string> { itemViewModel.Title, itemViewModel.Description};
+                if (sQLInjectionProtectionService.HasMaliciousCharacters(dataList))
+                {
+                    HttpContext.Session.SetString("MaliciousSymbols", Constant.MaliciousSymbols);
+                    return RedirectToAction("EditItem");
+                }
+
                 int id = int.Parse(HttpContext.Session.GetString("ItemId"));
                 var item = db.Items.FirstOrDefault(x => x.Id == id);
                 Category category = db.Categories.FirstOrDefault(x => x.Name == itemViewModel.SelectedCategory);

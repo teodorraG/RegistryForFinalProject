@@ -13,6 +13,11 @@
 <br />
 <br />
 <form asp-controller="ShoppingCart" asp-action="ShoppingCart" method="post">
+    @if (HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols") != null)
+    {
+        <p class="text-danger">@HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols")</p>
+        HttpContextAccessor.HttpContext.Session.Remove("MaliciousSymbols");
+    }
 
     @if (this.TempData["AlreadyInCart"] != null)
     {
@@ -58,7 +63,7 @@
                             <label id="@string.Concat("Price",i)">$@Model.Items[i].Price</label>
                         </td>
                         <td data-th="Quantity">
-                            <input asp-for="Items[i].Quantity" type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1" min="1" >
+                            <input asp-for="Items[i].Quantity" type="number" id="@string.Concat("Quantity",i)" onchange="CalculateNewPrice('@i')" class="form-control text-center" value="1" min="1">
                         </td>
                         <td data-th="Subtotal" class="text-center"><label id="@string.Concat("Subtotal",i)">$@Model.Items[i].Price</label></td>
                         <td class="actions" data-th="">
@@ -117,7 +122,7 @@
         <div class="form-group col-md-3">
             <label for="inputZip"><span class="text-danger">*</span>Zip</label>
             <span class="text-danger" asp-validation-for="Zip"></span>
-            <input asp-for="Zip" type="text" class="form-control" id="inputZip">
+            <input asp-for="Zip" type="number" class="form-control" id="inputZip">
         </div>
     </div>
     <br />
