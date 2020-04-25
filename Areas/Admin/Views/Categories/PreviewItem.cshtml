@@ -37,15 +37,6 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-unstyled">
-                        @*@if (Model.Registries.Count > 0)
-                        {
-                            <li>
-                                <input type="radio" asp-for="SelectedValue" value="@Model.Registries[0].DateOfEvent" checked>
-                                <label>
-                                    <strong>@Model.Registries[0].DateOfEvent</strong>
-                                </label>
-                            </li>
-                        }*@
                         @for (int i = 0; i < Model.Registries.Count; i++)
                         {
 
@@ -76,7 +67,7 @@
         <div class="col-md-6">
             <h3 class="my-3">@Model.Item.Title</h3>
 
-            <div class="form-group" id="rating-ability-wrapper">
+            @*<div class="form-group" id="rating-ability-wrapper">
                 <label class="control-label" for="rating">
                     <span class="field-label-header"></span><br>
                     <span class="field-label-info"></span>
@@ -100,7 +91,7 @@
                 <button type="button" class="btnrating btn btn-default btn-sm" data-attr="5" id="rating-star-5">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
-            </div>
+            </div>*@
 
             <p>@Model.Item.Description</p>
             <h5 class="card-title text-warning">In stock: @Model.Item.Quantity</h5>

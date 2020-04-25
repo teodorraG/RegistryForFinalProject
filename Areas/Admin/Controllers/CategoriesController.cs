@@ -160,7 +160,7 @@ namespace RegistryForFinalProject.wwwroot.Areas.Admin.Controllers
             if (alreadyInCart != null)
             {
                 this.TempData["AlreadyInCart"] = Constant.AlreadyInCart;
-                    return RedirectToAction("ShoppingCart", "ShoppingCart");
+                    return RedirectToAction("ShoppingCart", "ShoppingCart", new { area = "" });
             }
 
             
@@ -169,7 +169,7 @@ namespace RegistryForFinalProject.wwwroot.Areas.Admin.Controllers
             var user = db.Accounts.FirstOrDefault(x => x.UserName == username);
             db.ShoppingCarts.Add(new ShoppingCart { ItemId = itemId, AccountId = user.Id });
             db.SaveChanges();
-            return RedirectToAction("ShoppingCart", "ShoppingCart");
+            return RedirectToAction("ShoppingCart", "ShoppingCart", new { area = "" });
         }
 
         [HttpPost]
@@ -195,6 +195,7 @@ namespace RegistryForFinalProject.wwwroot.Areas.Admin.Controllers
             var item = db.Items.FirstOrDefault(x => x.Id == id);
             db.Remove(item);
             db.SaveChanges();
+            this.TempData["SuccessfullyDeletedByAdmin"] = Constant.SuccessfullyDeletedByAdmin;
             return RedirectToAction("Categories");
         }
     }

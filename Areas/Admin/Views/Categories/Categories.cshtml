@@ -15,7 +15,10 @@
         {
             <div class="alert alert-success">@this.TempData["AddedItemToRegistry"]</div>
         }
-
+        @if (this.TempData["SuccessfullyDeletedByAdmin"] != null)
+        {
+            <div class="alert alert-success">@this.TempData["SuccessfullyDeletedByAdmin"]</div>
+        }
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

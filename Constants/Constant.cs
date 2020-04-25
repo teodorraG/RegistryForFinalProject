@@ -74,5 +74,9 @@ namespace RegistryForFinalProject.Constants
 
         //SqlInjection
         public const string MaliciousSymbols = "The symbols you have entered are not allowed.";
+
+        //Admin
+        public const string SuccessfullyDeletedByAdmin = "The item has been deteled.";
+
     }
 }
