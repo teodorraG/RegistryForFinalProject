@@ -5,40 +5,40 @@
     ViewData["Title"] = "Buy";
 }
 
-    <form asp-controller="Categories" asp-action="Categories" formmethod="post">
-        @if (HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols") != null)
-        {
-            <p class="text-danger">@HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols")</p>
-            HttpContextAccessor.HttpContext.Session.Remove("MaliciousSymbols");
-        }
-        @if (this.TempData["AddedItemToRegistry"] != null)
-        {
-            <div class="alert alert-success">@this.TempData["AddedItemToRegistry"]</div>
-        }
+<form asp-controller="Categories" asp-action="Categories" formmethod="post">
+    @if (HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols") != null)
+    {
+        <p class="text-danger">@HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols")</p>
+        HttpContextAccessor.HttpContext.Session.Remove("MaliciousSymbols");
+    }
+    @if (this.TempData["AddedItemToRegistry"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["AddedItemToRegistry"]</div>
+    }
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="text-danger" asp-validation-for="SelectedCategory"></span>
-                    <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
-                        <option>All Categories</option>
-                    </select>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="text-danger" asp-validation-for="SelectedCategory"></span>
+                <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
+                    <option>All Categories</option>
+                </select>
+            </div>
 
-                <div class="col-md-4">
+            <div class="col-md-4">
 
-                    <label for="customRange1">Price range:</label>
-                    <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
-                </div>
-                <div class="col-md-2">
-                    <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-warning" id="filterButton" type="submit">Filter Results</button>
-                </div>
+                <label for="customRange1">Price range:</label>
+                <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
+            </div>
+            <div class="col-md-2">
+                <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-warning" id="filterButton" type="submit">Filter Results</button>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 
 <form asp-controller="Categories" asp-action="Search" formmethod="post">
     @if (this.TempData["Search"] != null)
@@ -84,13 +84,13 @@
                 </div>
             </div>
         }
-    <div class="container">
-        <div class="row">
-            <div class="col-5"></div>
-            <div class="col-2"><button class="btn btn-secondary btn-lg btn-block" onclick="ViewMore()" id="ViewMoreButton">View more</button></div>
-            <div class="col-5"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col-2"><button class="btn btn-secondary btn-lg btn-block" onclick="ViewMore()" id="ViewMoreButton">View more</button></div>
+                <div class="col-5"></div>
+            </div>
         </div>
-    </div>
 
 
     </div>
@@ -103,9 +103,19 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
-        </li>
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUserIsAdmin") == "true")
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="Admin" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+        }
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
         </li>

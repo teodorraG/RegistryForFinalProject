@@ -45,6 +45,14 @@ namespace RegistryForFinalProject.Controllers
                     var user = db.Accounts.FirstOrDefault(x => x.UserName == logViewModel.UserName && x.Password == password);
                     HttpContext.Session.SetString("CurrentUser", user.UserName);
                     HttpContext.Session.SetString("CurrentUserId", user.Id.ToString());
+                    if (user.Role == Role.Admin)
+                    {
+                        HttpContext.Session.SetString("CurrentUserIsAdmin", "true");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("CurrentUserIsAdmin", "false");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -60,6 +68,7 @@ namespace RegistryForFinalProject.Controllers
         public IActionResult LogOut()
         {
             HttpContext.Session.Remove("CurrentUser");
+            HttpContext.Session.Remove("CurrentUserId");
             return RedirectToAction("Index", "Home");
         }
         public IActionResult Register()

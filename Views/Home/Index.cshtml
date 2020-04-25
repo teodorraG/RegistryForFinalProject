@@ -65,9 +65,20 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
-        </li>
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUserIsAdmin") == "true")
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="Admin" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+        }
+
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
         </li>
@@ -103,3 +114,4 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="~/js/site.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="~/js/GeoLocation.js"></script>

@@ -38,19 +38,19 @@
                 <div class="modal-body">
                     <ul class="list-unstyled">
                         @*@if (Model.Registries.Count > 0)
-                            {
-                                <li>
-                                    <input type="radio" asp-for="SelectedValue" value="@Model.Registries[0].DateOfEvent" checked>
-                                    <label>
-                                        <strong>@Model.Registries[0].DateOfEvent</strong>
-                                    </label>
-                                </li>
-                            }*@
+                        {
+                            <li>
+                                <input type="radio" asp-for="SelectedValue" value="@Model.Registries[0].DateOfEvent" checked>
+                                <label>
+                                    <strong>@Model.Registries[0].DateOfEvent</strong>
+                                </label>
+                            </li>
+                        }*@
                         @for (int i = 0; i < Model.Registries.Count; i++)
                         {
 
                             <li>
-                                <input type="radio" asp-for="SelectedValue" value="@Model.Registries[i].DateOfEvent">
+                                <input  type="radio" asp-for="SelectedValue" value="@Model.Registries[i].DateOfEvent">
                                 <label>
                                     <strong>@Model.Registries[i].DateOfEvent</strong>
                                 </label>
@@ -146,19 +146,9 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
         </li>
-        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUserIsAdmin") == "true")
-        {
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="Admin" asp-controller="Categories" asp-action="Categories">Buy</a>
-            </li>
-
-        }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
-            </li>
-        }
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
         </li>

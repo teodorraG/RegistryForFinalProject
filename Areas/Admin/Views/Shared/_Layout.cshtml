@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RegistryForFinalProject</title>
+    <meta name="description" content="@this.ViewData["Title"]" />
+    <meta name="keywords" content="Getme, shop online, registry, baby christianing, birthday party, wedding, shop" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/favi_icon.ico" rel="icon" type="image/png" />
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="shadow-lg mb-5 rounded">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-secondary border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="http://res.cloudinary.com/teodorascloud/image/upload/reiofcujxuwwhnkaocmq.jpg" class="logo" alt="logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
+                                        <div class="col-md-3"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a></div>
+                                        <div class="col-md-3"><a class="nav-link text-light" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a></div>
+                                    </div>
+                                </div>
+                            </li>
+                            @RenderSection("MainNavigation", false)
+                        </ul>
+                    </div>
+                    <ul class="navbar-nav">
+                        @RenderSection("AccountNavigation", false)
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <div id="page-container" class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="shadow-lg mb-5 rounded">
+        <footer id="footer" class="border-top footer text-muted">
+            <div class="container">
+                <ul class="footer-line">
+                    <li>&copy; 2020 &nbsp;</li>
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook fa-1x pr-2 warning"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram fa-1x pr-2 warning"></i></a></li>
+                    <li><a href="https://twitter.com/explore"><i class="fab fa-twitter fa-1x pr-2 warning"></i></a></li>
+                    <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Privacy">Privacy Policy</a></li>
+                    <li class="liFormat"><a class="nav-link text-secondary" asp-area="" asp-controller="Footer" asp-action="Terms">Terms and Conditions</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/0a5d2a231e.js" crossorigin="anonymous"></script>
+    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

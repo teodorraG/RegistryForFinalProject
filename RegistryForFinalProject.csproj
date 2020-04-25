@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Controllers\CategoriesController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\favi_icon.ico" />
   </ItemGroup>
 

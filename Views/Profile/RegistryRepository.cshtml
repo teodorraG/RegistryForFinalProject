@@ -25,7 +25,7 @@
 
                 <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
                     <div class="card" style="height: 24rem;">
-                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/bi8xo1acchgl6llox9ml.jpg" class="card-img-top img-thumbnail" alt="baby">                          
+                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/bi8xo1acchgl6llox9ml.jpg" class="card-img-top img-thumbnail" alt="baby">
                         <div class="row">
                             <div class="card-body">
                                 <h5 class="card-title">@registry.Name</h5>
@@ -73,7 +73,7 @@
 
             }
         </div>
-        </div>
+    </div>
 
 
 
@@ -87,7 +87,7 @@
 
                 <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
                     <div class="card" style="height: 24rem;">
-                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/q989hqichvisi7nh3kb9.jpg" class="card-img-top img-thumbnail" alt="baby">                            
+                        <img src="http://res.cloudinary.com/teodorascloud/image/upload/q989hqichvisi7nh3kb9.jpg" class="card-img-top img-thumbnail" alt="baby">
                         <div class="row">
                             <div class="card-body">
                                 <h5 class="card-title">@registry.Name</h5>
@@ -116,9 +116,19 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
-        </li>
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUserIsAdmin") == "true")
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="Admin" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+        }
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
         </li>

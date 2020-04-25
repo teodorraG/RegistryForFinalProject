@@ -49,20 +49,24 @@ namespace RegistryForFinalProject.Services
 
             foreach (var item in ListOfInputs)
             {
-                foreach (char c in item)
+                if (item != null)
                 {
-                    if (maliciousCharacters.Contains(c))
+                    foreach (char c in item)
                     {
-                        return true;
+                        if (maliciousCharacters.Contains(c))
+                        {
+                            return true;
+                        }
+                    }
+                    foreach (var w in maliciousWords)
+                    {
+                        if (item.ToLower().Contains(w))
+                        {
+                            return true;
+                        }
                     }
                 }
-                foreach (var w in maliciousWords)
-                {
-                    if (item.ToLower().Contains(w))
-                    {
-                        return true;
-                    }
-                }
+                
             }
             return false;
         }

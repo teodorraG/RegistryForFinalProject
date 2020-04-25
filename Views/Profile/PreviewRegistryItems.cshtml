@@ -5,7 +5,7 @@
     ViewData["Title"] = "Preview Registry items";
 }
 
-<form asp-controller="Profile" asp-action="PreviewRegistryItems" formaction="post">
+<form asp-controller="Profile" asp-action="PreviewRegistryItems" asp-route-itemId="@Model.Item.Id" formaction="post">
     <br />
     <div class="row">
         <div class="col-md-4"></div>
@@ -142,9 +142,19 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
-        </li>
+        @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUserIsAdmin") == "true")
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="Admin" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+            </li>
+        }
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
         </li>

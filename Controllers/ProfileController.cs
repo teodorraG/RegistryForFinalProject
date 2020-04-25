@@ -395,22 +395,37 @@ namespace RegistryForFinalProject.Controllers
             return RedirectToAction("PreviewRegistryItems",new { id = id });
         }
 
-        public IActionResult PreviewRegistryItems(int id)
+        public IActionResult PreviewRegistryItems(PreviewRegistryItemsViewModel previewRegistryItemsViewModel, int id)
         {
             var item = db.Items.FirstOrDefault(x => x.Id == id);
-            PreviewRegistryItemsViewModel previewRegistryItemsViewModel = new PreviewRegistryItemsViewModel { Item = item };
+            PreviewRegistryItemsViewModel previewRegistryItems = new PreviewRegistryItemsViewModel { Item = item };
             var currentUser = HttpContext.Session.GetString("CurrentUser");
             var user = db.Accounts.FirstOrDefault(x => x.UserName == currentUser);
-            previewRegistryItemsViewModel.Registries = db.Registries.Where(x => x.AccountId == user.Id).ToList();
-            return View(previewRegistryItemsViewModel);
+            previewRegistryItems.Registries = db.Registries.Where(x => x.AccountId == user.Id).ToList();
+            return View(previewRegistryItems);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult PreviewRegistryItems(PreviewRegistryItemsViewModel previewRegistryItemsViewModel, int id)
+        public IActionResult PreviewRegistryItems(int itemId)
         {
-            
-            return RedirectToAction("Categories", "PreviewItem");
+            string userName = HttpContext.Session.GetString("CurrentUser");
+            var currentUserId = db.Accounts.FirstOrDefault(x => x.UserName == userName).Id;
+
+            var alreadyInCart = db.ShoppingCarts.FirstOrDefault(x => x.ItemId == itemId && x.AccountId == currentUserId && x.IsPurchased == false);
+            if (alreadyInCart != null)
+            {
+                this.TempData["AlreadyInCart"] = Constant.AlreadyInCart;
+                return RedirectToAction("ShoppingCart", "ShoppingCart");
+            }
+
+
+
+            string username = HttpContext.Session.GetString("CurrentUser");
+            var user = db.Accounts.FirstOrDefault(x => x.UserName == username);
+            db.ShoppingCarts.Add(new ShoppingCart { ItemId = itemId, AccountId = user.Id });
+            db.SaveChanges();
+            return RedirectToAction("ShoppingCart", "ShoppingCart");
         }
 
         public IActionResult DeleteItem(int id, int registryId)

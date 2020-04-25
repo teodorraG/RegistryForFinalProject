@@ -27,7 +27,7 @@ namespace RegistryForFinalProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<RegistryDbContext>(); 
+            services.AddDbContext<RegistryDbContext>();
             services.AddDistributedMemoryCache();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -74,14 +74,17 @@ namespace RegistryForFinalProject
             app.UseAuthorization();
 
             app.UseSession();
-            
+
             app.UseEndpoints(endpoints =>
             {
-                
+                endpoints.MapControllerRoute(
+                    name: "Admin",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                
+
             });
         }
     }

@@ -11,8 +11,9 @@ using Microsoft.AspNetCore.Http;
 using RegistryForFinalProject.Constants;
 using RegistryForFinalProject.Services;
 
-namespace RegistryForFinalProject.Controllers
+namespace RegistryForFinalProject.wwwroot.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoriesController : Controller
     {
         private readonly RegistryDbContext db = new RegistryDbContext();
@@ -189,5 +190,12 @@ namespace RegistryForFinalProject.Controllers
             return RedirectToAction("Categories");
         }
 
+        public IActionResult AdminDeleteItem(int id)
+        {
+            var item = db.Items.FirstOrDefault(x => x.Id == id);
+            db.Remove(item);
+            db.SaveChanges();
+            return RedirectToAction("Categories");
+        }
     }
 }

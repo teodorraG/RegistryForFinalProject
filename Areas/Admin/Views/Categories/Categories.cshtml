@@ -1,0 +1,143 @@
+﻿@using CloudinaryDotNet;
+@model RegistryForFinalProject.Models.ViewModels.CategoriesViewModel
+
+@{
+    ViewData["Title"] = "Buy";
+}
+
+    <form asp-controller="Categories" asp-action="Categories" formmethod="post">
+        @if (HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols") != null)
+        {
+            <p class="text-danger">@HttpContextAccessor.HttpContext.Session.GetString("MaliciousSymbols")</p>
+            HttpContextAccessor.HttpContext.Session.Remove("MaliciousSymbols");
+        }
+        @if (this.TempData["AddedItemToRegistry"] != null)
+        {
+            <div class="alert alert-success">@this.TempData["AddedItemToRegistry"]</div>
+        }
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="text-danger" asp-validation-for="SelectedCategory"></span>
+                    <select asp-for="SelectedCategory" class="form-control" asp-items="@Model.Categories">
+                        <option>All Categories</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+
+                    <label for="customRange1">Price range:</label>
+                    <input type="range" class="custom-range" name="ageInputName" id="ageInputId" min="1" max="1000" value="1000" oninput="ageOutputId.value = ageInputId.value">
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="Price" id="ageOutputId" value="1000" oninput="ageInputId.value = ageOutputId.value" style="width:72px">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-warning" id="filterButton" type="submit">Filter Results</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+<form asp-controller="Categories" asp-action="Search" formmethod="post">
+    @if (this.TempData["Search"] != null)
+    {
+        <div class="alert alert-danger">@this.TempData["Search"]</div>
+    }
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <input asp-for="Search" class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search">
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<br />
+<br />
+<div class="container">
+    <div class="row">
+
+        @for (int i = 0; i < Model.Items.Count; i++)
+        {
+        <div class="col-sm-6 align-self-center col-md-3 mb-3 ShowMore" style="width: 18rem;">
+            <div class="card" style="height: 35rem;" id="@string.Concat("more", $"{i}")">
+                <img src="@string.Concat(string.Concat("http://res.cloudinary.com/teodorascloud/image/upload/",$"{Model.Items[i].Image1}"),".jpg")" width="200" height="250" class="card-img-top" alt="...">
+                <div class="row">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.Items[i].Title</h5>
+                        <p class="card-text">
+                            @Model.Items[i].Description
+                        </p>
+                        <h6 class="card-title">$@Model.Items[i].Price</h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="PreviewItem/@Model.Items[i].Id" class="btn btn-block btn-warning">Check Out</a>
+            </div>
+            <div>
+                <a type="submit" class="btn btn-block btn-danger" formmethod="post" asp-route-id="@Model.Items[i].Id" asp-area="Admin" asp-action="AdminDeleteItem" asp-controller="Categories">Delete</a>
+            </div>
+        </div>
+        }
+    <div class="container">
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2"><button class="btn btn-secondary btn-lg btn-block" onclick="ViewMore()" id="ViewMoreButton">View more</button></div>
+            <div class="col-5"></div>
+        </div>
+    </div>
+
+
+    </div>
+</div>
+
+@section MainNavigation {
+
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Registry" asp-action="Registry">Registry</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Categories">Buy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Sell" asp-action="Sell">Sell</a>
+        </li>
+    }
+}
+
+@section AccountNavigation {
+    @if (HttpContextAccessor.HttpContext.Session.GetString("CurrentUser") != null)
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Profile" data-toggle="tooltip" data-placement="top" title="Profile"><i class="fas fa-user-circle fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="ShoppingCart" data-toggle="tooltip" data-placement="top" title="Shopping Cart"><i class="fas fa-shopping-cart fa-2x warning"></i></a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" title="Sign out"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+        </li>
+        <li>
+            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="~/js/categoryPrice.js"></script>
+<script src="~/js/ShowMore.js"></script>
